@@ -1,0 +1,236 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "Threat Hunting - FortiSIEM - Get Incident",
+    "aliasName": null,
+    "tag": null,
+    "description": "Retrieves a list and details of incidents from the Fortinet FortiSIEM server based on the outbreak alert event type",
+    "isActive": true,
+    "debug": false,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [
+        "fortiSIEM_query",
+        "from_date",
+        "to_date",
+        "fortisiem_event_count",
+        "fortisiem_incidentStatus",
+        "fortisiem_incident_count"
+    ],
+    "synchronous": false,
+    "collection": "\/api\/3\/workflow_collections\/2ae30943-7a2f-435b-a100-3ec7c3e2294b",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/b6c84c29-a80d-4103-a3e8-19325c1d179f",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Configuration",
+            "description": null,
+            "arguments": {
+                "alerts_severity_map": "{'MINIMAL': {{'Severity'| picklist('Minimal') }}, 'LOW': {{'Severity'| picklist('Low') }}, 'MEDIUM': {{'Severity'| picklist('Medium') }}, 'HIGH': {{'Severity'| picklist('High') }}, 'CRITICAL': {{'Severity'| picklist('Critical') }}}",
+                "incident_source_data": "{{vars.steps.Get_Outbreak_Alert_Incident.data.data}}"
+            },
+            "status": null,
+            "top": "300",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
+            "uuid": "7ab3c059-7e0b-43c3-9e9e-1e95206df2c6"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Create Alert Record",
+            "description": null,
+            "arguments": {
+                "for_each": {
+                    "item": "{{vars.incident_source_data}}",
+                    "__bulk": true,
+                    "parallel": false,
+                    "condition": "",
+                    "batch_size": 100
+                },
+                "resource": {
+                    "name": "Outbreak Alert - {{vars.item.eventName}}-{{vars.item.eventType}}",
+                    "type": "\/api\/3\/picklists\/f2fb4c85-baae-407e-b218-1cc54a49546c",
+                    "state": "\/api\/3\/picklists\/a1bac09b-1441-45aa-ad1b-c88744e48e72",
+                    "domain": "{{vars.item.incidentTarget.domain or None }}",
+                    "source": "Fortinet FortiSIEM",
+                    "status": "\/api\/3\/picklists\/7de816ff-7140-4ee5-bd05-93ce22002146",
+                    "severity": "{{vars.item.eventSeverityCat | resolveRange(vars.alerts_severity_map)}}",
+                    "sourceId": "{{vars.item[\"incidentId\"]}}",
+                    "sourceIp": "{{vars.item.incidentSrc.srcIpAddr or None}}",
+                    "userName": "{{vars.item.incidentTarget.user or None}}",
+                    "__replace": "true",
+                    "epochTime": "{{vars.item[\"incidentLastSeen\"]}}",
+                    "eventTime": "{{arrow.get(vars.item[\"incidentLastSeen\"]).to(\"UTC\").format(\"YYYY-MM-DD HH:mm:ss ZZ\")}}",
+                    "recordTags": "{{vars.input.records[0].recordTags | join(\",\")}}",
+                    "sourcedata": "{{vars.item | toJSON}}",
+                    "description": "<div class=\"font-size-16 ng-binding padding-bottom-sm\"><h4 style=\"background: #404142;padding: 5px;text-align: left;color: orange;background: black;\">{{vars.item.incidentTitle or vars.item.eventName or 'N\/A'}}<\/h4><\/div>\n<table style=\"border-color: #04080c;\" border=\"1\" class=\"font-normal\">\n<tbody><tr><td>\n\n\n{%if vars.item.incidentSrc%} \n<div class=\"font-size-14 ng-binding\">Incident Source<\/div><div class=\"card-container-body\" style=\"width: 100%;font-size:46px;\">\n<div class=\"card-number\" style=\"font-size:20px;  border-left: 5px solid red;background:#141b23\">{{vars.item.incidentSrc}}<\/div>\n<\/div>\n{%endif%}\n\n\n{%if vars.item.incidentTarget%}\n<div class=\"font-size-14 ng-binding\">Incident Target<\/div><div class=\"card-container-body\" style=\"width: 100%;font-size:46px;\">\n<div class=\"card-number\" style=\"font-size:20px;  border-left: 5px solid red;background:#141b23\">{{vars.item.incidentTarget}}<\/div>\n<\/div>\n{%endif%}\n\n{%if vars.item.incidentRptIp%}\n<div class=\"font-size-14 ng-binding\">Incident Reporting IP<\/div><div class=\"card-container-body\" style=\"width: 100%;font-size:46px;\">\n<div class=\"card-number\" style=\"font-size:20px;  border-left: 5px solid red;background:#141b23\">{{vars.item.incidentRptIp}}<\/div>\n<\/div>\n{%endif%}\n\n\n{%if vars.item.incidentSrc or vars.item.incidentRptDevName or vars.item.incidentRptIp %}\n<div class=\"font-size-14 ng-binding\">Reporting Device<\/div><div class=\"card-container-body\" style=\"width: 100%;font-size:46px;\">\n<div class=\"card-number\" style=\"font-size:20px;  border-left: 5px solid red;background:#141b23\">{{vars.item.incidentSrc or vars.item.incidentRptDevName or vars.item.incidentRptIp}}<\/div>\n<\/div>\n{%endif%}\n\n{%if 'CVE' in vars.item.incidentComments %}\n<div class=\"font-size-14 ng-binding\">Detected CVE<\/div><div class=\"card-container-body\" style=\"width: 100%;font-size:46px;\">\n<div class=\"card-number\" style=\"font-size:20px;  border-left: 5px solid red;background:#141b23\">{{vars.item.incidentComments|regex_search(\"CVE[^]]*\")}}<\/div>\n<\/div>\n{%endif%}\n\n{%if vars.item.phIncidentImpacts %}\n<div class=\"font-size-14 ng-binding\">Incident Impacts<\/div><div class=\"card-container-body\" style=\"width: 100%;font-size:46px;\">\n<div class=\"card-number\" style=\"font-size:20px;  border-left: 5px solid red;background:#141b23\">{{vars.item.phIncidentImpacts}}<\/div>\n<\/div>\n{%endif%}\n\n{%if vars.item.incidentComments%}\n<div class=\"font-size-14 ng-binding\">Incident Analysts Comments<\/div><div class=\"card-container-body\" style=\"width: 100%;font-size:46px;\">\n<div class=\"card-number\" style=\"font-size:20px;  border-left: 5px solid red;background:#141b23\">{{vars.item.incidentComments}}<\/div>\n<\/div>\n{%endif%}\n\n\n{%if vars.item.attackTechnique%}\n<div class=\"font-size-14 ng-binding\">Attack Technique<\/div><div class=\"card-container-body\" style=\"width: 100%;font-size:46px;\">\n<div class=\"card-number\" style=\"font-size:20px;  border-left: 5px solid red;background:#141b23\">{{vars.item.attackTechnique}}<\/div>\n<\/div>\n{%endif%}\n\n{%if vars.item.incidentDetail%}\n<div class=\"font-size-14 ng-binding\">Incident Details<\/div><div class=\"card-container-body\" style=\"width: 100%;font-size:46px;\">\n<div class=\"card-number\" style=\"font-size:20px;  border-left: 5px solid red;background:#141b23\">{{vars.item.incidentDetail.replace(',',' ')}}<\/div>\n<\/div>\n{%endif%}\n\n<table style=\"color:white;font-size:11;\">\n<tbody><tr><\/tr><tr>\n\n\n<\/tr><tr>\n\n\n<\/tr><tr>\n\n\n<\/tr><tr>\n\n\n<\/tr><tr>\n\n\n<\/tr><tr>\n\n\n<\/tr><tr>\n\n\n<\/tr><tr>\n\n\n<\/tr>\n<\/tbody><\/table><\/td><\/tr><\/tbody><\/table>",
+                    "targetAsset": "{{vars.item.incidentTarget.hostIpAddr or None}}",
+                    "ackSlaStatus": "\/api\/3\/picklists\/72979f64-e8b9-4888-a965-957e0ec24818",
+                    "computerName": "{{vars.item.incidentTarget.hostName or vars.item.incidentTarget.destName or None}}",
+                    "destinationIp": "{{vars.item.incidentTarget.destIpAddr or None}}",
+                    "respSlaStatus": "\/api\/3\/picklists\/72979f64-e8b9-4888-a965-957e0ec24818",
+                    "mitreTechnique": "{{vars.item.attackTactic or None}}",
+                    "outbreakAlerts": "{{vars.input.records[0]['@id']}}",
+                    "priorityWeight": 1,
+                    "escalatedtoincident": "\/api\/3\/picklists\/2128a09c-153d-4db3-985d-de6be33deae5",
+                    "resolvedAutomatedly": false,
+                    "alertRemainingAckSLA": 0
+                },
+                "_showJson": false,
+                "operation": "Overwrite",
+                "collection": "\/api\/3\/upsert\/alerts",
+                "__recommend": [],
+                "fieldOperation": {
+                    "recordTags": "Overwrite"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "435",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
+            "group": null,
+            "uuid": "6747061f-16d5-4cca-bc53-d74b0b8da604"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Fetch Associated Events",
+            "description": null,
+            "arguments": {
+                "for_each": {
+                    "item": "{{vars.steps.Create_Alert_Record}}",
+                    "parallel": false,
+                    "condition": ""
+                },
+                "arguments": {
+                    "max_events": "{{vars.input.params['fortisiem_event_count']}}",
+                    "incidentdata": "{{vars.item}}"
+                },
+                "apply_async": false,
+                "step_variables": [],
+                "pass_parent_env": false,
+                "pass_input_record": true,
+                "workflowReference": "\/api\/3\/workflows\/97733935-0624-4e7c-aadc-ccc0dbe51fe1"
+            },
+            "status": null,
+            "top": "570",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+            "group": null,
+            "uuid": "91a28a61-2dd2-4c99-a13c-cfc964363d30"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Get Outbreak Alert Incident",
+            "description": null,
+            "arguments": {
+                "name": "Fortinet FortiSIEM",
+                "config": "4c0216d2-27d8-41da-8b4d-f8ae360c6a6f",
+                "params": {
+                    "size": "{{vars.input.params['fortisiem_incident_count']}}",
+                    "start": 0,
+                    "fields": "",
+                    "search": "",
+                    "timeTo": "{{vars.input.params['to_date']}}",
+                    "orderBy": "",
+                    "severity": [
+                        "High",
+                        "Medium"
+                    ],
+                    "timeFrom": "{{vars.input.params['from_date']}}",
+                    "eventType": "{{vars.input.params['fortiSIEM_query']}}",
+                    "incidentStatus": "{{vars.input.params['fortisiem_incidentStatus']}}",
+                    "incidentCategory": "",
+                    "incidentSubCategory": ""
+                },
+                "version": "5.0.1",
+                "connector": "fortinet-fortisiem",
+                "operation": "get_incidents",
+                "mock_result": "{\n  \"data\": {\n    \"data\": [\n      {\n        \"count\": 744,\n        \"customer\": \"test1\",\n        \"eventName\": \"Network Device Degraded: Lossy Ping Response\",\n        \"eventType\": \"{{vars.fortiSIEM_query}}\",\n        \"incidentId\": 2115,\n        \"incidentSrc\": \"\",\n        \"attackTactic\": \"Impact\",\n        \"incidentReso\": 1,\n        \"eventSeverity\": 8,\n        \"incidentRptIp\": \"10.132.252.22\",\n        \"incidentTitle\": \"Network Device FGVM01TM23001213 degraded due to more than 75 pct packet loss\",\n        \"incidentDetail\": \"pktLossPct:100.00, \",\n        \"incidentStatus\": 3,\n        \"incidentTarget\": {\n          \"hostName\": \"FGVM01TM23001213\",\n          \"hostIpAddr\": \"10.132.252.22\"\n        },\n        \"attackTechnique\": [\n          {\n            \"name\": \"System Shutdown\/Reboot\",\n            \"techniqueid\": \"T1529\"\n          }\n        ],\n        \"eventSeverityCat\": \"MEDIUM\",\n        \"incidentLastSeen\": 1690137210000,\n        \"incidentFirstSeen\": 1690047270000,\n        \"incidentRptDevName\": \"FGVM01TM23001213\",\n        \"phIncidentCategory\": 1,\n        \"incidentClearedTime\": 1690137230000,\n        \"incidentClearedReason\": \"Incident cleared by system because it has expired\",\n        \"phSubIncidentCategory\": \"Impact\"\n      },\n      {\n        \"count\": 744,\n        \"customer\": \"test1\",\n        \"eventName\": \"Network Device Down: no ping response\",\n        \"eventType\": \"PH_RULE_NON_RESPONSIVE_NET_DEV\",\n        \"incidentId\": 2116,\n        \"incidentSrc\": \"\",\n        \"attackTactic\": \"Impact\",\n        \"incidentReso\": 1,\n        \"eventSeverity\": 10,\n        \"incidentRptIp\": \"10.132.252.22\",\n        \"incidentTitle\": \"Network Device FGVM01TM23001213 down due to total ping loss\",\n        \"incidentDetail\": \"\",\n        \"incidentStatus\": 3,\n        \"incidentTarget\": {\n          \"hostName\": \"FGVM01TM23001213\",\n          \"hostIpAddr\": \"10.132.252.22\"\n        },\n        \"attackTechnique\": [\n          {\n            \"name\": \"System Shutdown\/Reboot\",\n            \"techniqueid\": \"T1529\"\n          }\n        ],\n        \"eventSeverityCat\": \"HIGH\",\n        \"incidentLastSeen\": 1690137210000,\n        \"incidentFirstSeen\": 1690047270000,\n        \"incidentRptDevName\": \"FGVM01TM23001213\",\n        \"phIncidentCategory\": 1,\n        \"incidentClearedTime\": 1690137230000,\n        \"incidentClearedReason\": \"Incident cleared by system because it has expired\",\n        \"phSubIncidentCategory\": \"Impact\"\n      },\n      {\n        \"count\": 1,\n        \"customer\": \"Super\",\n        \"eventName\": \"No logs from a device\",\n        \"eventType\": \"PH_RULE_NO_LOGS_FROM_DEVICE\",\n        \"incidentId\": 2122,\n        \"incidentSrc\": \"\",\n        \"incidentReso\": 1,\n        \"eventSeverity\": 7,\n        \"incidentRptIp\": \"10.132.252.13\",\n        \"incidentTitle\": \"High log receiving delay from monitored device 10.132.252.13\",\n        \"incidentDetail\": \"jobName:Syslog, \",\n        \"incidentStatus\": 1,\n        \"incidentTarget\": {\n          \"hostIpAddr\": \"10.132.252.13\"\n        },\n        \"eventSeverityCat\": \"MEDIUM\",\n        \"incidentLastSeen\": 1690141980000,\n        \"incidentFirstSeen\": 1690141980000,\n        \"incidentRptDevName\": \"nsoni.fsm660.local\",\n        \"phIncidentCategory\": 1,\n        \"incidentClearedTime\": 1690227125000,\n        \"incidentClearedReason\": \"Clear conditions have been met\",\n        \"phSubIncidentCategory\": \"FortiSIEM\"\n      },\n      {\n        \"count\": 1,\n        \"customer\": \"test1\",\n        \"eventName\": \"FortiSIEM Agent Operational Error\",\n        \"eventType\": \"PH_RULE_FSM_AGENT_OP_ERROR\",\n        \"incidentId\": 2123,\n        \"incidentSrc\": \"\",\n        \"incidentReso\": 1,\n        \"eventSeverity\": 9,\n        \"incidentRptIp\": \"10.132.252.13\",\n        \"incidentTitle\": \"FortiSIEM Agent error PH_AUDIT_AGENT_NOTRESPONDING on WIN-8UO5L4TEH87.nsoni.local\",\n        \"incidentDetail\": \"compEventType:PH_AUDIT_AGENT_NOTRESPONDING, type:Windows, \",\n        \"incidentStatus\": 3,\n        \"incidentTarget\": {\n          \"hostName\": \"WIN-8UO5L4TEH87.nsoni.local\"\n        },\n        \"eventSeverityCat\": \"HIGH\",\n        \"incidentLastSeen\": 1690227060000,\n        \"incidentFirstSeen\": 1690227060000,\n        \"incidentRptDevName\": \"HOST-10.132.252.13\",\n        \"phIncidentCategory\": 1,\n        \"incidentClearedTime\": 1690313630000,\n        \"incidentClearedReason\": \"Incident cleared by system because it has expired\",\n        \"phSubIncidentCategory\": \"FortiSIEM\"\n      },\n      {\n        \"count\": 740,\n        \"customer\": \"test1\",\n        \"eventName\": \"Network Device Down: no ping response\",\n        \"eventType\": \"PH_RULE_NON_RESPONSIVE_NET_DEV\",\n        \"incidentId\": 2121,\n        \"incidentSrc\": \"\",\n        \"attackTactic\": \"Impact\",\n        \"incidentReso\": 1,\n        \"eventSeverity\": 10,\n        \"incidentRptIp\": \"10.132.252.22\",\n        \"incidentTitle\": \"Network Device FGVM01TM23001213 down due to total ping loss\",\n        \"incidentDetail\": \"\",\n        \"incidentStatus\": 3,\n        \"incidentTarget\": {\n          \"hostName\": \"FGVM01TM23001213\",\n          \"hostIpAddr\": \"10.132.252.22\"\n        },\n        \"attackTechnique\": [\n          {\n            \"name\": \"System Shutdown\/Reboot\",\n            \"techniqueid\": \"T1529\"\n          }\n        ],\n        \"eventSeverityCat\": \"HIGH\",\n        \"incidentLastSeen\": 1690227210000,\n        \"incidentFirstSeen\": 1690137330000,\n        \"incidentRptDevName\": \"FGVM01TM23001213\",\n        \"phIncidentCategory\": 1,\n        \"incidentClearedTime\": 1690227230000,\n        \"incidentClearedReason\": \"Incident cleared by system because it has expired\",\n        \"phSubIncidentCategory\": \"Impact\"\n      }\n    ],\n    \"size\": 104,\n    \"start\": 0,\n    \"total\": 104\n  },\n  \"status\": \"Success\",\n  \"message\": \"\",\n  \"operation\": null,\n  \"execution_time\": \"477 ms\"\n}",
+                "operationTitle": "List Incidents",
+                "pickFromTenant": false,
+                "step_variables": []
+            },
+            "status": null,
+            "top": "165",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/0bfed618-0316-11e7-93ae-92361f002671",
+            "group": null,
+            "uuid": "0174b7c5-b39d-41c2-801c-40274bd79943"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "step_variables": {
+                    "input": {
+                        "params": []
+                    },
+                    "useMockOutput": "{{globalVars.Demo_mode}}"
+                }
+            },
+            "status": null,
+            "top": "30",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+            "group": null,
+            "uuid": "b6c84c29-a80d-4103-a3e8-19325c1d179f"
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Configuration -> Create Record",
+            "targetStep": "\/api\/3\/workflow_steps\/6747061f-16d5-4cca-bc53-d74b0b8da604",
+            "sourceStep": "\/api\/3\/workflow_steps\/7ab3c059-7e0b-43c3-9e9e-1e95206df2c6",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "4036d1a3-b8dd-45fe-b706-9a41fb7b1e42"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Create Alert Record -> Fetch Associated Events",
+            "targetStep": "\/api\/3\/workflow_steps\/91a28a61-2dd2-4c99-a13c-cfc964363d30",
+            "sourceStep": "\/api\/3\/workflow_steps\/6747061f-16d5-4cca-bc53-d74b0b8da604",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "f389878b-db15-48ca-b14a-c0394822abd7"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Get Outbreak Alert Incident -> Configuration",
+            "targetStep": "\/api\/3\/workflow_steps\/7ab3c059-7e0b-43c3-9e9e-1e95206df2c6",
+            "sourceStep": "\/api\/3\/workflow_steps\/0174b7c5-b39d-41c2-801c-40274bd79943",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "3c9deb9d-afa6-4547-bd8e-5ea46113c353"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Get Outbreak Alert Incident",
+            "targetStep": "\/api\/3\/workflow_steps\/0174b7c5-b39d-41c2-801c-40274bd79943",
+            "sourceStep": "\/api\/3\/workflow_steps\/b6c84c29-a80d-4103-a3e8-19325c1d179f",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "ae492d46-4add-4b10-b9b9-eeeb609db84b"
+        }
+    ],
+    "groups": [],
+    "priority": "\/api\/3\/picklists\/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+    "uuid": "cc178f00-d898-4514-94e5-3388d5e3ac8e",
+    "owners": [],
+    "isPrivate": false,
+    "deletedAt": null,
+    "recordTags": [
+        "Subroutine",
+        "Outbreak Alert",
+        "FortiSIEM"
+    ]
+}

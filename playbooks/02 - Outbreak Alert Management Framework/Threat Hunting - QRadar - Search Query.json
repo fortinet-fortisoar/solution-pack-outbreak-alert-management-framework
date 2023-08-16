@@ -1,0 +1,180 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "Threat Hunting - QRadar - Search Query",
+    "aliasName": null,
+    "tag": null,
+    "description": "Executes an outbreak alert Ariel query on the QRadar server and create FortiSOAR Alert",
+    "isActive": true,
+    "debug": false,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [
+        "q_radar_query"
+    ],
+    "synchronous": false,
+    "collection": "\/api\/3\/workflow_collections\/2ae30943-7a2f-435b-a100-3ec7c3e2294b",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/956ab7fa-2220-4aa1-8981-43beec660669",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Configuration",
+            "description": null,
+            "arguments": {
+                "_tmp": "{% for  event in vars.steps.QRadar_Hunting.data.events %}\n    {% set d1 = {} %}\n    {% for e in event['utf8_payload'].split('\\t') %}\n        {% if loop.index0 == 0 %}\n            {% set k = (e.split('=')[0]).split(' ')[-1] %}\n            {% set v = e.split('=')[-1] %}\n            {% set _ = d1.update({k: v}) %}\n        {% elif 'Message=' in e %}\n            {% set msg = 'RuleName' + e.split('RuleName')[-1].replace(': ',':') %}\n            {% set ind_list = [] %}\n            {% set exnd_list = [] %}            \n                {% for item in msg.split(' ') %}\n                    {% if ':' not in item %}\n                        {% set i = ((loop.index0)-1) | int %}\n                        {% set prev = ind_list[i]%}\n                        {% set st = prev + ' ' + item %}\n                        {% set _ = ind_list.append(st) %}\n                    {% else %}\n                        {%  set _ = ind_list.append(item) %}\n                    {% endif %}\n                {% endfor %}\n                {% for i in exnd_list %}\n                    {{ind_list.pop(i-loop.index0)}}\n                {% endfor %}\n                {% for i in ind_list %}\n                    {% if (i | regex_search('[0-9][0-9]:[0-9][0-9]:[0-9][0-9].*')) == None %}\n                        {% set k1 = i.split(':')[0].strip() %}\n                        {% set v1 = i.split(':')[1:]|join(':') %}\n                        {% set _ = d1.update({k1: v1}) %}\n                    {% endif %}\n                {% endfor %}\n        {% set k2 = e.split('=')[0].strip() %}\n        {% set v2 = e.split('=')[-1].strip() %}\n        {% set _ = d1.update({k2: v2}) %}\n        {% endif %}\n    {% endfor %}\n    {% set _ = vars.q_event.append(d1) %}\n{% endfor %}\n{{vars.q_event}}"
+            },
+            "status": null,
+            "top": "300",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
+            "uuid": "c0be2faf-c401-4381-8fb6-ee29337f7231"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Create Alert",
+            "description": null,
+            "arguments": {
+                "for_each": {
+                    "item": "{{vars.q_event}}",
+                    "__bulk": true,
+                    "parallel": false,
+                    "condition": "",
+                    "batch_size": 100
+                },
+                "resource": {
+                    "name": "Outbreak Alert - {{vars.input.params['q_radar_query'].title}}",
+                    "type": "\/api\/3\/picklists\/f2fb4c85-baae-407e-b218-1cc54a49546c",
+                    "state": "\/api\/3\/picklists\/a1bac09b-1441-45aa-ad1b-c88744e48e72",
+                    "status": "\/api\/3\/picklists\/7de816ff-7140-4ee5-bd05-93ce22002146",
+                    "filePath": "{{vars.item.Image}}",
+                    "severity": "\/api\/3\/picklists\/7efa2220-39bb-44e4-961f-ac368776e3b0",
+                    "sourceId": "{{vars.item.SourceHostname}}",
+                    "sourceIp": "{{vars.item.SourceIp}}",
+                    "__replace": "true",
+                    "processId": "{{vars.item.ProcessId}}",
+                    "recordTags": "{{vars.input.records[0].recordTags | join(\",\")}}",
+                    "sourcePort": "{{vars.item.SourcePort}}",
+                    "description": "{{vars.item.Message}}",
+                    "deviceOwner": "{{vars.item.AgentDevice}}",
+                    "processGuid": "{{vars.item.ProcessGuid}}",
+                    "ackSlaStatus": "\/api\/3\/picklists\/72979f64-e8b9-4888-a965-957e0ec24818",
+                    "destinationID": "{{vars.item.DestinationHostname}}",
+                    "destinationIp": "{{vars.item.DestinationIp}}",
+                    "respSlaStatus": "\/api\/3\/picklists\/72979f64-e8b9-4888-a965-957e0ec24818",
+                    "outbreakAlerts": "{{vars.input.records[0]['@id']}}",
+                    "priorityWeight": 1,
+                    "destinationPort": "{{vars.item.DestinationPort}}",
+                    "alertDetectionDate": "{{arrow.get(vars.item.UtcTime).int_timestamp}}",
+                    "escalatedtoincident": "\/api\/3\/picklists\/2128a09c-153d-4db3-985d-de6be33deae5",
+                    "resolvedAutomatedly": false,
+                    "alertRemainingAckSLA": 0
+                },
+                "_showJson": false,
+                "operation": "Overwrite",
+                "collection": "\/api\/3\/upsert\/alerts",
+                "__recommend": [],
+                "fieldOperation": {
+                    "recordTags": "Overwrite"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "435",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
+            "group": null,
+            "uuid": "aecde0c6-c4a1-40c8-b23e-dd17819eff9e"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "QRadar Hunting",
+            "description": null,
+            "arguments": {
+                "name": "IBM QRadar",
+                "config": "7ba1257e-cc5e-4992-bac1-9371acbcb5b5",
+                "params": {
+                    "search_string": "{{vars.input.params['q_radar_query'].query}}"
+                },
+                "version": "1.6.0",
+                "connector": "qradar",
+                "operation": "query_qradar",
+                "mock_result": "{\n  \"data\": {\n    \"events\": [\n      {\n        \"utf8_payload\": \"<13>Jul 28 01:59:51 DESKTOP-PCGUGDK AgentDevice=WindowsLog\\tAgentLogFile=Microsoft-Windows-Sysmon\/Operational\\tPluginVersion=WC.MSEVEN6.10.1.2.20\\tSource=Microsoft-Windows-Sysmon\\tComputer=DESKTOP-PCGUGDK\\tOriginatingComputer=DESKTOP-PCGUGDK\\tUser=SYSTEM\\tDomain=NT AUTHORITY\\tEventID=3\\tEventIDCode=3\\tEventType=4\\tEventCategory=3\\tRecordNumber=4353180\\tTimeGenerated=1690534789\\tTimeWritten=1690534789\\tLevel=Informational\\tKeywords=0\\tTask=SysmonTask-SYSMONEVENT_NETWORK_CONNECT\\tOpcode=Data Collection Start\\tMessage=Network connection detected: RuleName: Usermode UtcTime: 2023-07-28 08:59:07.659 ProcessGuid: {61a3cfef-a879-64a3-4b00-000000001100} ProcessId: 3716 Image: C:\\\\Users\\\\admin\\\\Downloads\\\\fortiagent.exe User: NT AUTHORITY\\\\SYSTEM Protocol: tcp Initiated: true SourceIsIpv6: false SourceIp: 10.132.253.159 SourceHostname: DESKTOP-PCGUGDK SourcePort: 60444 SourcePortName: - DestinationIsIpv6: false DestinationIp: 10.132.253.34 DestinationHostname: qa-fortitester-sys1.fortisoar.in DestinationPort: 443 DestinationPortName: https\\n\"\n      },\n      {\n        \"utf8_payload\": \"<13>Jul 28 02:00:21 DESKTOP-PCGUGDK AgentDevice=WindowsLog\\tAgentLogFile=Microsoft-Windows-Sysmon\/Operational\\tPluginVersion=WC.MSEVEN6.10.1.2.20\\tSource=Microsoft-Windows-Sysmon\\tComputer=DESKTOP-PCGUGDK\\tOriginatingComputer=DESKTOP-PCGUGDK\\tUser=SYSTEM\\tDomain=NT AUTHORITY\\tEventID=3\\tEventIDCode=3\\tEventType=4\\tEventCategory=3\\tRecordNumber=4353191\\tTimeGenerated=1690534798\\tTimeWritten=1690534798\\tLevel=Informational\\tKeywords=0\\tTask=SysmonTask-SYSMONEVENT_NETWORK_CONNECT\\tOpcode=Data Collection Start\\tMessage=Network connection detected: RuleName: Usermode UtcTime: 2023-07-28 08:59:16.606 ProcessGuid: {61a3cfef-a879-64a3-4b00-000000001100} ProcessId: 3716 Image: C:\\\\Users\\\\admin\\\\Downloads\\\\fortiagent.exe User: NT AUTHORITY\\\\SYSTEM Protocol: tcp Initiated: true SourceIsIpv6: false SourceIp: 10.132.253.159 SourceHostname: DESKTOP-PCGUGDK SourcePort: 60455 SourcePortName: - DestinationIsIpv6: false DestinationIp: 10.132.253.34 DestinationHostname: qa-fortitester-sys1.fortisoar.in DestinationPort: 443 DestinationPortName: https\\n\"\n      }\n    ]\n  },\n  \"status\": \"Success\",\n  \"message\": \"\",\n  \"operation\": null,\n  \"execution_time\": \"417 ms\"\n}",
+                "operationTitle": "Make an Ariel Query to QRadar",
+                "pickFromTenant": false,
+                "step_variables": {
+                    "q_event": "[]"
+                }
+            },
+            "status": null,
+            "top": "165",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/0bfed618-0316-11e7-93ae-92361f002671",
+            "group": null,
+            "uuid": "85c6f071-862a-4bef-a167-1e0e995b832d"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "step_variables": {
+                    "input": {
+                        "params": []
+                    },
+                    "useMockOutput": "{{globalVars.Demo_mode}}"
+                }
+            },
+            "status": null,
+            "top": "30",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+            "group": null,
+            "uuid": "956ab7fa-2220-4aa1-8981-43beec660669"
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Configuration -> Create Alert",
+            "targetStep": "\/api\/3\/workflow_steps\/aecde0c6-c4a1-40c8-b23e-dd17819eff9e",
+            "sourceStep": "\/api\/3\/workflow_steps\/c0be2faf-c401-4381-8fb6-ee29337f7231",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "28601f0d-203f-40f9-bddb-a14b5d7b0b1d"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "QRadar Hunting -> Configuration",
+            "targetStep": "\/api\/3\/workflow_steps\/c0be2faf-c401-4381-8fb6-ee29337f7231",
+            "sourceStep": "\/api\/3\/workflow_steps\/85c6f071-862a-4bef-a167-1e0e995b832d",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "cb82a474-255e-4985-ba5c-1eccac0f25ad"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> QRadar Hunting",
+            "targetStep": "\/api\/3\/workflow_steps\/85c6f071-862a-4bef-a167-1e0e995b832d",
+            "sourceStep": "\/api\/3\/workflow_steps\/956ab7fa-2220-4aa1-8981-43beec660669",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "dcf4359d-3e05-4e95-89ab-5dcd02524459"
+        }
+    ],
+    "groups": [],
+    "priority": "\/api\/3\/picklists\/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+    "uuid": "bd0c5112-9cfd-428c-b39e-919c859d3032",
+    "owners": [],
+    "isPrivate": false,
+    "deletedAt": null,
+    "recordTags": [
+        "Subroutine",
+        "Outbreak Alert",
+        "QRadar"
+    ]
+}

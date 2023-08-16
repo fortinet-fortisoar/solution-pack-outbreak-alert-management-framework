@@ -1,0 +1,131 @@
+{
+    "name": "outbreakAlertManagementFramework",
+    "version": "1.0.0",
+    "fsrMinCompatibility": "7.2.0",
+    "type": "solutionpack",
+    "local": true,
+    "label": "Outbreak Alert Management Framework",
+    "dependencies": [
+        {
+            "name": "sOARFramework",
+            "type": "solutionpack",
+            "label": "SOAR Framework",
+            "minVersion": null
+        },
+        {
+            "name": "threat-intel-management",
+            "type": "solutionpack",
+            "label": "Threat Intel Management",
+            "minVersion": null
+        },
+        {
+            "name": "vulnerabilityManagement",
+            "type": "solutionpack",
+            "label": "Vulnerability Management",
+            "minVersion": null
+        }
+    ],
+    "prerequisite": null,
+    "publisher": "Fortinet",
+    "description": "Outbreak Alert Management Framework provides key information about on-going cybersecurity attack with significant ramifications affecting numerous companies, organizations and industries",
+    "help": "https://github.com/fortinet-fortisoar/solution-pack-outbreak-alert-management-framework/blob/release/1.0.0/README.md",
+    "category": [
+        "Vulnerability Management"
+    ],
+    "supportInfo": "Fortinet Customer Support",
+    "iconLarge": null,
+    "postInstallConfig": {
+        "enabled": false
+    },
+    "recordTags": [
+        "Outbreak Alert"
+    ],
+    "date": "2023-08-16T06:03:24+00:00",
+    "contents": {
+        "picklistNames": [
+            {
+                "name": "Outbreak Alert Severity"
+            },
+            {
+                "name": "Rule Type"
+            }
+        ],
+        "modules": {
+            "outbreak_alerts": {
+                "name": "Outbreak Alerts",
+                "apiName": "outbreak_alerts"
+            },
+            "threat_hunt_rules": {
+                "name": "Threat Hunt Rules",
+                "apiName": "threat_hunt_rules"
+            }
+        },
+        "viewTemplates": {
+            "outbreak_alerts": {
+                "name": "Outbreak Alerts",
+                "apiName": "outbreak_alerts",
+                "views": [
+                    "list",
+                    "detail",
+                    "form"
+                ]
+            },
+            "threat_hunt_rules": {
+                "name": "Threat Hunt Rules",
+                "apiName": "threat_hunt_rules",
+                "views": [
+                    "list",
+                    "detail",
+                    "form"
+                ]
+            }
+        },
+        "views": {
+            "navigation": [
+                "Outbreak Alert Management"
+            ]
+        },
+        "roles": [
+            {
+                "name": "Full App Permissions"
+            }
+        ],
+        "playbooks": [
+            {
+                "name": "02 - Outbreak Alert Management Framework"
+            }
+        ],
+        "globalVariables": [],
+        "playbookBlocks": [],
+        "connectors": [
+            {
+                "name": "Azure Log Analytics",
+                "apiName": "azure-log-analytics"
+            },
+            {
+                "name": "Fortinet FortiAnalyzer",
+                "apiName": "fortinet-fortianalyzer"
+            },
+            {
+                "name": "Fortinet FortiGate",
+                "apiName": "fortigate-firewall"
+            },
+            {
+                "name": "Fortinet FortiSIEM",
+                "apiName": "fortinet-fortisiem"
+            },
+            {
+                "name": "IBM QRadar",
+                "apiName": "qradar"
+            },
+            {
+                "name": "NIST National Vulnerability Database",
+                "apiName": "nist-nvd"
+            },
+            {
+                "name": "Splunk",
+                "apiName": "splunk"
+            }
+        ]
+    }
+}

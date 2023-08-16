@@ -1,0 +1,231 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "Remediation - Block Indicators",
+    "aliasName": null,
+    "tag": null,
+    "description": "Blocks malicious outbreak alert indicators",
+    "isActive": true,
+    "debug": false,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [],
+    "synchronous": false,
+    "collection": "\/api\/3\/workflow_collections\/2ae30943-7a2f-435b-a100-3ec7c3e2294b",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/724e2e63-0ca0-4b18-92f7-dc92608df03a",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Block Indicators",
+            "description": null,
+            "arguments": {
+                "for_each": {
+                    "item": "{{vars.steps.Get_Threat_Intel_Feeds}}",
+                    "__bulk": false,
+                    "parallel": true,
+                    "condition": ""
+                },
+                "arguments": {
+                    "indicator_type": "{{vars.item.typeOfFeed.itemValue}}",
+                    "indicator_value": "{{vars.item.value}}",
+                    "indicator_record_iri": "{{vars.item['@id']}}",
+                    "indicator_block_reason": "Found \"{{vars.input.records[0]['title']}}\""
+                },
+                "apply_async": false,
+                "step_variables": [],
+                "pass_parent_env": false,
+                "pass_input_record": true,
+                "workflowReference": "\/api\/3\/workflows\/1a1cac48-567a-4066-b0d1-c63457226f12"
+            },
+            "status": null,
+            "top": "240",
+            "left": "880",
+            "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+            "group": null,
+            "uuid": "30052cd0-7993-4ea3-9518-0958ec4af58d"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Configuration",
+            "description": null,
+            "arguments": {
+                "url": "{{vars.steps.Get_Threat_Intel_Feeds | json_query(\"[?typeOfFeed.itemValue == 'URL'].value\") | join(', ')}}",
+                "domain": "{{vars.steps.Get_Threat_Intel_Feeds | json_query(\"[?typeOfFeed.itemValue == 'Domain'].value\") | join(', ')}}",
+                "fileHash": "{{vars.steps.Get_Threat_Intel_Feeds | json_query(\"[?typeOfFeed.itemValue == 'FileHash'].value\") | join(', ')}}",
+                "ip_address": "{{vars.steps.Get_Threat_Intel_Feeds | json_query(\"[?typeOfFeed.itemValue == 'IP Address'].value\") | join(', ')}}",
+                "fileHash_MD5": "{{vars.steps.Get_Threat_Intel_Feeds | json_query(\"[?typeOfFeed.itemValue == 'FileHash-MD5'].value\") | join(', ')}}",
+                "email_address": "{{vars.steps.Get_Threat_Intel_Feeds | json_query(\"[?typeOfFeed.itemValue == 'Email Address'].value\") | join(', ')}}",
+                "fileHash_SHA1": "{{vars.steps.Get_Threat_Intel_Feeds | json_query(\"[?typeOfFeed.itemValue == 'FileHash-SHA1'].value\") | join(', ')}}",
+                "fileHash_SHA256": "{{vars.steps.Get_Threat_Intel_Feeds | json_query(\"[?typeOfFeed.itemValue == 'FileHash-SHA256'].value\") | join(', ')}}",
+                "network_activity": "{{vars.steps.Get_Threat_Intel_Feeds | json_query(\"[?typeOfFeed.itemValue == 'Network Activity'].value\") | join(', ')}}"
+            },
+            "status": null,
+            "top": "313",
+            "left": "530",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
+            "uuid": "32beb85a-aca1-45c5-a566-36cc96b13dc2"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Create Indicator Table",
+            "description": null,
+            "arguments": {
+                "params": {
+                    "data": "[\n    {\n        \"IP Address\": \"<p style='word-break: break-word;white-space: pre-wrap;'>{{vars.ip_address}}<\/p>\",\n        \"Domain\": \"<p style='word-break: break-word;white-space: pre-wrap;'>{{vars.domain}}<\/p>\",\n        \"URL\": \"<p style='word-break: break-word;white-space: pre-wrap;'>{{vars.url}}<\/p>\",\n        \"FileHash\": \"<p style='word-break: break-word;white-space: pre-wrap;'>{{vars.fileHash}}<\/p>\",\n        \"FileHash-MD5\": \"<p style='word-break: break-word;white-space: pre-wrap;'>{{vars.fileHash_MD5}}<\/p>\",\n        \"FileHash-SHA1\": \"<p style='word-break: break-word;white-space: pre-wrap;'>{{vars.fileHash_SHA1}}<\/p>\",\n        \"FileHash-SHA256\": \"<p style='word-break: break-word;white-space: pre-wrap;'>{{vars.fileHash_SHA256}}<\/p>\",\n        \"Network Activity\": \"<p style='word-break: break-word;white-space: pre-wrap;'>{{vars.network_activity}}<\/p>\",\n        \"Email Address\": \"<p style='word-break: break-word;white-space: pre-wrap;'>{{vars.email_address}}<\/p>\"\n    }\n]",
+                    "display": "Vertical",
+                    "styling": false,
+                    "template": "Stylized with row selection",
+                    "row_fields": ""
+                },
+                "version": "3.2.3",
+                "connector": "cyops_utilities",
+                "operation": "json_to_html",
+                "operationTitle": "Utils: Convert JSON into a HTML Table",
+                "step_variables": []
+            },
+            "status": null,
+            "top": "391",
+            "left": "847",
+            "stepType": "\/api\/3\/workflow_step_types\/0109f35d-090b-4a2b-bd8a-94cbc3508562",
+            "group": null,
+            "uuid": "024da727-b51b-41ed-baee-bfb7a3451188"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Demo",
+            "description": null,
+            "arguments": {
+                "type": "InputBased",
+                "input": {
+                    "schema": {
+                        "title": "Block Indicator",
+                        "description": "{{vars.steps.Create_Indicator_Table.data}}",
+                        "inputVariables": []
+                    }
+                },
+                "record": "{{vars.input.records[0]['@id']}}",
+                "agent_id": null,
+                "resources": "outbreak_alerts",
+                "owner_detail": {
+                    "isAssigned": false
+                },
+                "isRecordLinked": true,
+                "step_variables": [],
+                "response_mapping": {
+                    "options": [
+                        {
+                            "option": "Create Task"
+                        }
+                    ],
+                    "duplicateOption": false
+                },
+                "email_notification": {
+                    "enabled": false,
+                    "smtpParameters": []
+                },
+                "inline_channel_list": [],
+                "external_channel_list": [],
+                "unauthenticated_input": false
+            },
+            "status": null,
+            "top": "407",
+            "left": "1280",
+            "stepType": "\/api\/3\/workflow_step_types\/fc04082a-d7dc-4299-96fb-6837b1baa0fe",
+            "group": null,
+            "uuid": "4f81ec7d-bd4d-4397-8e8b-996d92a5f733"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Get Threat Intel Feeds",
+            "description": null,
+            "arguments": {
+                "query": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "type": "primitive",
+                            "field": "outbreakAlerts.id",
+                            "value": "{{vars.input.records[0]['id']}}",
+                            "operator": "eq",
+                            "_operator": "eq"
+                        }
+                    ]
+                },
+                "module": "threat_intel_feeds?$limit=3000",
+                "checkboxFields": false,
+                "step_variables": []
+            },
+            "status": null,
+            "top": "148",
+            "left": "417",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928770",
+            "group": null,
+            "uuid": "9a46fce7-99c4-453f-bdfc-e8c76e67944f"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "step_variables": {
+                    "input": {
+                        "params": []
+                    }
+                }
+            },
+            "status": null,
+            "top": "40",
+            "left": "40",
+            "stepType": "\/api\/3\/workflow_step_types\/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+            "group": null,
+            "uuid": "724e2e63-0ca0-4b18-92f7-dc92608df03a"
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Configuration -> Create Indicator Table",
+            "targetStep": "\/api\/3\/workflow_steps\/024da727-b51b-41ed-baee-bfb7a3451188",
+            "sourceStep": "\/api\/3\/workflow_steps\/32beb85a-aca1-45c5-a566-36cc96b13dc2",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "ec6b5a17-4627-47c4-8174-9ab3e9ed5d83"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Get Threat Intel Feeds -> Configuration",
+            "targetStep": "\/api\/3\/workflow_steps\/32beb85a-aca1-45c5-a566-36cc96b13dc2",
+            "sourceStep": "\/api\/3\/workflow_steps\/9a46fce7-99c4-453f-bdfc-e8c76e67944f",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "552603b9-be91-4ce1-9345-e591e9a00104"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Get Threat Intel Feeds",
+            "targetStep": "\/api\/3\/workflow_steps\/9a46fce7-99c4-453f-bdfc-e8c76e67944f",
+            "sourceStep": "\/api\/3\/workflow_steps\/724e2e63-0ca0-4b18-92f7-dc92608df03a",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "e0223408-d3e7-485a-a1ec-6862b6b969e3"
+        }
+    ],
+    "groups": [],
+    "priority": "\/api\/3\/picklists\/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+    "uuid": "4d3d05aa-a2c7-460f-80bb-214726e0884f",
+    "owners": [],
+    "isPrivate": false,
+    "deletedAt": null,
+    "recordTags": [
+        "Subroutine",
+        "Indicators",
+        "Outbreak Alert"
+    ]
+}
