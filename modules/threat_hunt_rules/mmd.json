@@ -1,35 +1,18 @@
 {
-    "@context": "\/api\/3\/contexts\/StagingModelMetadata",
     "@id": "\/api\/3\/staging_model_metadatas\/9f6e77b3-1520-4aef-bad9-ad8fdd3760cb",
-    "@type": "StagingModelMetadata",
+    "uuid": "9f6e77b3-1520-4aef-bad9-ad8fdd3760cb",
+    "descriptions": {
+        "singular": "Threat Hunt Rule",
+        "plural": "Threat Hunt Rules"
+    },
     "type": "threat_hunt_rules",
-    "parentType": null,
-    "tableName": "threat_hunt_rules",
-    "ownable": false,
-    "userOwnable": false,
-    "queueable": false,
-    "trackable": true,
-    "taggable": true,
-    "peerReplicable": false,
-    "defaultSort": [],
-    "uniqueConstraint": [
-        {
-            "threat_hunt_rules_unique": {
-                "columns": [
-                    "title"
-                ]
-            }
-        }
-    ],
-    "indexable": true,
-    "writable": true,
     "attributes": [
         {
             "@type": "AttributeMetadata",
             "type": "string",
             "name": "ruleLink",
             "length": null,
-            "orderIndex": 1,
+            "orderIndex": 2,
             "formType": "url",
             "dataSource": null,
             "searchable": true,
@@ -73,7 +56,7 @@
             "type": "string",
             "name": "fortiAnalyzer",
             "length": null,
-            "orderIndex": 2,
+            "orderIndex": 3,
             "formType": "textarea",
             "dataSource": null,
             "searchable": true,
@@ -143,7 +126,7 @@
             "type": "string",
             "name": "fortiSIEM",
             "length": null,
-            "orderIndex": 3,
+            "orderIndex": 4,
             "formType": "textarea",
             "dataSource": null,
             "searchable": true,
@@ -213,7 +196,7 @@
             "type": "picklists",
             "name": "ruleType",
             "length": null,
-            "orderIndex": 4,
+            "orderIndex": 5,
             "formType": "picklist",
             "dataSource": {
                 "model": "picklists",
@@ -290,7 +273,7 @@
             "type": "string",
             "name": "title",
             "length": null,
-            "orderIndex": 5,
+            "orderIndex": 6,
             "formType": "text",
             "dataSource": null,
             "searchable": true,
@@ -335,7 +318,7 @@
             "type": "outbreak_alerts",
             "name": "outbreakAlerts",
             "length": null,
-            "orderIndex": 6,
+            "orderIndex": 7,
             "formType": "manyToMany",
             "dataSource": {
                 "model": "outbreak_alerts"
@@ -377,7 +360,7 @@
             "type": "string",
             "name": "rule",
             "length": null,
-            "orderIndex": 7,
+            "orderIndex": 8,
             "formType": "richtext",
             "dataSource": null,
             "searchable": true,
@@ -420,133 +403,7 @@
         {
             "@type": "AttributeMetadata",
             "type": "string",
-            "name": "microsoftSentinel",
-            "length": null,
-            "orderIndex": 8,
-            "formType": "textarea",
-            "dataSource": null,
-            "searchable": true,
-            "peerReplicable": true,
-            "system": false,
-            "encrypted": false,
-            "gridColumn": false,
-            "collection": false,
-            "inversedField": null,
-            "ownsRelationship": false,
-            "validation": {
-                "required": false,
-                "minlength": 0,
-                "maxlength": 10485761,
-                "_enableRange": false
-            },
-            "bulkAction": {
-                "allow": false,
-                "buttonText": "",
-                "buttonIcon": "",
-                "buttonClass": "btn btn-default btn-sm"
-            },
-            "dataSourceFilters": null,
-            "defaultValue": null,
-            "tooltip": null,
-            "visibility": [
-                {
-                    "sort": [],
-                    "limit": 30,
-                    "logic": "AND",
-                    "filters": [
-                        {
-                            "field": "ruleType",
-                            "operator": "eq",
-                            "value": "\/api\/3\/picklists\/fa026fd2-2b2f-45b0-80aa-61eda4f9a007",
-                            "_value": {
-                                "itemValue": "Sigma",
-                                "@id": "\/api\/3\/picklists\/fa026fd2-2b2f-45b0-80aa-61eda4f9a007"
-                            },
-                            "type": "object"
-                        }
-                    ]
-                }
-            ],
-            "htmlEscape": false,
-            "orphanRemoval": null,
-            "readable": true,
-            "writeable": true,
-            "identifier": null,
-            "unique": false,
-            "recommend": false,
-            "skipSerialization": false,
-            "displayName": "{{ microsoftSentinel }}",
-            "descriptions": {
-                "singular": "MicrosoftSentinel"
-            }
-        },
-        {
-            "@type": "AttributeMetadata",
-            "type": "string",
             "name": "elasticSearch",
-            "length": null,
-            "orderIndex": 9,
-            "formType": "textarea",
-            "dataSource": null,
-            "searchable": true,
-            "peerReplicable": true,
-            "system": false,
-            "encrypted": false,
-            "gridColumn": false,
-            "collection": false,
-            "inversedField": null,
-            "ownsRelationship": false,
-            "validation": {
-                "required": false,
-                "minlength": 0,
-                "maxlength": 10485761,
-                "_enableRange": false
-            },
-            "bulkAction": {
-                "allow": false,
-                "buttonText": "",
-                "buttonIcon": "",
-                "buttonClass": "btn btn-default btn-sm"
-            },
-            "dataSourceFilters": null,
-            "defaultValue": null,
-            "tooltip": null,
-            "visibility": [
-                {
-                    "sort": [],
-                    "limit": 30,
-                    "logic": "AND",
-                    "filters": [
-                        {
-                            "field": "ruleType",
-                            "operator": "eq",
-                            "value": "\/api\/3\/picklists\/fa026fd2-2b2f-45b0-80aa-61eda4f9a007",
-                            "_value": {
-                                "itemValue": "Sigma",
-                                "@id": "\/api\/3\/picklists\/fa026fd2-2b2f-45b0-80aa-61eda4f9a007"
-                            },
-                            "type": "object"
-                        }
-                    ]
-                }
-            ],
-            "htmlEscape": false,
-            "orphanRemoval": null,
-            "readable": true,
-            "writeable": true,
-            "identifier": null,
-            "unique": false,
-            "recommend": false,
-            "skipSerialization": false,
-            "displayName": "{{ elasticSearch }}",
-            "descriptions": {
-                "singular": "ElasticSearch"
-            }
-        },
-        {
-            "@type": "AttributeMetadata",
-            "type": "string",
-            "name": "arcSight",
             "length": null,
             "orderIndex": 10,
             "formType": "textarea",
@@ -589,6 +446,13 @@
                                 "@id": "\/api\/3\/picklists\/fa026fd2-2b2f-45b0-80aa-61eda4f9a007"
                             },
                             "type": "object"
+                        },
+                        {
+                            "field": "elasticSearch",
+                            "operator": "isnull",
+                            "_operator": "isnull",
+                            "value": "false",
+                            "type": "primitive"
                         }
                     ]
                 }
@@ -601,15 +465,15 @@
             "unique": false,
             "recommend": false,
             "skipSerialization": false,
-            "displayName": "{{ arcSight }}",
+            "displayName": "{{ elasticSearch }}",
             "descriptions": {
-                "singular": "ArcSight"
+                "singular": "ElasticSearch"
             }
         },
         {
             "@type": "AttributeMetadata",
             "type": "string",
-            "name": "qRadar",
+            "name": "arcSight",
             "length": null,
             "orderIndex": 11,
             "formType": "textarea",
@@ -652,6 +516,13 @@
                                 "@id": "\/api\/3\/picklists\/fa026fd2-2b2f-45b0-80aa-61eda4f9a007"
                             },
                             "type": "object"
+                        },
+                        {
+                            "field": "arcSight",
+                            "operator": "isnull",
+                            "_operator": "isnull",
+                            "value": "false",
+                            "type": "primitive"
                         }
                     ]
                 }
@@ -664,15 +535,15 @@
             "unique": false,
             "recommend": false,
             "skipSerialization": false,
-            "displayName": "{{ qRadar }}",
+            "displayName": "{{ arcSight }}",
             "descriptions": {
-                "singular": "QRadar"
+                "singular": "ArcSight"
             }
         },
         {
             "@type": "AttributeMetadata",
             "type": "string",
-            "name": "splunk",
+            "name": "qRadar",
             "length": null,
             "orderIndex": 12,
             "formType": "textarea",
@@ -715,6 +586,83 @@
                                 "@id": "\/api\/3\/picklists\/fa026fd2-2b2f-45b0-80aa-61eda4f9a007"
                             },
                             "type": "object"
+                        },
+                        {
+                            "field": "qRadar",
+                            "operator": "isnull",
+                            "_operator": "isnull",
+                            "value": "false",
+                            "type": "primitive"
+                        }
+                    ]
+                }
+            ],
+            "htmlEscape": false,
+            "orphanRemoval": null,
+            "readable": true,
+            "writeable": true,
+            "identifier": null,
+            "unique": false,
+            "recommend": false,
+            "skipSerialization": false,
+            "displayName": "{{ qRadar }}",
+            "descriptions": {
+                "singular": "QRadar"
+            }
+        },
+        {
+            "@type": "AttributeMetadata",
+            "type": "string",
+            "name": "splunk",
+            "length": null,
+            "orderIndex": 13,
+            "formType": "textarea",
+            "dataSource": null,
+            "searchable": true,
+            "peerReplicable": true,
+            "system": false,
+            "encrypted": false,
+            "gridColumn": false,
+            "collection": false,
+            "inversedField": null,
+            "ownsRelationship": false,
+            "validation": {
+                "required": false,
+                "minlength": 0,
+                "maxlength": 10485761,
+                "_enableRange": false
+            },
+            "bulkAction": {
+                "allow": false,
+                "buttonText": "",
+                "buttonIcon": "",
+                "buttonClass": "btn btn-default btn-sm"
+            },
+            "dataSourceFilters": null,
+            "defaultValue": null,
+            "tooltip": null,
+            "visibility": [
+                {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "field": "ruleType",
+                            "operator": "eq",
+                            "value": "\/api\/3\/picklists\/fa026fd2-2b2f-45b0-80aa-61eda4f9a007",
+                            "_value": {
+                                "itemValue": "Sigma",
+                                "@id": "\/api\/3\/picklists\/fa026fd2-2b2f-45b0-80aa-61eda4f9a007"
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "field": "splunk",
+                            "operator": "isnull",
+                            "_operator": "isnull",
+                            "value": "false",
+                            "type": "primitive"
                         }
                     ]
                 }
@@ -733,21 +681,6 @@
             }
         }
     ],
-    "system": false,
-    "module": "threat_hunt_rules",
-    "softDeleteable": false,
-    "archivable": false,
-    "paused": false,
-    "partitionBy": "modifyDate",
-    "archivalCriteria": {
-        "keep_primary_data_for": 24,
-        "delete_primary_data_after": 60
-    },
-    "archivalFilters": [],
-    "uuid": "9f6e77b3-1520-4aef-bad9-ad8fdd3760cb",
-    "displayName": "{{ title }}",
-    "descriptions": {
-        "singular": "Threat Hunt Rule",
-        "plural": "Threat Hunt Rules"
-    }
+    "tableName": "threat_hunt_rules",
+    "displayName": "{{ title }}"
 }

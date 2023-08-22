@@ -41,7 +41,7 @@
                                             "active": 0,
                                             "icon": "icon icon-queue_rules",
                                             "show": false,
-                                            "visible": false,
+                                            "visible": true,
                                             "widget": {
                                                 "type": "rows",
                                                 "config": {
@@ -198,17 +198,17 @@
                                                                                                     {
                                                                                                         "name": "qRadar",
                                                                                                         "highlightMode": true,
-                                                                                                        "readOnly": false
+                                                                                                        "readOnly": true
                                                                                                     },
                                                                                                     {
                                                                                                         "name": "splunk",
                                                                                                         "highlightMode": true,
-                                                                                                        "readOnly": false
+                                                                                                        "readOnly": true
                                                                                                     },
                                                                                                     {
-                                                                                                        "name": "microsoftSentinel",
+                                                                                                        "name": "azureLogAnalytics",
                                                                                                         "highlightMode": true,
-                                                                                                        "readOnly": false
+                                                                                                        "readOnly": true
                                                                                                     }
                                                                                                 ],
                                                                                                 "style": "col-lg-6"
@@ -218,12 +218,12 @@
                                                                                                     {
                                                                                                         "name": "arcSight",
                                                                                                         "highlightMode": true,
-                                                                                                        "readOnly": false
+                                                                                                        "readOnly": true
                                                                                                     },
                                                                                                     {
                                                                                                         "name": "elasticSearch",
                                                                                                         "highlightMode": true,
-                                                                                                        "readOnly": false
+                                                                                                        "readOnly": true
                                                                                                     }
                                                                                                 ],
                                                                                                 "style": "col-lg-6"
@@ -247,8 +247,8 @@
                                                 }
                                             },
                                             "icon": "icon icon-threat-hunting",
-                                            "show": false,
-                                            "visible": false,
+                                            "show": true,
+                                            "visible": true,
                                             "conditionalVisibility": true,
                                             "filter": {
                                                 "sort": [],
@@ -354,8 +354,8 @@
                                                     }
                                                 ]
                                             },
-                                            "show": true,
-                                            "visible": true
+                                            "show": false,
+                                            "visible": false
                                         }
                                     ],
                                     "isPrimaryTab": true

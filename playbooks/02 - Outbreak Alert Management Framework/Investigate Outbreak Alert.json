@@ -21,13 +21,13 @@
             "description": null,
             "arguments": {
                 "for_each": {
-                    "item": "{{vars.microsoft_sentinel_query}}",
+                    "item": "{{vars.azureLogAnalytics_query}}",
                     "parallel": false,
                     "condition": ""
                 },
                 "arguments": {
                     "time_span": "{{vars.from_date}}",
-                    "microsoft_sentinel_query": "{{vars.item}}"
+                    "azureLogAnalytics_query": "{{vars.item}}"
                 },
                 "apply_async": false,
                 "step_variables": [],
@@ -41,43 +41,6 @@
             "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
             "group": null,
             "uuid": "e3623dee-b2f7-4179-a4fb-2145d7af13d0"
-        },
-        {
-            "@type": "WorkflowStep",
-            "name": "Block Indicators",
-            "description": null,
-            "arguments": [],
-            "status": null,
-            "top": "270",
-            "left": "2400",
-            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
-            "group": null,
-            "uuid": "eede6d09-fe84-4654-90b6-54553ef96e9e"
-        },
-        {
-            "@type": "WorkflowStep",
-            "name": "Create Task To Block Indicators",
-            "description": null,
-            "arguments": {
-                "resource": {
-                    "name": "aa",
-                    "__replace": "",
-                    "submittedBy": "\/api\/3\/people\/3451141c-bac6-467c-8d72-85e0fab569ce"
-                },
-                "operation": "Overwrite",
-                "collection": "\/api\/3\/tasks",
-                "__recommend": [],
-                "fieldOperation": {
-                    "recordTags": "Overwrite"
-                },
-                "step_variables": []
-            },
-            "status": null,
-            "top": "430",
-            "left": "2400",
-            "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
-            "group": null,
-            "uuid": "a160d941-cced-423f-867d-bbaf768bb6b5"
         },
         {
             "@type": "WorkflowStep",
@@ -160,17 +123,9 @@
                     "sort": [],
                     "limit": 30,
                     "logic": "AND",
-                    "filters": [
-                        {
-                            "type": "primitive",
-                            "field": "outbreakAlerts.id",
-                            "value": "{{vars.input.records[0].id}}",
-                            "operator": "eq",
-                            "_operator": "eq"
-                        }
-                    ]
+                    "filters": []
                 },
-                "module": "hunting_rules?$limit=30&$relationships=true&$fsr_max_relation_count=100",
+                "module": "threat_hunt_rules?$limit=30&$relationships=true&$fsr_max_relation_count=100",
                 "step_variables": []
             },
             "status": null,
@@ -184,13 +139,45 @@
             "@type": "WorkflowStep",
             "name": "Mitigation",
             "description": null,
-            "arguments": [],
+            "arguments": {
+                "type": "InputBased",
+                "input": {
+                    "schema": {
+                        "title": "Mitigation Measures",
+                        "description": "Following are the recommended mitigation measures are required for **{{vars.input.records[0].title}} **\n\n{{vars.input.records[0].mitigation}}",
+                        "inputVariables": []
+                    }
+                },
+                "record": "{{ vars.input.records[0][\"@id\"] }}",
+                "agent_id": null,
+                "resources": "outbreak_alerts",
+                "owner_detail": {
+                    "isAssigned": false
+                },
+                "isRecordLinked": true,
+                "step_variables": [],
+                "response_mapping": {
+                    "options": [
+                        {
+                            "option": "OK"
+                        }
+                    ],
+                    "duplicateOption": false
+                },
+                "email_notification": {
+                    "enabled": false,
+                    "smtpParameters": []
+                },
+                "inline_channel_list": [],
+                "external_channel_list": [],
+                "unauthenticated_input": false
+            },
             "status": null,
             "top": "350",
-            "left": "2725",
-            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "left": "2075",
+            "stepType": "\/api\/3\/workflow_step_types\/fc04082a-d7dc-4299-96fb-6837b1baa0fe",
             "group": null,
-            "uuid": "46abaa28-7116-468c-b6d3-691f70a1db2b"
+            "uuid": "146df7db-572d-4515-a2d1-615fcb90522f"
         },
         {
             "@type": "WorkflowStep",
@@ -223,7 +210,9 @@
             "name": "Remediation",
             "description": null,
             "arguments": {
-                "arguments": [],
+                "arguments": {
+                    "from_date": "{{arrow.utcnow().shift(days=vars.from_date).format('YYYY-MM-DDTHH:mm:ss.ssss')}}Z"
+                },
                 "apply_async": false,
                 "step_variables": [],
                 "pass_parent_env": false,
@@ -231,66 +220,18 @@
                 "workflowReference": "\/api\/3\/workflows\/4d3d05aa-a2c7-460f-80bb-214726e0884f"
             },
             "status": null,
-            "top": "354",
-            "left": "1845",
+            "top": "350",
+            "left": "1750",
             "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
             "group": null,
             "uuid": "9c8029b7-fbb1-4f2f-ab2d-cfc3242be37e"
         },
         {
             "@type": "WorkflowStep",
-            "name": "Should Block Indicator Automatically",
-            "description": null,
-            "arguments": {
-                "type": "InputBased",
-                "input": {
-                    "schema": {
-                        "title": "Do you want to block the indicators automatically",
-                        "description": "Dou you want to the block the indicators of outbreak Alert automatically?",
-                        "inputVariables": []
-                    }
-                },
-                "record": "{{ vars.input.records[0][\"@id\"] }}",
-                "agent_id": null,
-                "resources": "outbreak_alerts",
-                "owner_detail": {
-                    "isAssigned": false
-                },
-                "isRecordLinked": true,
-                "step_variables": [],
-                "response_mapping": {
-                    "options": [
-                        {
-                            "option": "Yes",
-                            "primary": true
-                        },
-                        {
-                            "option": "No"
-                        }
-                    ],
-                    "duplicateOption": false
-                },
-                "email_notification": {
-                    "enabled": false,
-                    "smtpParameters": []
-                },
-                "inline_channel_list": [],
-                "external_channel_list": [],
-                "unauthenticated_input": false
-            },
-            "status": null,
-            "top": "140",
-            "left": "2160",
-            "stepType": "\/api\/3\/workflow_step_types\/fc04082a-d7dc-4299-96fb-6837b1baa0fe",
-            "group": null,
-            "uuid": "4b279dac-cb65-4969-8098-46a578c8bef0"
-        },
-        {
-            "@type": "WorkflowStep",
             "name": "SIEM Advanced Hunting",
             "description": null,
             "arguments": {
-                "tmp": "{% for item in vars.steps.Get_Hunting_Rules %}\n{% if item.qRadar != None %}\n{% set _ = vars.q_radar_query.append({\"title\": item.title, \"query\": item.qRadar}) %}\n{% endif %}\n{% if item.splunk != None %}\n{% set _ = vars.splunk_query.append({\"title\": item.title, \"query\": item.splunk}) %}\n{% endif %}\n{% if item.arcSight != None %}\n{% set _ = vars.arc_sight_query.append({\"title\": item.title, \"query\": item.arcSight}) %}\n{% endif %}\n{% if item.microsoftSentinel != None %}\n{% set _ = vars.microsoft_sentinel_query.append({\"title\": item.title, \"query\": item.microsoftSentinel}) %}\n{% endif %}\n{% if item.elasticSearch != None %}\n{% set _ = vars.elastic_search.append({\"title\": item.title, \"query\": item.elasticSearch}) %}\n{% endif %}\n{% endfor %}",
+                "tmp": "{% for item in vars.steps.Get_Hunting_Rules %}\n{% if item.qRadar != None %}\n{% set _ = vars.q_radar_query.append({\"title\": item.title, \"query\": item.qRadar}) %}\n{% endif %}\n{% if item.splunk != None %}\n{% set _ = vars.splunk_query.append({\"title\": item.title, \"query\": item.splunk}) %}\n{% endif %}\n{% if item.arcSight != None %}\n{% set _ = vars.arc_sight_query.append({\"title\": item.title, \"query\": item.arcSight}) %}\n{% endif %}\n{% if item.azureLogAnalytics != None %}\n{% set _ = vars.azureLogAnalytics_query.append({\"title\": item.title, \"query\": item.azureLogAnalytics}) %}\n{% endif %}\n{% if item.elasticSearch != None %}\n{% set _ = vars.elastic_search.append({\"title\": item.title, \"query\": item.elasticSearch}) %}\n{% endif %}\n{% endfor %}",
                 "record_count": "1000"
             },
             "status": null,
@@ -378,7 +319,7 @@
                 "fortisiem_query": "[]",
                 "outbreak_alert_iri": "{{vars.input.records[0]['@id']}}",
                 "fortiAnalyzer_query": "[]",
-                "microsoft_sentinel_query": "[]"
+                "azureLogAnalytics_query": "[]"
             },
             "status": null,
             "top": "270",
@@ -391,23 +332,13 @@
     "routes": [
         {
             "@type": "WorkflowRoute",
-            "name": "Block Indicators -> Mitigation",
-            "targetStep": "\/api\/3\/workflow_steps\/46abaa28-7116-468c-b6d3-691f70a1db2b",
-            "sourceStep": "\/api\/3\/workflow_steps\/eede6d09-fe84-4654-90b6-54553ef96e9e",
+            "name": "Azure Log Analytics Hunting -> Remediation",
+            "targetStep": "\/api\/3\/workflow_steps\/9c8029b7-fbb1-4f2f-ab2d-cfc3242be37e",
+            "sourceStep": "\/api\/3\/workflow_steps\/e3623dee-b2f7-4179-a4fb-2145d7af13d0",
             "label": null,
             "isExecuted": false,
             "group": null,
-            "uuid": "8868b682-f026-475f-80f0-bdbd16e2dfe9"
-        },
-        {
-            "@type": "WorkflowRoute",
-            "name": "Create Task To Block Indicators -> Mitigation",
-            "targetStep": "\/api\/3\/workflow_steps\/46abaa28-7116-468c-b6d3-691f70a1db2b",
-            "sourceStep": "\/api\/3\/workflow_steps\/a160d941-cced-423f-867d-bbaf768bb6b5",
-            "label": null,
-            "isExecuted": false,
-            "group": null,
-            "uuid": "4672aed3-a2be-4b50-b48a-27f96641771a"
+            "uuid": "fed459ff-4527-4ecc-a290-b81bca532c28"
         },
         {
             "@type": "WorkflowRoute",
@@ -441,6 +372,16 @@
         },
         {
             "@type": "WorkflowRoute",
+            "name": "Get FortiSIEM Incident -> Remediation",
+            "targetStep": "\/api\/3\/workflow_steps\/9c8029b7-fbb1-4f2f-ab2d-cfc3242be37e",
+            "sourceStep": "\/api\/3\/workflow_steps\/28d36fdd-05ac-46f9-949f-deceaf35ccef",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "59b3a060-daa9-4949-85cd-ba8a42da78e2"
+        },
+        {
+            "@type": "WorkflowRoute",
             "name": "Get Hunting Rules -> Threat Hunting",
             "targetStep": "\/api\/3\/workflow_steps\/acc4a508-9574-46d2-b13d-d902f7a2deab",
             "sourceStep": "\/api\/3\/workflow_steps\/6b11a28e-3ed5-4725-9228-728236b0ffbc",
@@ -451,23 +392,23 @@
         },
         {
             "@type": "WorkflowRoute",
-            "name": "Should Block Indicator Automatically -> Block Indicators",
-            "targetStep": "\/api\/3\/workflow_steps\/eede6d09-fe84-4654-90b6-54553ef96e9e",
-            "sourceStep": "\/api\/3\/workflow_steps\/4b279dac-cb65-4969-8098-46a578c8bef0",
+            "name": "QRadar Hunting -> Remediation",
+            "targetStep": "\/api\/3\/workflow_steps\/9c8029b7-fbb1-4f2f-ab2d-cfc3242be37e",
+            "sourceStep": "\/api\/3\/workflow_steps\/c39ef6a4-103f-4229-ab70-f79b83a93e73",
             "label": null,
             "isExecuted": false,
             "group": null,
-            "uuid": "f73a9d1e-509a-47f9-aeea-8ef0363a5d12"
+            "uuid": "d34996be-88a3-48da-9dfd-a530d46573c6"
         },
         {
             "@type": "WorkflowRoute",
-            "name": "Should Block Indicator Automatically -> Create Task To Block Indicators",
-            "targetStep": "\/api\/3\/workflow_steps\/a160d941-cced-423f-867d-bbaf768bb6b5",
-            "sourceStep": "\/api\/3\/workflow_steps\/4b279dac-cb65-4969-8098-46a578c8bef0",
+            "name": "Remediation -> Mitigation",
+            "targetStep": "\/api\/3\/workflow_steps\/146df7db-572d-4515-a2d1-615fcb90522f",
+            "sourceStep": "\/api\/3\/workflow_steps\/9c8029b7-fbb1-4f2f-ab2d-cfc3242be37e",
             "label": null,
             "isExecuted": false,
             "group": null,
-            "uuid": "5299f2d4-5a18-430e-ac70-b4cc71752e7b"
+            "uuid": "e9d25633-0db6-4136-b3d1-29bfbca0e0d7"
         },
         {
             "@type": "WorkflowRoute",
@@ -501,6 +442,16 @@
         },
         {
             "@type": "WorkflowRoute",
+            "name": "Splunk Hunting -> Remediation",
+            "targetStep": "\/api\/3\/workflow_steps\/9c8029b7-fbb1-4f2f-ab2d-cfc3242be37e",
+            "sourceStep": "\/api\/3\/workflow_steps\/2798ccb0-94da-47c9-ba43-54a42bca7a78",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "6c36ba46-ea3d-4390-a3c3-af27efbda340"
+        },
+        {
+            "@type": "WorkflowRoute",
             "name": "Start -> Find Hunting Rules",
             "targetStep": "\/api\/3\/workflow_steps\/6b11a28e-3ed5-4725-9228-728236b0ffbc",
             "sourceStep": "\/api\/3\/workflow_steps\/69054683-770e-4caa-8727-b38d9c7da7e9",
@@ -518,6 +469,16 @@
             "isExecuted": false,
             "group": null,
             "uuid": "02648c60-a0bf-4c2c-b26b-b19588b811fd"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Threat Hunting -> SIEM Advanced Hunting",
+            "targetStep": "\/api\/3\/workflow_steps\/8ac51aed-78e1-4048-97e7-ef49eadc7974",
+            "sourceStep": "\/api\/3\/workflow_steps\/acc4a508-9574-46d2-b13d-d902f7a2deab",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "ccf1c52c-03ec-4784-9a10-aea5b2339df8"
         }
     ],
     "groups": [],

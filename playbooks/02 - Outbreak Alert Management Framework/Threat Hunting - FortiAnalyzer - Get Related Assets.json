@@ -19,46 +19,12 @@
     "steps": [
         {
             "@type": "WorkflowStep",
-            "name": "Create Asset",
+            "name": "Create Alert Record",
             "description": null,
             "arguments": {
                 "resource": {
-                    "ip": "{{vars.steps.Get_Device_Information.data.result[0].data.ip}}",
-                    "name": "{{vars.steps.Get_Device_Information.data.result[0].data.name}}",
-                    "__link": {
-                        "alerts": "{{vars.steps.Create_Record['@id']}}",
-                        "recordTags": "{{\"Outbreak Alert\"}},{{vars.input.params['alert_data']['tag']}}"
-                    },
-                    "hostname": "{{vars.steps.Get_Device_Information.data.result[0].data.hostname}}",
-                    "__replace": "true",
-                    "deviceUid": "{{vars.steps.Get_Device_Information.data.result[0].data['mgmt_uuid']}}",
-                    "macAddress": "{{vars.steps.Get_Device_Information.data.result[0].data.latitude}}",
-                    "description": "{{vars.steps.Get_Device_Information.data.result[0].data.desc}}",
-                    "serialNumber": "{{vars.steps.Get_Device_Information.data.result[0].data.sn}}"
-                },
-                "operation": "Append",
-                "collection": "\/api\/3\/upsert\/assets",
-                "__recommend": [],
-                "fieldOperation": {
-                    "recordTags": "Append"
-                },
-                "step_variables": []
-            },
-            "status": null,
-            "top": "435",
-            "left": "125",
-            "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
-            "group": null,
-            "uuid": "b1e9e857-1b26-43f7-b737-085be05caadc"
-        },
-        {
-            "@type": "WorkflowStep",
-            "name": "Create Record",
-            "description": null,
-            "arguments": {
-                "resource": {
-                    "name": "{{vars.input.params['alert_data']['subject']}}",
-                    "type": "\/api\/3\/picklists\/574a6ee2-7265-4701-815e-cff83b053bce",
+                    "name": "Outbreak Alert - {{vars.input.params['alert_data']['subject']}}",
+                    "type": "\/api\/3\/picklists\/f2fb4c85-baae-407e-b218-1cc54a49546c",
                     "state": "{{vars.input.params['alert_data']['eventstatus']| resolveRange(vars.alerts_status_map)}}",
                     "__link": {
                         "recordTags": "{{\"Outbreak Alert\"}},{{vars.input.params['alert_data']['tag']}}"
@@ -86,7 +52,6 @@
                 "operation": "Overwrite",
                 "collection": "\/api\/3\/upsert\/alerts",
                 "__recommend": [],
-                "mock_result": "{\n  \"data\": {\n    \"id\": 1,\n    \"result\": [\n      {\n        \"url\": \"\/dvmdb\/adom\/root\/device\/Branch_Office_02\",\n        \"data\": {\n          \"ip\": \"10.2.0.1\",\n          \"mr\": 2,\n          \"sn\": \"FGVM02TM23008636\",\n          \"eip\": \"\",\n          \"oid\": 363,\n          \"psk\": \"\",\n          \"beta\": -1,\n          \"desc\": \"\",\n          \"name\": \"Branch_Office_02\",\n          \"opts\": 0,\n          \"prio\": 0,\n          \"role\": 0,\n          \"vdom\": [\n            {\n              \"oid\": 3,\n              \"name\": \"root\",\n              \"devid\": \"Branch_Office_02\",\n              \"flags\": 0,\n              \"opmode\": 1,\n              \"status\": null,\n              \"vpn_id\": 0,\n              \"comments\": null,\n              \"ext_flags\": 0,\n              \"vdom_type\": 1,\n              \"node_flags\": 0,\n              \"tab_status\": null,\n              \"rtm_prof_id\": 0\n            }\n          ],\n          \"build\": 1517,\n          \"flags\": 2097185,\n          \"patch\": 5,\n          \"av_ver\": \"\",\n          \"os_ver\": 7,\n          \"source\": 2,\n          \"vm_cpu\": 0,\n          \"vm_mem\": 0,\n          \"adm_usr\": \"faz\",\n          \"app_ver\": \"\",\n          \"fap_cnt\": 0,\n          \"fex_cnt\": 0,\n          \"fsw_cnt\": 0,\n          \"ha_mode\": 0,\n          \"ips_ext\": 0,\n          \"ips_ver\": \"\",\n          \"maxvdom\": 500,\n          \"mgmt_if\": \"\",\n          \"os_type\": 0,\n          \"version\": 700,\n          \"adm_pass\": [\n            \"ENC\",\n            \"dSegGguXGoSgEBIkax+KwXpPORIS25ynlSDOh9WLgdoqM+KhxuDcfkItjPI8r2YV4c43CQ9X0JBx75mQHwXflme0Vyi5ak4whJCPHLUkrdVDe\/MhNjsQmiUC5J+PPk7SPl+KcUwhbhZmt8ItZYGz6i6NYnGagb5BlBaN8UtCfVej6pk9\"\n          ],\n          \"checksum\": \"\",\n          \"faz.perm\": 15,\n          \"faz.used\": 0,\n          \"ha_slave\": null,\n          \"hostname\": \"\",\n          \"latitude\": \"37.338207\",\n          \"mgt_vdom\": \"\",\n          \"auto_mgmt\": 0,\n          \"branch_pt\": 0,\n          \"conn_mode\": 0,\n          \"db_status\": 0,\n          \"faz.quota\": 0,\n          \"lic_flags\": 0,\n          \"longitude\": \"-121.88633\",\n          \"mgmt_mode\": 2,\n          \"mgmt_uuid\": \"b43414b8-23fa-51ee-b89e-e83167974237\",\n          \"module_sn\": \"\",\n          \"tunnel_ip\": \"\",\n          \"vm_status\": 0,\n          \"dev_status\": 1,\n          \"foslic_cpu\": 0,\n          \"foslic_ram\": 0,\n          \"foslic_utm\": 0,\n          \"hdisk_size\": 0,\n          \"hyperscale\": 0,\n          \"lic_region\": \"\",\n          \"node_flags\": 0,\n          \"tab_status\": \"\",\n          \"conf_status\": 0,\n          \"conn_status\": 0,\n          \"foslic_type\": 0,\n          \"ha_group_id\": 0,\n          \"last_resync\": 0,\n          \"private_key\": \"\",\n          \"faz.full_act\": 0,\n          \"hw_rev_major\": 0,\n          \"hw_rev_minor\": 0,\n          \"last_checked\": 0,\n          \"logdisk_size\": 0,\n          \"onboard_rule\": null,\n          \"platform_str\": \"FortiGate-VM64-KVM\",\n          \"vm_cpu_limit\": 0,\n          \"vm_mem_limit\": 0,\n          \"ha_group_name\": \"\",\n          \"location_from\": \"config\",\n          \"tunnel_cookie\": \"\",\n          \"vm_lic_expire\": 0,\n          \"foslic_dr_site\": 0,\n          \"mgmt.__data[0]\": 0,\n          \"mgmt.__data[1]\": 0,\n          \"mgmt.__data[2]\": 0,\n          \"mgmt.__data[3]\": 0,\n          \"mgmt.__data[4]\": 0,\n          \"mgmt.__data[5]\": 0,\n          \"mgmt.__data[6]\": 0,\n          \"mgmt.__data[7]\": 0,\n          \"prefer_img_ver\": \"\",\n          \"first_tunnel_up\": 0,\n          \"foslic_inst_time\": 0,\n          \"foslic_last_sync\": 0,\n          \"nsxt_service_name\": \"\",\n          \"private_key_status\": 0\n        },\n        \"status\": {\n          \"code\": 0,\n          \"message\": \"OK\"\n        }\n      }\n    ]\n  },\n  \"status\": \"Success\",\n  \"message\": \"\",\n  \"operation\": null,\n  \"execution_time\": \"4 seconds 541 ms\"\n}",
                 "fieldOperation": {
                     "recordTags": "Append"
                 },
@@ -101,18 +66,53 @@
         },
         {
             "@type": "WorkflowStep",
+            "name": "Create Asset",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "ip": "{{vars.steps.Get_Device_Information.data.result[0].data.ip}}",
+                    "name": "{{vars.steps.Get_Device_Information.data.result[0].data.name}}",
+                    "__link": {
+                        "alerts": "{{vars.steps.Create_Alert_Record['@id']}}",
+                        "recordTags": "{{\"Outbreak Alert\"}},{{vars.input.params['alert_data']['tag']}}"
+                    },
+                    "hostname": "{{vars.steps.Get_Device_Information.data.result[0].data.hostname}}",
+                    "__replace": "true",
+                    "deviceUid": "{{vars.steps.Get_Device_Information.data.result[0].data['mgmt_uuid']}}",
+                    "macAddress": "{{vars.steps.Get_Device_Information.data.result[0].data.latitude}}",
+                    "description": "{{vars.steps.Get_Device_Information.data.result[0].data.desc}}",
+                    "serialNumber": "{{vars.steps.Get_Device_Information.data.result[0].data.sn}}"
+                },
+                "operation": "Append",
+                "collection": "\/api\/3\/upsert\/assets",
+                "__recommend": [],
+                "fieldOperation": {
+                    "recordTags": "Append"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "435",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
+            "group": null,
+            "uuid": "b1e9e857-1b26-43f7-b737-085be05caadc"
+        },
+        {
+            "@type": "WorkflowStep",
             "name": "Get Device Information",
             "description": null,
             "arguments": {
                 "name": "Fortinet FortiAnalyzer",
                 "config": "d3cf8815-d902-4cd0-972c-d4c98e232529",
                 "params": {
-                    "name": "{{vars.steps.Create_Record.computerName}}",
+                    "name": "{{vars.steps.Create_Alert_Record.computerName}}",
                     "adom_name": "{{vars.input.params['alert_data']['vdom']}}"
                 },
                 "version": "3.2.0",
                 "connector": "fortinet-fortianalyzer",
                 "operation": "get_device_info",
+                "mock_result": "{\n  \"data\": {\n    \"id\": 1,\n    \"result\": [\n      {\n        \"url\": \"\/dvmdb\/adom\/root\/device\/Branch_Office_02\",\n        \"data\": {\n          \"ip\": \"10.2.0.1\",\n          \"mr\": 2,\n          \"sn\": \"FGVM02TM23008636\",\n          \"eip\": \"\",\n          \"oid\": 363,\n          \"psk\": \"\",\n          \"beta\": -1,\n          \"desc\": \"\",\n          \"name\": \"Branch_Office_02\",\n          \"opts\": 0,\n          \"prio\": 0,\n          \"role\": 0,\n          \"vdom\": [\n            {\n              \"oid\": 3,\n              \"name\": \"root\",\n              \"devid\": \"Branch_Office_02\",\n              \"flags\": 0,\n              \"opmode\": 1,\n              \"status\": null,\n              \"vpn_id\": 0,\n              \"comments\": null,\n              \"ext_flags\": 0,\n              \"vdom_type\": 1,\n              \"node_flags\": 0,\n              \"tab_status\": null,\n              \"rtm_prof_id\": 0\n            }\n          ],\n          \"build\": 1517,\n          \"flags\": 2097185,\n          \"patch\": 5,\n          \"av_ver\": \"\",\n          \"os_ver\": 7,\n          \"source\": 2,\n          \"vm_cpu\": 0,\n          \"vm_mem\": 0,\n          \"adm_usr\": \"faz\",\n          \"app_ver\": \"\",\n          \"fap_cnt\": 0,\n          \"fex_cnt\": 0,\n          \"fsw_cnt\": 0,\n          \"ha_mode\": 0,\n          \"ips_ext\": 0,\n          \"ips_ver\": \"\",\n          \"maxvdom\": 500,\n          \"mgmt_if\": \"\",\n          \"os_type\": 0,\n          \"version\": 700,\n          \"adm_pass\": [\n            \"ENC\",\n            \"dSegGguXGoSgEBIkax+KwXpPORIS25ynlSDOh9WLgdoqM+KhxuDcfkItjPI8r2YV4c43CQ9X0JBx75mQHwXflme0Vyi5ak4whJCPHLUkrdVDe\/MhNjsQmiUC5J+PPk7SPl+KcUwhbhZmt8ItZYGz6i6NYnGagb5BlBaN8UtCfVej6pk9\"\n          ],\n          \"checksum\": \"\",\n          \"faz.perm\": 15,\n          \"faz.used\": 0,\n          \"ha_slave\": null,\n          \"hostname\": \"\",\n          \"latitude\": \"37.338207\",\n          \"mgt_vdom\": \"\",\n          \"auto_mgmt\": 0,\n          \"branch_pt\": 0,\n          \"conn_mode\": 0,\n          \"db_status\": 0,\n          \"faz.quota\": 0,\n          \"lic_flags\": 0,\n          \"longitude\": \"-121.88633\",\n          \"mgmt_mode\": 2,\n          \"mgmt_uuid\": \"b43414b8-23fa-51ee-b89e-e83167974237\",\n          \"module_sn\": \"\",\n          \"tunnel_ip\": \"\",\n          \"vm_status\": 0,\n          \"dev_status\": 1,\n          \"foslic_cpu\": 0,\n          \"foslic_ram\": 0,\n          \"foslic_utm\": 0,\n          \"hdisk_size\": 0,\n          \"hyperscale\": 0,\n          \"lic_region\": \"\",\n          \"node_flags\": 0,\n          \"tab_status\": \"\",\n          \"conf_status\": 0,\n          \"conn_status\": 0,\n          \"foslic_type\": 0,\n          \"ha_group_id\": 0,\n          \"last_resync\": 0,\n          \"private_key\": \"\",\n          \"faz.full_act\": 0,\n          \"hw_rev_major\": 0,\n          \"hw_rev_minor\": 0,\n          \"last_checked\": 0,\n          \"logdisk_size\": 0,\n          \"onboard_rule\": null,\n          \"platform_str\": \"FortiGate-VM64-KVM\",\n          \"vm_cpu_limit\": 0,\n          \"vm_mem_limit\": 0,\n          \"ha_group_name\": \"\",\n          \"location_from\": \"config\",\n          \"tunnel_cookie\": \"\",\n          \"vm_lic_expire\": 0,\n          \"foslic_dr_site\": 0,\n          \"mgmt.__data[0]\": 0,\n          \"mgmt.__data[1]\": 0,\n          \"mgmt.__data[2]\": 0,\n          \"mgmt.__data[3]\": 0,\n          \"mgmt.__data[4]\": 0,\n          \"mgmt.__data[5]\": 0,\n          \"mgmt.__data[6]\": 0,\n          \"mgmt.__data[7]\": 0,\n          \"prefer_img_ver\": \"\",\n          \"first_tunnel_up\": 0,\n          \"foslic_inst_time\": 0,\n          \"foslic_last_sync\": 0,\n          \"nsxt_service_name\": \"\",\n          \"private_key_status\": 0\n        },\n        \"status\": {\n          \"code\": 0,\n          \"message\": \"OK\"\n        }\n      }\n    ]\n  },\n  \"status\": \"Success\",\n  \"message\": \"\",\n  \"operation\": null,\n  \"execution_time\": \"4 seconds 541 ms\"\n}",
                 "operationTitle": "Get Device Information",
                 "pickFromTenant": false,
                 "step_variables": []

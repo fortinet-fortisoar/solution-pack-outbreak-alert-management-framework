@@ -10,7 +10,7 @@
     "singleRecordExecution": false,
     "remoteExecutableFlag": false,
     "parameters": [
-        "microsoft_sentinel_query",
+        "azureLogAnalytics_query",
         "time_span"
     ],
     "synchronous": false,
@@ -45,7 +45,7 @@
                     "batch_size": 100
                 },
                 "resource": {
-                    "name": "Outbreak Alert - {{vars.input.params['microsoft_sentinel_query'].title}}",
+                    "name": "Outbreak Alert - {{vars.input.params['azureLogAnalytics_query'].title}}",
                     "source": "Azure Log Analytics",
                     "sourceId": "{{vars.item.MeterId}}",
                     "__replace": "",
@@ -75,7 +75,7 @@
                 "name": "Azure Log Analytics",
                 "config": "bf8b0340-c5d3-4f7b-82d6-813a21ea5b50",
                 "params": {
-                    "query": "{{vars.input.params['microsoft_sentinel_query'].query}}",
+                    "query": "{{vars.input.params['azureLogAnalytics_query'].query}}",
                     "timespan": "PT{{(vars.input.params['time_span'] | string).replace('-', '')}}H",
                     "workspaces": "",
                     "WorkspaceId": "6c3970b0-0d7b-4e81-bb05-25e1c2cfdc2e"

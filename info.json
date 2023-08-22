@@ -40,9 +40,12 @@
     "recordTags": [
         "Outbreak Alert"
     ],
-    "date": "2023-08-16T06:03:24+00:00",
+    "date": "2023-08-22T06:49:20+00:00",
     "contents": {
         "picklistNames": [
+            {
+                "name": "AlertType"
+            },
             {
                 "name": "Outbreak Alert Severity"
             },
@@ -51,16 +54,23 @@
             }
         ],
         "modules": {
-            "outbreak_alerts": {
-                "name": "Outbreak Alerts",
-                "apiName": "outbreak_alerts"
-            },
             "threat_hunt_rules": {
                 "name": "Threat Hunt Rules",
                 "apiName": "threat_hunt_rules"
+            },
+            "outbreak_alerts": {
+                "name": "Outbreak Alerts",
+                "apiName": "outbreak_alerts"
             }
         },
         "viewTemplates": {
+            "alerts": {
+                "name": "Alerts",
+                "apiName": "alerts",
+                "views": [
+                    "detail"
+                ]
+            },
             "outbreak_alerts": {
                 "name": "Outbreak Alerts",
                 "apiName": "outbreak_alerts",
@@ -119,8 +129,16 @@
                 "apiName": "qradar"
             },
             {
+                "name": "Jira",
+                "apiName": "jira"
+            },
+            {
                 "name": "NIST National Vulnerability Database",
                 "apiName": "nist-nvd"
+            },
+            {
+                "name": "ServiceNow",
+                "apiName": "servicenow"
             },
             {
                 "name": "Splunk",

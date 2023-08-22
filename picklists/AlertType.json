@@ -1,0 +1,20 @@
+{
+    "@context": "\/api\/3\/contexts\/PicklistName",
+    "@id": "\/api\/3\/picklist_names\/a7087b9c-5660-495f-a8ac-c3b198ddb8c2",
+    "@type": "PicklistName",
+    "name": "AlertType",
+    "system": false,
+    "picklists": [
+        {
+            "@id": "\/api\/3\/picklists\/f2fb4c85-baae-407e-b218-1cc54a49546c",
+            "@type": "Picklist",
+            "itemValue": "Outbreak Alert",
+            "orderIndex": 36,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/a7087b9c-5660-495f-a8ac-c3b198ddb8c2",
+            "uuid": "f2fb4c85-baae-407e-b218-1cc54a49546c"
+        }
+    ],
+    "uuid": "a7087b9c-5660-495f-a8ac-c3b198ddb8c2"
+}

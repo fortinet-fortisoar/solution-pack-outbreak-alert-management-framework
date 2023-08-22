@@ -17,27 +17,6 @@
     "steps": [
         {
             "@type": "WorkflowStep",
-            "name": "Compute CSV Filepath",
-            "description": null,
-            "arguments": {
-                "params": {
-                    "iri": "{{vars.ioc_csv_file['@id']}}"
-                },
-                "version": "3.2.3",
-                "connector": "cyops_utilities",
-                "operation": "download_file_from_cyops",
-                "operationTitle": "File: Compute Hash",
-                "step_variables": []
-            },
-            "status": null,
-            "top": "300",
-            "left": "125",
-            "stepType": "\/api\/3\/workflow_step_types\/0109f35d-090b-4a2b-bd8a-94cbc3508562",
-            "group": null,
-            "uuid": "ab8ecaeb-65bc-48ed-85b4-8944da4f3644"
-        },
-        {
-            "@type": "WorkflowStep",
             "name": "Configuration",
             "description": null,
             "arguments": {
@@ -63,7 +42,7 @@
             "arguments": {
                 "params": {
                     "type": "filepath",
-                    "file_name": "{{vars.steps.Compute_CSV_Filepath.data['cyops_file_path']}}",
+                    "file_name": "{{vars.steps.Download_IOC_CSV_File.data['cyops_file_path']}}",
                     "file_type": "CSV"
                 },
                 "version": "3.2.3",
@@ -89,11 +68,14 @@
                     "__bulk": true,
                     "parallel": false,
                     "condition": "",
-                    "batch_size": 100
+                    "batch_size": 500
                 },
                 "resource": {
                     "tLP": "\/api\/3\/picklists\/7bff95b7-6438-4b01-b23a-0fe8cb5b33d3",
                     "value": "{{ vars.item.Indicator }}",
+                    "__link": {
+                        "outbreakAlerts": "{{vars.input.records[0]['@id']}}"
+                    },
                     "source": "Outbreak Alert",
                     "sourceId": "Outbreak Alert",
                     "__replace": "true",
@@ -102,11 +84,10 @@
                     "reputation": "\/api\/3\/picklists\/7074e547-7785-4979-be32-c6d0c863e4bd",
                     "sourceData": "{{ vars.item | toJSON}}",
                     "typeOfFeed": "{{ (vars.item.Type) | resolveRange(vars.typeOfFeed_map) }}",
-                    "outbreakAlerts": "{{vars.input.records[0]['@id']}}",
                     "killChainPhases": "{% if '|' in vars.item['Kill Chain'] %}{% set k = (vars.item['Kill Chain'].split('|')[0]).strip() %}['{{ (k)| resolveRange(vars.killChainPhases_map) }}']{% elif vars.item['Kill Chain'] %}['{{ (vars.item['Kill Chain'])| resolveRange(vars.killChainPhases_map) }}']{% else %}None{% endif %}"
                 },
                 "_showJson": false,
-                "operation": "Overwrite",
+                "operation": "Append",
                 "collection": "\/api\/3\/upsert\/threat_intel_feeds",
                 "__recommend": [],
                 "fieldOperation": {
@@ -122,6 +103,30 @@
             "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
             "group": null,
             "uuid": "51dcffdd-76cc-4bc0-b9d1-aaa0408e9c40"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Download IOC CSV File",
+            "description": null,
+            "arguments": {
+                "params": {
+                    "url": "{{vars.input.records[0].iOCCSVFile}}",
+                    "password": "",
+                    "username": "",
+                    "request_headers": ""
+                },
+                "version": "3.2.3",
+                "connector": "cyops_utilities",
+                "operation": "download_file_from_url",
+                "operationTitle": "File: Download File from URL",
+                "step_variables": []
+            },
+            "status": null,
+            "top": "300",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/0109f35d-090b-4a2b-bd8a-94cbc3508562",
+            "group": null,
+            "uuid": "e97b3f1b-e9ff-4283-8307-6c79be066fa5"
         },
         {
             "@type": "WorkflowStep",
@@ -158,13 +163,13 @@
     "routes": [
         {
             "@type": "WorkflowRoute",
-            "name": "Compute CSV Filepath -> Convert CSV to Dictionary",
-            "targetStep": "\/api\/3\/workflow_steps\/690c0252-4b20-4d6c-a37b-d5ac7bbff57d",
-            "sourceStep": "\/api\/3\/workflow_steps\/ab8ecaeb-65bc-48ed-85b4-8944da4f3644",
+            "name": "Configuration -> Download IOC CSV File",
+            "targetStep": "\/api\/3\/workflow_steps\/e97b3f1b-e9ff-4283-8307-6c79be066fa5",
+            "sourceStep": "\/api\/3\/workflow_steps\/c9d30f3d-d97d-485b-bc81-f198e800fdb7",
             "label": null,
             "isExecuted": false,
             "group": null,
-            "uuid": "2ebf1214-4aef-43b0-a3ce-76f69b2e48c0"
+            "uuid": "7c47a76c-2545-4a96-b171-8c63d008739d"
         },
         {
             "@type": "WorkflowRoute",
@@ -178,13 +183,13 @@
         },
         {
             "@type": "WorkflowRoute",
-            "name": "Copy of Configuration -> Compute CSV Filepath",
-            "targetStep": "\/api\/3\/workflow_steps\/ab8ecaeb-65bc-48ed-85b4-8944da4f3644",
-            "sourceStep": "\/api\/3\/workflow_steps\/c9d30f3d-d97d-485b-bc81-f198e800fdb7",
+            "name": "Download IOC CSV File -> Convert CSV to Dictionary",
+            "targetStep": "\/api\/3\/workflow_steps\/690c0252-4b20-4d6c-a37b-d5ac7bbff57d",
+            "sourceStep": "\/api\/3\/workflow_steps\/e97b3f1b-e9ff-4283-8307-6c79be066fa5",
             "label": null,
             "isExecuted": false,
             "group": null,
-            "uuid": "63b58267-12f0-4900-9eba-df480652434b"
+            "uuid": "e433adf8-9926-41b7-bfbf-229093ca776d"
         },
         {
             "@type": "WorkflowRoute",

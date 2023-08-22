@@ -1,0 +1,133 @@
+{
+    "@id": "\/api\/3\/staging_model_metadatas\/b86fee5b-441a-4948-b273-8fc5c21651e5",
+    "uuid": "b86fee5b-441a-4948-b273-8fc5c21651e5",
+    "descriptions": {
+        "plural": "Alerts",
+        "singular": "Alert"
+    },
+    "type": "alerts",
+    "attributes": [
+        {
+            "@type": "AttributeMetadata",
+            "type": "string",
+            "name": "jiraTicketID",
+            "length": null,
+            "orderIndex": 1,
+            "formType": "text",
+            "dataSource": null,
+            "searchable": false,
+            "peerReplicable": true,
+            "system": false,
+            "encrypted": false,
+            "gridColumn": false,
+            "collection": false,
+            "inversedField": null,
+            "ownsRelationship": false,
+            "validation": {
+                "required": false,
+                "minlength": 0,
+                "maxlength": 10485761,
+                "_enableRange": false
+            },
+            "bulkAction": {
+                "allow": false,
+                "buttonText": "",
+                "buttonIcon": "",
+                "buttonClass": "btn btn-default btn-sm"
+            },
+            "dataSourceFilters": null,
+            "defaultValue": "",
+            "tooltip": null,
+            "visibility": [
+                {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "field": "jiraTicketID",
+                            "operator": "isnull",
+                            "_operator": "isnull",
+                            "value": "false",
+                            "type": "primitive"
+                        }
+                    ]
+                }
+            ],
+            "htmlEscape": false,
+            "orphanRemoval": null,
+            "readable": true,
+            "writeable": true,
+            "identifier": null,
+            "unique": false,
+            "recommend": false,
+            "skipSerialization": false,
+            "displayName": "{{ jiraTicketID }}",
+            "descriptions": {
+                "singular": "Jira Ticket ID"
+            }
+        },
+        {
+            "@type": "AttributeMetadata",
+            "type": "string",
+            "name": "serviceNowTicketID",
+            "length": null,
+            "orderIndex": 2,
+            "formType": "text",
+            "dataSource": null,
+            "searchable": false,
+            "peerReplicable": true,
+            "system": false,
+            "encrypted": false,
+            "gridColumn": false,
+            "collection": false,
+            "inversedField": null,
+            "ownsRelationship": false,
+            "validation": {
+                "required": false,
+                "minlength": 0,
+                "maxlength": 10485761,
+                "_enableRange": false
+            },
+            "bulkAction": {
+                "allow": false,
+                "buttonText": "",
+                "buttonIcon": "",
+                "buttonClass": "btn btn-default btn-sm"
+            },
+            "dataSourceFilters": null,
+            "defaultValue": "",
+            "tooltip": null,
+            "visibility": [
+                {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "field": "serviceNowTicketID",
+                            "operator": "isnull",
+                            "_operator": "isnull",
+                            "value": "false",
+                            "type": "primitive"
+                        }
+                    ]
+                }
+            ],
+            "htmlEscape": false,
+            "orphanRemoval": null,
+            "readable": true,
+            "writeable": true,
+            "identifier": null,
+            "unique": false,
+            "recommend": false,
+            "skipSerialization": false,
+            "displayName": "{{ serviceNowTicketID }}",
+            "descriptions": {
+                "singular": "ServiceNow Ticket ID"
+            }
+        }
+    ],
+    "tableName": "alerts",
+    "displayName": "{{ name }}"
+}

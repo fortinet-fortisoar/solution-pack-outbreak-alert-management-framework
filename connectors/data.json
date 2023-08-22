@@ -6,63 +6,15 @@
         "description": "Log Analytics is a tool in the Azure portal that's used to edit and run log queries against data in the Azure Monitor Logs store. This connector facilitates the automated operations related to query and saved searches.",
         "publisher": null,
         "operation_roles": [],
-        "configurations": [
-            {
-                "id": 24,
-                "config_id": "bf8b0340-c5d3-4f7b-82d6-813a21ea5b50",
-                "status": 1,
-                "name": "demo",
-                "default": true,
-                "config": {
-                    "client_id": "e9ecb6ed-f68d-49aa-ac81-17557e10107e",
-                    "expiresOn": 1691996236.125517,
-                    "tenant_id": "8c041846-239e-44fb-9be0-ecbf4f9c8a41",
-                    "verify_ssl": true,
-                    "accessToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ii1LSTNROW5OUjdiUm9meG1lWm9YcWJIWkdldyIsImtpZCI6Ii1LSTNROW5OUjdiUm9meG1lWm9YcWJIWkdldyJ9.eyJhdWQiOiJodHRwczovL21hbmFnZW1lbnQuYXp1cmUuY29tIiwiaXNzIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvOGMwNDE4NDYtMjM5ZS00NGZiLTliZTAtZWNiZjRmOWM4YTQxLyIsImlhdCI6MTY5MTk5MjMzNiwibmJmIjoxNjkxOTkyMzM2LCJleHAiOjE2OTE5OTYyMzYsImFpbyI6IkUyRmdZR0ErK0NpRllhMk1kWHI4ZWQ2d3RVYVhBUT09IiwiYXBwaWQiOiJlOWVjYjZlZC1mNjhkLTQ5YWEtYWM4MS0xNzU1N2UxMDEwN2UiLCJhcHBpZGFjciI6IjEiLCJpZHAiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC84YzA0MTg0Ni0yMzllLTQ0ZmItOWJlMC1lY2JmNGY5YzhhNDEvIiwiaWR0eXAiOiJhcHAiLCJvaWQiOiI2YTc0MTc2My1kZGU5LTRhNjktYmZkZi1iOTg3NTMxYjc2ZWQiLCJyaCI6IjAuQVZJQVJoZ0VqSjRqLTBTYjRPeV9UNXlLUVVaSWYza0F1dGRQdWtQYXdmajJNQk82QUFBLiIsInN1YiI6IjZhNzQxNzYzLWRkZTktNGE2OS1iZmRmLWI5ODc1MzFiNzZlZCIsInRpZCI6IjhjMDQxODQ2LTIzOWUtNDRmYi05YmUwLWVjYmY0ZjljOGE0MSIsInV0aSI6InRNajNkbXE2WVVTbG5aNDlURmljQUEiLCJ2ZXIiOiIxLjAiLCJ4bXNfdGNkdCI6MTY3MjE1OTA2OH0.AdJluOqC4PU-uxx2H9Bds1p-h2HOrr8grJfwiGymqV7yEaoqRAESU6G4n_te-KpTqZ9Wdb9lUuPcSZ0umnUjLBBj0jtJ5BwtqXG25TsozDw5YYIhA52C0sE3JMytjlCXMElahdfsFOHUlPbReKW4HdYyJNrJXcH8tPkUZ4z8m86vo_ZC6bB7pZh2e16j8PrIc_nc_Nsa_e5s6K3vFo39MYv-uvAjjpyMVIKhvfPmxwVIS9mJqnFvYeHtgjQK6aOh5VsdpZsQchWkpSIMUdTtPT1HQtKjc3--chtIjVMuplibGYN3wxj8gwHIAcl94RltUAzsdXE4oYOILmE1b8UaFA",
-                    "logExpiresOn": 1691996237.553929,
-                    "workspace_id": "523b1243-2798-4936-ade4-4a57290b65c0",
-                    "client_secret": "RFV8Q~db2618cfoOFHYAEUy8ffIYKN2S8Pn5fau_",
-                    "refresh_token": null,
-                    "connector_info": {
-                        "connector_name": "azure-log-analytics",
-                        "connector_version": "2.0.0"
-                    },
-                    "logAccessToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ii1LSTNROW5OUjdiUm9meG1lWm9YcWJIWkdldyIsImtpZCI6Ii1LSTNROW5OUjdiUm9meG1lWm9YcWJIWkdldyJ9.eyJhdWQiOiJodHRwczovL2FwaS5sb2dhbmFseXRpY3MuaW8iLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC84YzA0MTg0Ni0yMzllLTQ0ZmItOWJlMC1lY2JmNGY5YzhhNDEvIiwiaWF0IjoxNjkxOTkyMzM4LCJuYmYiOjE2OTE5OTIzMzgsImV4cCI6MTY5MTk5NjIzOCwiYWlvIjoiRTJGZ1lGaXpidFUvdVFBaHAvTmU3UWtILzcxdEJBQT0iLCJhcHBpZCI6ImU5ZWNiNmVkLWY2OGQtNDlhYS1hYzgxLTE3NTU3ZTEwMTA3ZSIsImFwcGlkYWNyIjoiMSIsImlkcCI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzhjMDQxODQ2LTIzOWUtNDRmYi05YmUwLWVjYmY0ZjljOGE0MS8iLCJvaWQiOiI2YTc0MTc2My1kZGU5LTRhNjktYmZkZi1iOTg3NTMxYjc2ZWQiLCJyaCI6IjAuQVZJQVJoZ0VqSjRqLTBTYjRPeV9UNXlLUVFzX2Y4cVJmU3hJamduRjJFRFE2c1c2QUFBLiIsInN1YiI6IjZhNzQxNzYzLWRkZTktNGE2OS1iZmRmLWI5ODc1MzFiNzZlZCIsInRpZCI6IjhjMDQxODQ2LTIzOWUtNDRmYi05YmUwLWVjYmY0ZjljOGE0MSIsInV0aSI6IkY2ZXJPY1NvdEVxdmJiN2kwbnM1QUEiLCJ2ZXIiOiIxLjAifQ.Kmd7a7DEENwhix30nNB59ptirNSGOVyfNfrpy1mCpWhqHk9_gs6nFHDtGdzOXgkWCutWR_0QM5aNRjWATluX2SC2DSzf9ZeyK0oliyJ8QGRGlQlyb_TS9PQz6x1p0d_xzet-ObIVz5TqDUrBF7lZ0HiU1zN-NXyMtu4GQiNUEmKq715tBbKne4iB0xFc-ltc897FdKkge7_AXtHBCib1uAlWu56yFTFWkOWhw7lx4ouioaErGMouNqHW9_2qZ8rLkPKZv0ZqFMJdRKbGAlcuX9JbgTt22x6iNDKMCocKTdMYw4nNh5M96P-GQ38AuhxgXc-rhJJaqCpadvBsylaOvQ",
-                    "workspace_name": "FortiSOAR-Integration-New",
-                    "logRefreshToken": null,
-                    "subscription_id": "b490cd38-86fd-4a84-9557-01d895873451",
-                    "resource_group_name": "ftnt-fsr-pune-office"
-                },
-                "remote_status": [],
-                "health_status": [],
-                "connector": 50,
-                "agent": "49b16cdf1d0dcdd54e562a1bf2b58c64",
-                "teams": []
-            }
-        ],
+        "configurations": [],
         "dataImports": [],
-        "install_mode": "rpm",
-        "ingestionPlaybooks": {
-            "collections": [],
-            "exported_tags": []
-        }
+        "install_mode": "rpm"
     },
     {
         "name": "fortinet-fortianalyzer",
         "label": "Fortinet FortiAnalyzer",
         "category": "Analytics & SIEM",
         "description": "FortiAnalyzer is the NOC-SOC security analysis tool built with operations perspective. With action-oriented views and deep drill-down capabilities, FortiAnalyzer not only gives organizations critical insight into threats, but also accurately scopes risk across the attack surface, pinpointing where immediate response is required.",
-        "publisher": null,
-        "operation_roles": [],
-        "configurations": [],
-        "dataImports": [],
-        "install_mode": "rpm"
-    },
-    {
-        "name": "fortigate-firewall",
-        "label": "Fortinet FortiGate",
-        "category": "Firewall and Network Protection",
-        "description": "Fortinet FortiGate enterprise firewall provide high performance, consolidated advanced security and granular visibility for broad protection across the entire digital attack surface.",
         "publisher": null,
         "operation_roles": [],
         "configurations": [],
@@ -92,10 +44,43 @@
         "install_mode": "rpm"
     },
     {
+        "name": "fortigate-firewall",
+        "label": "Fortinet FortiGate",
+        "category": "Firewall and Network Protection",
+        "description": "Fortinet FortiGate enterprise firewall provide high performance, consolidated advanced security and granular visibility for broad protection across the entire digital attack surface.",
+        "publisher": null,
+        "operation_roles": [],
+        "configurations": [],
+        "dataImports": [],
+        "install_mode": "rpm"
+    },
+    {
+        "name": "jira",
+        "label": "Jira",
+        "category": "Ticket Creation",
+        "description": "Jira Service Desk Connector for issue creating, updating and deleting.",
+        "publisher": null,
+        "operation_roles": [],
+        "configurations": [],
+        "dataImports": [],
+        "install_mode": "rpm"
+    },
+    {
         "name": "nist-nvd",
         "label": "NIST National Vulnerability Database",
         "category": "Vulnerability Management",
         "description": "The NIST National Vulnerability Database (NVD) is the U.S. government repository of standards based vulnerability management data represented using the Security Content Automation Protocol (SCAP). This data enables automation of vulnerability management, security measurement, and compliance. The NVD includes databases of security checklist references, security related software flaws, misconfigurations, product names, and impact metrics.",
+        "publisher": null,
+        "operation_roles": [],
+        "configurations": [],
+        "dataImports": [],
+        "install_mode": "rpm"
+    },
+    {
+        "name": "servicenow",
+        "label": "ServiceNow",
+        "category": "CMDB",
+        "description": "ServiceNow connector provides functionality to create, read, update and delete records of Table and Catalog type",
         "publisher": null,
         "operation_roles": [],
         "configurations": [],

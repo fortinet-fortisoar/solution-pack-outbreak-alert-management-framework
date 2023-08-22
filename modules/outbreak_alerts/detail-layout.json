@@ -162,6 +162,16 @@
                                                                                                         "name": "lastRevisedDate",
                                                                                                         "highlightMode": true,
                                                                                                         "readOnly": true
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "name": "serviceNowTicketID",
+                                                                                                        "highlightMode": true,
+                                                                                                        "readOnly": false
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "name": "jiraTicketID",
+                                                                                                        "highlightMode": true,
+                                                                                                        "readOnly": false
                                                                                                     }
                                                                                                 ],
                                                                                                 "style": "col-lg-6"
@@ -197,7 +207,7 @@
                                                                                                     {
                                                                                                         "name": "iOCCSVFile",
                                                                                                         "highlightMode": true,
-                                                                                                        "readOnly": false
+                                                                                                        "readOnly": true
                                                                                                     }
                                                                                                 ]
                                                                                             }
@@ -307,7 +317,7 @@
                                             "title": "Mitigation Details",
                                             "active": 0,
                                             "icon": "fa fa-minus-square-o",
-                                            "show": true,
+                                            "show": false,
                                             "visible": true,
                                             "widget": {
                                                 "type": "rows",
@@ -330,7 +340,7 @@
                                                                                                     {
                                                                                                         "name": "mitigation",
                                                                                                         "highlightMode": true,
-                                                                                                        "readOnly": false
+                                                                                                        "readOnly": true
                                                                                                     }
                                                                                                 ]
                                                                                             }

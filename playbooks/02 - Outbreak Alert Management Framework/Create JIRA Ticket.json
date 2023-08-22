@@ -1,0 +1,177 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "Create JIRA Ticket",
+    "aliasName": null,
+    "tag": null,
+    "description": "Create the JIRA ticket for the outbreak alert",
+    "isActive": true,
+    "debug": false,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [],
+    "synchronous": false,
+    "collection": "\/api\/3\/workflow_collections\/2ae30943-7a2f-435b-a100-3ec7c3e2294b",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/6e6f75d5-62b8-4c0d-832b-8939fb46d24a",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Configuration",
+            "description": null,
+            "arguments": {
+                "project_key": "SOLUTIONS",
+                "ticket_type": "[System] Incident",
+                "useMockOutput": "{{globalVars.Demo_mode}}",
+                "alert_status_map": "{ \"{{'AlertStatus'| picklist('Open', 'itemValue')}}\": \"Open\", \"{{'AlertStatus'| picklist('Investigating', 'itemValue')}}\": \"Work in progress\", \"{{'AlertStatus'| picklist('Pending', 'itemValue')}}\": \"Pending\", \"{{'AlertStatus'| picklist('Closed', 'itemValue')}}\": \"Resolved\"  }",
+                "alert_severity_map": "{\"{{('Severity'| picklist('Critical')).itemValue}}\": \"Highest\", \"{{('Severity'| picklist('High')).itemValue}}\": \"High\", \"{{('Severity'| picklist('Medium')).itemValue}}\": \"Medium\", \"{{('Severity'| picklist('Low')).itemValue}}\": \"Low\" }"
+            },
+            "status": null,
+            "top": "165",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+            "group": null,
+            "uuid": "82868e4c-aa0b-4301-b25f-7ab42abd7320"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Create Ticket",
+            "description": null,
+            "arguments": {
+                "name": "Jira",
+                "config": "5e039627-92c8-4e14-a9fd-fba653921a9b",
+                "params": {
+                    "parent": "",
+                    "priority": "{{vars.input.records[0].severity.itemValue | resolveRange(vars.alert_severity_map)}}",
+                    "issue_type": "[System] Incident",
+                    "project_key": "SOLUTIONS",
+                    "other_fields": "",
+                    "ticket_summary": "{{vars.input.records[0].name}}",
+                    "ticket_description": "{{vars.input.records[0].description}}"
+                },
+                "version": "1.2.0",
+                "connector": "jira",
+                "operation": "create_ticket",
+                "mock_result": "{\n  \"data\": {\n    \"id\": \"10019\",\n    \"key\": \"SOLUTIONS-5\",\n    \"self\": \"https:\/\/cybersponse.atlassian.net\/rest\/api\/2\/issue\/10019\",\n    \"status\": \"Open\"\n  },\n  \"status\": \"Success\",\n  \"message\": \"\",\n  \"operation\": null,\n  \"execution_time\": \"1 seconds 908 ms\"\n}",
+                "operationTitle": "Create Ticket",
+                "step_variables": []
+            },
+            "status": null,
+            "top": "300",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/0bfed618-0316-11e7-93ae-92361f002671",
+            "group": null,
+            "uuid": "f2ae069f-ee08-49e8-9a9f-8c9a7234254b"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "resource": "alerts",
+                "resources": [
+                    "alerts"
+                ],
+                "step_variables": {
+                    "input": {
+                        "params": [],
+                        "records": [
+                            "{{vars.input.records[0]}}"
+                        ]
+                    }
+                },
+                "fieldbasedtrigger": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "type": "object",
+                            "field": "type",
+                            "value": "\/api\/3\/picklists\/f2fb4c85-baae-407e-b218-1cc54a49546c",
+                            "_value": {
+                                "@id": "\/api\/3\/picklists\/f2fb4c85-baae-407e-b218-1cc54a49546c",
+                                "display": "Outbreak Alert",
+                                "itemValue": "Outbreak Alert"
+                            },
+                            "operator": "eq"
+                        }
+                    ]
+                }
+            },
+            "status": null,
+            "top": "30",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/ea155646-3821-4542-9702-b246da430a8d",
+            "group": null,
+            "uuid": "6e6f75d5-62b8-4c0d-832b-8939fb46d24a"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Update Ticket ID",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "jiraTicketID": "{{vars.steps.Create_Ticket.data.id}}"
+                },
+                "operation": "Append",
+                "collection": "{{vars.input.records[0]['@id']}}",
+                "__recommend": [],
+                "collectionType": "\/api\/3\/alerts",
+                "fieldOperation": {
+                    "recordTags": "Append"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "435",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
+            "group": null,
+            "uuid": "ad33bcbc-3aaf-497d-8e02-ffa6071815df"
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Configuration -> Create Ticket",
+            "targetStep": "\/api\/3\/workflow_steps\/f2ae069f-ee08-49e8-9a9f-8c9a7234254b",
+            "sourceStep": "\/api\/3\/workflow_steps\/82868e4c-aa0b-4301-b25f-7ab42abd7320",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "4615511d-c7c4-44d1-b576-53f79f9e3176"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Create Ticket -> Update Ticket ID",
+            "targetStep": "\/api\/3\/workflow_steps\/ad33bcbc-3aaf-497d-8e02-ffa6071815df",
+            "sourceStep": "\/api\/3\/workflow_steps\/f2ae069f-ee08-49e8-9a9f-8c9a7234254b",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "bc280f87-45a1-4cae-bb78-61748af2559f"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Configuration",
+            "targetStep": "\/api\/3\/workflow_steps\/82868e4c-aa0b-4301-b25f-7ab42abd7320",
+            "sourceStep": "\/api\/3\/workflow_steps\/6e6f75d5-62b8-4c0d-832b-8939fb46d24a",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "3c8f0a00-3757-46ab-8a97-906e29c63fd0"
+        }
+    ],
+    "groups": [],
+    "priority": "\/api\/3\/picklists\/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+    "uuid": "75b636c5-4006-4c9e-9c99-c79526c90898",
+    "owners": [],
+    "isPrivate": false,
+    "deletedAt": null,
+    "recordTags": [
+        "PostCreate",
+        "Outbreak Alert",
+        "JIRA"
+    ]
+}
