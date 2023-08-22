@@ -102,7 +102,7 @@
         ],
         "playbooks": [
             {
-                "name": "02 - Outbreak Alert Management Framework"
+                "name": "10 - SP - Outbreak Alert Management Framework"
             }
         ],
         "globalVariables": [],
