@@ -1,0 +1,416 @@
+{
+    "@context": "\/api\/3\/contexts\/SystemViewTemplate",
+    "@type": "SystemViewTemplate",
+    "type": "rows",
+    "config": {
+        "rows": [
+            {
+                "columns": [
+                    {
+                        "widgets": [
+                            {
+                                "type": "primaryDetail",
+                                "config": {
+                                    "wid": "84e37328-9eda-474a-9c05-81cca40d2354",
+                                    "idField": "id",
+                                    "picklistFieldReadOnly": false,
+                                    "titleFieldReadOnly": false,
+                                    "featuredRelationship": {
+                                        "field": "outbreakAlerts",
+                                        "preText": "Under Investigation In",
+                                        "query": {
+                                            "sort": [],
+                                            "limit": 30,
+                                            "logic": "AND",
+                                            "filters": []
+                                        },
+                                        "statusField": "status",
+                                        "sort": []
+                                    },
+                                    "picklistField": "ruleType",
+                                    "titleField": "title"
+                                }
+                            },
+                            {
+                                "type": "tabs",
+                                "config": {
+                                    "wid": "c41c3aa1-863d-407d-a075-342cfc5bc6af",
+                                    "tabs": [
+                                        {
+                                            "title": "Rule",
+                                            "active": 0,
+                                            "icon": "icon icon-queue_rules",
+                                            "show": false,
+                                            "visible": true,
+                                            "widget": {
+                                                "type": "rows",
+                                                "config": {
+                                                    "wid": "761bbdc8-a660-4873-9a0a-bf96ce366982",
+                                                    "rows": [
+                                                        {
+                                                            "columns": [
+                                                                {
+                                                                    "widgets": [
+                                                                        {
+                                                                            "type": "editableFormGroup",
+                                                                            "config": {
+                                                                                "wid": "d696c95d-a327-46ec-ac68-8fa7371372d7",
+                                                                                "rows": [
+                                                                                    {
+                                                                                        "columns": [
+                                                                                            {
+                                                                                                "fields": [
+                                                                                                    {
+                                                                                                        "name": "title",
+                                                                                                        "highlightMode": true,
+                                                                                                        "readOnly": true
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "name": "ruleType",
+                                                                                                        "highlightMode": true,
+                                                                                                        "readOnly": true
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "name": "ruleLink",
+                                                                                                        "highlightMode": true,
+                                                                                                        "readOnly": true
+                                                                                                    }
+                                                                                                ],
+                                                                                                "style": "col-lg-6"
+                                                                                            },
+                                                                                            {
+                                                                                                "fields": [
+                                                                                                    {
+                                                                                                        "name": "createDate",
+                                                                                                        "highlightMode": true,
+                                                                                                        "readOnly": false
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "name": "modifyDate",
+                                                                                                        "highlightMode": true,
+                                                                                                        "readOnly": false
+                                                                                                    }
+                                                                                                ],
+                                                                                                "style": "col-lg-6"
+                                                                                            }
+                                                                                        ]
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        }
+                                                                    ],
+                                                                    "style": "col-lg-12"
+                                                                }
+                                                            ],
+                                                            "wid": "0b659e92-2acd-4185-b4e1-2eadcfa45040",
+                                                            "container": true,
+                                                            "_collapsed": false
+                                                        },
+                                                        {
+                                                            "columns": [
+                                                                {
+                                                                    "widgets": [
+                                                                        {
+                                                                            "type": "editableFormGroup",
+                                                                            "config": {
+                                                                                "wid": "473c1c3b-413a-4ac2-a3e8-7aabf6dde692",
+                                                                                "rows": [
+                                                                                    {
+                                                                                        "columns": [
+                                                                                            {
+                                                                                                "fields": [
+                                                                                                    {
+                                                                                                        "name": "rule",
+                                                                                                        "highlightMode": true,
+                                                                                                        "readOnly": false
+                                                                                                    }
+                                                                                                ]
+                                                                                            }
+                                                                                        ]
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        }
+                                                                    ],
+                                                                    "style": "col-lg-12"
+                                                                }
+                                                            ],
+                                                            "wid": "393b4f70-4eca-4617-8ef9-aac01d5a6dd8",
+                                                            "_collapsed": false
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            "conditionalVisibility": true,
+                                            "filter": {
+                                                "sort": [],
+                                                "limit": 30,
+                                                "logic": "OR",
+                                                "filters": [
+                                                    {
+                                                        "field": "ruleType",
+                                                        "operator": "eq",
+                                                        "value": "\/api\/3\/picklists\/d2bc7e39-adae-4325-a506-e9e7c06f3420",
+                                                        "_value": {
+                                                            "display": "Yara",
+                                                            "itemValue": "Yara",
+                                                            "@id": "\/api\/3\/picklists\/d2bc7e39-adae-4325-a506-e9e7c06f3420"
+                                                        },
+                                                        "type": "object",
+                                                        "display": "Yara"
+                                                    },
+                                                    {
+                                                        "field": "ruleType",
+                                                        "operator": "eq",
+                                                        "value": "\/api\/3\/picklists\/fa026fd2-2b2f-45b0-80aa-61eda4f9a007",
+                                                        "_value": {
+                                                            "display": "Sigma",
+                                                            "itemValue": "Sigma",
+                                                            "@id": "\/api\/3\/picklists\/fa026fd2-2b2f-45b0-80aa-61eda4f9a007"
+                                                        },
+                                                        "type": "object",
+                                                        "display": "Sigma"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "title": "Advanced Hunting",
+                                            "active": 0,
+                                            "widget": {
+                                                "type": "rows",
+                                                "config": {
+                                                    "wid": "8b44a687-a478-4935-8cfe-e99442699300",
+                                                    "rows": [
+                                                        {
+                                                            "columns": [
+                                                                {
+                                                                    "widgets": [
+                                                                        {
+                                                                            "type": "editableFormGroup",
+                                                                            "config": {
+                                                                                "wid": "eb196d3c-6662-423a-aa71-2604bbb11de0",
+                                                                                "rows": [
+                                                                                    {
+                                                                                        "columns": [
+                                                                                            {
+                                                                                                "fields": [
+                                                                                                    {
+                                                                                                        "name": "qRadar",
+                                                                                                        "highlightMode": true,
+                                                                                                        "readOnly": true
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "name": "splunk",
+                                                                                                        "highlightMode": true,
+                                                                                                        "readOnly": true
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "name": "azureLogAnalytics",
+                                                                                                        "highlightMode": true,
+                                                                                                        "readOnly": true
+                                                                                                    }
+                                                                                                ],
+                                                                                                "style": "col-lg-6"
+                                                                                            },
+                                                                                            {
+                                                                                                "fields": [
+                                                                                                    {
+                                                                                                        "name": "arcSight",
+                                                                                                        "highlightMode": true,
+                                                                                                        "readOnly": true
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "name": "elasticSearch",
+                                                                                                        "highlightMode": true,
+                                                                                                        "readOnly": true
+                                                                                                    }
+                                                                                                ],
+                                                                                                "style": "col-lg-6"
+                                                                                            }
+                                                                                        ]
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        }
+                                                                    ],
+                                                                    "style": "col-lg-12"
+                                                                }
+                                                            ],
+                                                            "wid": "911870dd-51e3-4374-a529-857a6122f13e",
+                                                            "collapsible": false,
+                                                            "collapsibleIndex": 0,
+                                                            "_collapsed": false,
+                                                            "container": true
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            "icon": "icon icon-threat-hunting",
+                                            "show": true,
+                                            "visible": true,
+                                            "conditionalVisibility": true,
+                                            "filter": {
+                                                "sort": [],
+                                                "limit": 30,
+                                                "logic": "AND",
+                                                "filters": [
+                                                    {
+                                                        "field": "ruleType",
+                                                        "operator": "eq",
+                                                        "value": "\/api\/3\/picklists\/fa026fd2-2b2f-45b0-80aa-61eda4f9a007",
+                                                        "_value": {
+                                                            "display": "Sigma",
+                                                            "itemValue": "Sigma",
+                                                            "@id": "\/api\/3\/picklists\/fa026fd2-2b2f-45b0-80aa-61eda4f9a007"
+                                                        },
+                                                        "type": "object",
+                                                        "display": "Sigma"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "title": "Fortinet Fabric Hunting",
+                                            "active": 0,
+                                            "widget": {
+                                                "type": "rows",
+                                                "config": {
+                                                    "wid": "ea12c4dd-4956-42b6-a05c-e63bb65829d6",
+                                                    "rows": [
+                                                        {
+                                                            "columns": [
+                                                                {
+                                                                    "widgets": [
+                                                                        {
+                                                                            "type": "editableFormGroup",
+                                                                            "config": {
+                                                                                "wid": "871d55b5-15fd-4f04-aae3-d264fc7c691e",
+                                                                                "rows": [
+                                                                                    {
+                                                                                        "columns": [
+                                                                                            {
+                                                                                                "fields": [
+                                                                                                    {
+                                                                                                        "name": "ruleType",
+                                                                                                        "highlightMode": true,
+                                                                                                        "readOnly": true
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "name": "ruleLink",
+                                                                                                        "highlightMode": true,
+                                                                                                        "readOnly": false
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "name": "fortiAnalyzer",
+                                                                                                        "highlightMode": true,
+                                                                                                        "readOnly": true,
+                                                                                                        "renderWidgetHeight": 500,
+                                                                                                        "renderWidget": "json"
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "name": "fortiSIEM",
+                                                                                                        "highlightMode": true,
+                                                                                                        "readOnly": true,
+                                                                                                        "renderWidget": "json",
+                                                                                                        "renderWidgetHeight": 500
+                                                                                                    }
+                                                                                                ],
+                                                                                                "style": "col-lg-12"
+                                                                                            }
+                                                                                        ]
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        }
+                                                                    ],
+                                                                    "style": "col-lg-12"
+                                                                }
+                                                            ],
+                                                            "wid": "1366a446-0947-4551-bab4-4b4a411e313b",
+                                                            "_collapsed": false
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            "icon": "icon icon-set-as-default",
+                                            "conditionalVisibility": true,
+                                            "filter": {
+                                                "sort": [],
+                                                "limit": 30,
+                                                "logic": "AND",
+                                                "filters": [
+                                                    {
+                                                        "field": "ruleType",
+                                                        "operator": "eq",
+                                                        "value": "\/api\/3\/picklists\/8188b8c7-6f77-4f28-8b87-11c7ceef84dc",
+                                                        "_value": {
+                                                            "display": "Fortinet Fabric",
+                                                            "itemValue": "Fortinet Fabric",
+                                                            "@id": "\/api\/3\/picklists\/8188b8c7-6f77-4f28-8b87-11c7ceef84dc"
+                                                        },
+                                                        "type": "object",
+                                                        "display": "Fortinet Fabric"
+                                                    }
+                                                ]
+                                            },
+                                            "show": false,
+                                            "visible": false
+                                        }
+                                    ],
+                                    "isPrimaryTab": true
+                                }
+                            }
+                        ],
+                        "style": "col-lg-12"
+                    }
+                ],
+                "wid": "da81e220-a8ff-453a-bad3-26c7a16fd12d",
+                "_collapsed": false
+            },
+            {
+                "columns": [
+                    {
+                        "widgets": [
+                            {
+                                "type": "tabs",
+                                "config": {
+                                    "tabs": [
+                                        {
+                                            "title": "Related Records",
+                                            "widget": {
+                                                "type": "relationship.subtab",
+                                                "config": {
+                                                    "excludes": [
+                                                        "notes",
+                                                        "comments",
+                                                        "userOwners",
+                                                        "attachments"
+                                                    ],
+                                                    "wid": "de2a4421-ec6b-489d-a36e-d18d355a640a",
+                                                    "selectionType": "exclude",
+                                                    "includes": []
+                                                }
+                                            },
+                                            "show": true,
+                                            "visible": true,
+                                            "icon": "fa fa-none"
+                                        }
+                                    ],
+                                    "wid": "958bfd43-2331-4307-bba9-16bae5fdd9bb"
+                                }
+                            }
+                        ],
+                        "style": "col-lg-12"
+                    }
+                ],
+                "wid": "e032c191-4839-48b4-92b1-7dcc04abe6fa",
+                "_collapsed": false
+            }
+        ],
+        "wid": "18442a95-8bfe-416b-8408-f29c235f4d66",
+        "actionButtons": [],
+        "metadata": []
+    },
+    "uuid": "modules-threat_hunt_rules-detail"
+}

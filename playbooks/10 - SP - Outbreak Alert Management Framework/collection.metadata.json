@@ -1,0 +1,11 @@
+{
+    "@context": "\/api\/3\/contexts\/WorkflowCollection",
+    "@type": "WorkflowCollection",
+    "name": "10 - SP - Outbreak Alert Management Framework",
+    "description": null,
+    "visible": true,
+    "image": null,
+    "uuid": "2ae30943-7a2f-435b-a100-3ec7c3e2294b",
+    "deletedAt": null,
+    "recordTags": []
+}

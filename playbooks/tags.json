@@ -1,0 +1,17 @@
+[
+    "Azure Log Analytics",
+    "CVE",
+    "FortiAnalyzer",
+    "FortiSIEM",
+    "Indicators",
+    "JIRA",
+    "KEV",
+    "ManualTrigger",
+    "Outbreak Alert",
+    "PostCreate",
+    "QRadar",
+    "ServiceNow",
+    "Splunk",
+    "Subroutine",
+    "ThreatFeed"
+]

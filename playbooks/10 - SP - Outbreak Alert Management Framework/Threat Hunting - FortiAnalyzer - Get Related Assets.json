@@ -1,0 +1,192 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "Threat Hunting - FortiAnalyzer - Get Related Assets",
+    "aliasName": null,
+    "tag": null,
+    "description": "Retrieves device information from Fortinet FortiAnalyzer based on the device name",
+    "isActive": true,
+    "debug": false,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [
+        "alert_data"
+    ],
+    "synchronous": false,
+    "collection": "\/api\/3\/workflow_collections\/2ae30943-7a2f-435b-a100-3ec7c3e2294b",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/f5c93268-5ed9-43f7-a6a5-930c2f69e46c",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Create Alert Record",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "name": "Outbreak Alert - {{vars.input.params['alert_data']['subject']}}",
+                    "type": "\/api\/3\/picklists\/f2fb4c85-baae-407e-b218-1cc54a49546c",
+                    "state": "{{vars.input.params['alert_data']['eventstatus']| resolveRange(vars.alerts_status_map)}}",
+                    "__link": {
+                        "recordTags": "{{\"Outbreak Alert\"}},{{vars.input.params['alert_data']['tag']}}"
+                    },
+                    "source": "Fortinet FortiAnalyzer",
+                    "status": "\/api\/3\/picklists\/7de816ff-7140-4ee5-bd05-93ce22002146",
+                    "severity": "{{vars.input.params['alert_data']['severity']| resolveRange(vars.alerts_severity_map)}}",
+                    "sourceId": "{{vars.input.params['alert_data']['alertid']}}",
+                    "sourceIp": "{%if vars.input.params['alert_data']['epip']%}{{vars.input.params['alert_data']['epip']}}{%endif%}",
+                    "__replace": "true",
+                    "sourcedata": "{{vars.input.params['alert_data'] | toJSON }}",
+                    "description": "<table style=\"width: 400px; border-collapse: unset;\" border=\"2\">\n<tbody>\n<tr>\n<td style=\"width: 152px;\"><strong>Event Type<\/strong><\/td>\n<td style=\"width: 326px;\">&nbsp;{{vars.input.params['alert_data']['eventtype']}}<\/td>\n<\/tr>\n<tr>\n<td style=\"width: 152px;\"><strong>Device Name<\/strong><\/td>\n<td style=\"width: 326px;\">&nbsp;{{vars.input.params['alert_data']['devname']}}<\/td>\n<\/tr>\n<tr>\n<td style=\"width: 152px;\"><strong>Device Type<\/strong><\/td>\n<td style=\"width: 326px;\">&nbsp;{{vars.input.params['alert_data']['devtype']}}<\/td>\n<\/tr>\n<tr>\n<td style=\"width: 152px;\"><strong>Device ID<\/strong><\/td>\n<td style=\"width: 326px;\">&nbsp;{{vars.input.params['alert_data']['devid']}}<\/td>\n<\/tr>\n<tr>\n<td style=\"width: 152px;\"><strong>Tag<\/strong><\/td>\n<td style=\"width: 326px;\">&nbsp;{{vars.input.params['alert_data']['tag']}}<\/td>\n<\/tr>\n<tr>\n<td style=\"width: 152px;\"><strong>Subject<\/strong><\/td>\n<td style=\"width: 326px;\">&nbsp;{{vars.input.params['alert_data']['subject']}}<\/td>\n<\/tr>\n<tr>\n<td style=\"width: 152px;\"><strong>Extra Information<\/strong><\/td>\n<td style=\"width: 326px;\">&nbsp;{{vars.input.params['alert_data']['extrainfo']}}<\/td>\n<\/tr>\n<\/tbody>\n<\/table>\n<p>&nbsp;<\/p>",
+                    "ackSlaStatus": "\/api\/3\/picklists\/72979f64-e8b9-4888-a965-957e0ec24818",
+                    "computerName": "{{vars.input.params['alert_data']['devname']}}",
+                    "destinationIp": "{%if \"infected-ip\" in vars.input.params['alert_data']['extrainfo']%}{{vars.input.params['alert_data']['extrainfo'].split(',')[0].split(':')[1]}}{%endif%}",
+                    "respSlaStatus": "\/api\/3\/picklists\/72979f64-e8b9-4888-a965-957e0ec24818",
+                    "deviceSerialNo": "{{vars.input.params['alert_data']['devid']}}",
+                    "outbreakAlerts": "{{vars.input.records[0]['@id']}}",
+                    "priorityWeight": 1,
+                    "destinationPort": "{%if \"infected-ip\" in vars.input.params['alert_data']['extrainfo']%}{{vars.input.params['alert_data']['extrainfo'].split(',')[0].split(':')[2]}}{%endif%}",
+                    "escalatedtoincident": "\/api\/3\/picklists\/2128a09c-153d-4db3-985d-de6be33deae5",
+                    "resolvedAutomatedly": false,
+                    "alertRemainingAckSLA": 0
+                },
+                "operation": "Overwrite",
+                "collection": "\/api\/3\/upsert\/alerts",
+                "__recommend": [],
+                "fieldOperation": {
+                    "recordTags": "Append"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "165",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
+            "group": null,
+            "uuid": "48ac00a3-1390-4575-8b3e-a2f0c1a047e4"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Create Asset",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "ip": "{{vars.steps.Get_Device_Information.data.result[0].data.ip}}",
+                    "name": "{{vars.steps.Get_Device_Information.data.result[0].data.name}}",
+                    "__link": {
+                        "alerts": "{{vars.steps.Create_Alert_Record['@id']}}",
+                        "recordTags": "{{\"Outbreak Alert\"}},{{vars.input.params['alert_data']['tag']}}"
+                    },
+                    "hostname": "{{vars.steps.Get_Device_Information.data.result[0].data.hostname}}",
+                    "__replace": "true",
+                    "deviceUid": "{{vars.steps.Get_Device_Information.data.result[0].data['mgmt_uuid']}}",
+                    "macAddress": "{{vars.steps.Get_Device_Information.data.result[0].data.latitude}}",
+                    "description": "{{vars.steps.Get_Device_Information.data.result[0].data.desc}}",
+                    "serialNumber": "{{vars.steps.Get_Device_Information.data.result[0].data.sn}}"
+                },
+                "operation": "Append",
+                "collection": "\/api\/3\/upsert\/assets",
+                "__recommend": [],
+                "fieldOperation": {
+                    "recordTags": "Append"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "435",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/2597053c-e718-44b4-8394-4d40fe26d357",
+            "group": null,
+            "uuid": "b1e9e857-1b26-43f7-b737-085be05caadc"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Get Device Information",
+            "description": null,
+            "arguments": {
+                "name": "Fortinet FortiAnalyzer",
+                "config": "d3cf8815-d902-4cd0-972c-d4c98e232529",
+                "params": {
+                    "name": "{{vars.steps.Create_Alert_Record.computerName}}",
+                    "adom_name": "{{vars.input.params['alert_data']['vdom']}}"
+                },
+                "version": "3.2.0",
+                "connector": "fortinet-fortianalyzer",
+                "operation": "get_device_info",
+                "mock_result": "{\n  \"data\": {\n    \"id\": 1,\n    \"result\": [\n      {\n        \"url\": \"\/dvmdb\/adom\/root\/device\/Branch_Office_02\",\n        \"data\": {\n          \"ip\": \"10.2.0.1\",\n          \"mr\": 2,\n          \"sn\": \"FGVM02TM23008636\",\n          \"eip\": \"\",\n          \"oid\": 363,\n          \"psk\": \"\",\n          \"beta\": -1,\n          \"desc\": \"\",\n          \"name\": \"Branch_Office_02\",\n          \"opts\": 0,\n          \"prio\": 0,\n          \"role\": 0,\n          \"vdom\": [\n            {\n              \"oid\": 3,\n              \"name\": \"root\",\n              \"devid\": \"Branch_Office_02\",\n              \"flags\": 0,\n              \"opmode\": 1,\n              \"status\": null,\n              \"vpn_id\": 0,\n              \"comments\": null,\n              \"ext_flags\": 0,\n              \"vdom_type\": 1,\n              \"node_flags\": 0,\n              \"tab_status\": null,\n              \"rtm_prof_id\": 0\n            }\n          ],\n          \"build\": 1517,\n          \"flags\": 2097185,\n          \"patch\": 5,\n          \"av_ver\": \"\",\n          \"os_ver\": 7,\n          \"source\": 2,\n          \"vm_cpu\": 0,\n          \"vm_mem\": 0,\n          \"adm_usr\": \"faz\",\n          \"app_ver\": \"\",\n          \"fap_cnt\": 0,\n          \"fex_cnt\": 0,\n          \"fsw_cnt\": 0,\n          \"ha_mode\": 0,\n          \"ips_ext\": 0,\n          \"ips_ver\": \"\",\n          \"maxvdom\": 500,\n          \"mgmt_if\": \"\",\n          \"os_type\": 0,\n          \"version\": 700,\n          \"adm_pass\": [\n            \"ENC\",\n            \"dSegGguXGoSgEBIkax+KwXpPORIS25ynlSDOh9WLgdoqM+KhxuDcfkItjPI8r2YV4c43CQ9X0JBx75mQHwXflme0Vyi5ak4whJCPHLUkrdVDe\/MhNjsQmiUC5J+PPk7SPl+KcUwhbhZmt8ItZYGz6i6NYnGagb5BlBaN8UtCfVej6pk9\"\n          ],\n          \"checksum\": \"\",\n          \"faz.perm\": 15,\n          \"faz.used\": 0,\n          \"ha_slave\": null,\n          \"hostname\": \"\",\n          \"latitude\": \"37.338207\",\n          \"mgt_vdom\": \"\",\n          \"auto_mgmt\": 0,\n          \"branch_pt\": 0,\n          \"conn_mode\": 0,\n          \"db_status\": 0,\n          \"faz.quota\": 0,\n          \"lic_flags\": 0,\n          \"longitude\": \"-121.88633\",\n          \"mgmt_mode\": 2,\n          \"mgmt_uuid\": \"b43414b8-23fa-51ee-b89e-e83167974237\",\n          \"module_sn\": \"\",\n          \"tunnel_ip\": \"\",\n          \"vm_status\": 0,\n          \"dev_status\": 1,\n          \"foslic_cpu\": 0,\n          \"foslic_ram\": 0,\n          \"foslic_utm\": 0,\n          \"hdisk_size\": 0,\n          \"hyperscale\": 0,\n          \"lic_region\": \"\",\n          \"node_flags\": 0,\n          \"tab_status\": \"\",\n          \"conf_status\": 0,\n          \"conn_status\": 0,\n          \"foslic_type\": 0,\n          \"ha_group_id\": 0,\n          \"last_resync\": 0,\n          \"private_key\": \"\",\n          \"faz.full_act\": 0,\n          \"hw_rev_major\": 0,\n          \"hw_rev_minor\": 0,\n          \"last_checked\": 0,\n          \"logdisk_size\": 0,\n          \"onboard_rule\": null,\n          \"platform_str\": \"FortiGate-VM64-KVM\",\n          \"vm_cpu_limit\": 0,\n          \"vm_mem_limit\": 0,\n          \"ha_group_name\": \"\",\n          \"location_from\": \"config\",\n          \"tunnel_cookie\": \"\",\n          \"vm_lic_expire\": 0,\n          \"foslic_dr_site\": 0,\n          \"mgmt.__data[0]\": 0,\n          \"mgmt.__data[1]\": 0,\n          \"mgmt.__data[2]\": 0,\n          \"mgmt.__data[3]\": 0,\n          \"mgmt.__data[4]\": 0,\n          \"mgmt.__data[5]\": 0,\n          \"mgmt.__data[6]\": 0,\n          \"mgmt.__data[7]\": 0,\n          \"prefer_img_ver\": \"\",\n          \"first_tunnel_up\": 0,\n          \"foslic_inst_time\": 0,\n          \"foslic_last_sync\": 0,\n          \"nsxt_service_name\": \"\",\n          \"private_key_status\": 0\n        },\n        \"status\": {\n          \"code\": 0,\n          \"message\": \"OK\"\n        }\n      }\n    ]\n  },\n  \"status\": \"Success\",\n  \"message\": \"\",\n  \"operation\": null,\n  \"execution_time\": \"4 seconds 541 ms\"\n}",
+                "operationTitle": "Get Device Information",
+                "pickFromTenant": false,
+                "step_variables": []
+            },
+            "status": null,
+            "top": "300",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/0bfed618-0316-11e7-93ae-92361f002671",
+            "group": null,
+            "uuid": "f3b4136d-0dea-4f8f-82ee-47a339a66530"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "step_variables": {
+                    "input": {
+                        "params": []
+                    },
+                    "useMockOutput": "{{globalVars.Demo_mode}}",
+                    "alerts_status_map": "{\"open\": {{\"AlertStatus\"| picklist(\"Open\")}}, \"mitigated\": {{\"AlertStatus\"| picklist(\"Investigating\")}}, \"contained\": {{\"AlertStatus\"| picklist(\"Closed\")}}, \"blank\": {{\"AlertStatus\"| picklist(\"Open\")}}  }",
+                    "alerts_severity_map": "{'high': {{'Severity'| picklist('High')}}, 'medium': {{'Severity'| picklist('Medium')}}, 'low': {{'Severity'| picklist('Low')}}, 'critical': {{'Severity'| picklist('Critical')}} }"
+                }
+            },
+            "status": null,
+            "top": "30",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+            "group": null,
+            "uuid": "f5c93268-5ed9-43f7-a6a5-930c2f69e46c"
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Create Record -> Get Device Information",
+            "targetStep": "\/api\/3\/workflow_steps\/f3b4136d-0dea-4f8f-82ee-47a339a66530",
+            "sourceStep": "\/api\/3\/workflow_steps\/48ac00a3-1390-4575-8b3e-a2f0c1a047e4",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "e129a890-fdf5-4e02-b71c-3ccee00f8d3c"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Get Device Information -> Create Asset",
+            "targetStep": "\/api\/3\/workflow_steps\/b1e9e857-1b26-43f7-b737-085be05caadc",
+            "sourceStep": "\/api\/3\/workflow_steps\/f3b4136d-0dea-4f8f-82ee-47a339a66530",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "7cc1f24c-2ba9-41e6-83b6-c0c8a1aa587e"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Create Record",
+            "targetStep": "\/api\/3\/workflow_steps\/48ac00a3-1390-4575-8b3e-a2f0c1a047e4",
+            "sourceStep": "\/api\/3\/workflow_steps\/f5c93268-5ed9-43f7-a6a5-930c2f69e46c",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "14b638bc-81d2-4082-b5c5-e4e57a020c5a"
+        }
+    ],
+    "groups": [],
+    "priority": "\/api\/3\/picklists\/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+    "uuid": "c4a0fd9f-d1ec-4efd-87ac-de21e53c9aae",
+    "owners": [],
+    "isPrivate": false,
+    "deletedAt": null,
+    "recordTags": [
+        "Subroutine",
+        "Outbreak Alert",
+        "FortiAnalyzer"
+    ]
+}

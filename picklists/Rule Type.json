@@ -1,0 +1,40 @@
+{
+    "@context": "\/api\/3\/contexts\/PicklistName",
+    "@id": "\/api\/3\/picklist_names\/78c4dba2-f973-4a87-b495-bc915e11adf7",
+    "@type": "PicklistName",
+    "name": "Rule Type",
+    "system": false,
+    "picklists": [
+        {
+            "@id": "\/api\/3\/picklists\/d2bc7e39-adae-4325-a506-e9e7c06f3420",
+            "@type": "Picklist",
+            "itemValue": "Yara",
+            "orderIndex": 0,
+            "color": "#157DD9",
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/78c4dba2-f973-4a87-b495-bc915e11adf7",
+            "uuid": "d2bc7e39-adae-4325-a506-e9e7c06f3420"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/fa026fd2-2b2f-45b0-80aa-61eda4f9a007",
+            "@type": "Picklist",
+            "itemValue": "Sigma",
+            "orderIndex": 1,
+            "color": "#28B35C",
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/78c4dba2-f973-4a87-b495-bc915e11adf7",
+            "uuid": "fa026fd2-2b2f-45b0-80aa-61eda4f9a007"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/8188b8c7-6f77-4f28-8b87-11c7ceef84dc",
+            "@type": "Picklist",
+            "itemValue": "Fortinet Fabric",
+            "orderIndex": 2,
+            "color": "#e31b1d",
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/78c4dba2-f973-4a87-b495-bc915e11adf7",
+            "uuid": "8188b8c7-6f77-4f28-8b87-11c7ceef84dc"
+        }
+    ],
+    "uuid": "78c4dba2-f973-4a87-b495-bc915e11adf7"
+}

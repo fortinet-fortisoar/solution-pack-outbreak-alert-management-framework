@@ -1,0 +1,47 @@
+{
+    "@context": "\/api\/3\/contexts\/SystemViewTemplate",
+    "@type": "SystemViewTemplate",
+    "type": "app",
+    "config": {
+        "navigation": [
+            {
+                "title": "Outbreak Alert Management",
+                "icon": "icon icon-fraud-management",
+                "items": [
+                    {
+                        "title": "Outbreak Alerts",
+                        "require": {
+                            "module": "outbreak_alerts",
+                            "action": "read"
+                        },
+                        "state": {
+                            "name": "main.modules.list",
+                            "parameters": {
+                                "module": "outbreak_alerts"
+                            }
+                        },
+                        "icon": "icon icon-vulnerability",
+                        "editMode": false
+                    },
+                    {
+                        "title": "Threat Hunt Rules",
+                        "require": {
+                            "module": "threat_hunt_rules",
+                            "action": "read"
+                        },
+                        "state": {
+                            "name": "main.modules.list",
+                            "parameters": {
+                                "module": "threat_hunt_rules"
+                            }
+                        },
+                        "icon": "icon icon-rule-engine",
+                        "editMode": false
+                    }
+                ],
+                "editMode": false
+            }
+        ]
+    },
+    "uuid": "navigation"
+}
