@@ -36,6 +36,17 @@
             "name": "Create Alert",
             "description": null,
             "arguments": {
+                "message": {
+                    "tags": [
+                        "\/api\/3\/tags\/IBM QRadar"
+                    ],
+                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
+                    "tenant": "",
+                    "thread": false,
+                    "content": "<p>Created <strong><em>\"Outbreak Alert - {{vars.input.params['q_radar_query'].title}}\"<\/em> in <\/strong>Alert module for IBM QRadar<em>&nbsp;<strong>events<\/strong>.<\/em><\/p>",
+                    "records": "{{vars.input.records[0]['@id']}}",
+                    "parentstepid": "\/api\/3\/workflow_steps\/85c6f071-862a-4bef-a167-1e0e995b832d"
+                },
                 "for_each": {
                     "item": "{{vars.q_event}}",
                     "__bulk": true,
@@ -96,6 +107,16 @@
                 "config": "7ba1257e-cc5e-4992-bac1-9371acbcb5b5",
                 "params": {
                     "search_string": "{{vars.input.params['q_radar_query'].query}}"
+                },
+                "message": {
+                    "tags": [
+                        "\/api\/3\/tags\/IBM QRadar"
+                    ],
+                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
+                    "tenant": "",
+                    "thread": false,
+                    "content": "<p>Retrieving events from IBM QRadar based on below details.<\/p>\n<p>- <em><strong>Query<\/strong><\/em>: {{vars.input.params['q_radar_query'].query}}<\/p>",
+                    "records": "{{vars.input.records[0]['@id']}}"
                 },
                 "version": "1.6.0",
                 "connector": "qradar",

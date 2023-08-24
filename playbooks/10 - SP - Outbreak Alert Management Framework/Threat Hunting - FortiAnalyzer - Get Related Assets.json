@@ -22,6 +22,16 @@
             "name": "Create Alert Record",
             "description": null,
             "arguments": {
+                "message": {
+                    "tags": [
+                        "\/api\/3\/tags\/FortiAnalyzer"
+                    ],
+                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
+                    "tenant": "",
+                    "thread": false,
+                    "content": "<p>Created <strong><em>\"Outbreak Alert - {{vars.input.params['alert_data']['subject']}}\"<\/em> in <\/strong>Alert module for <em><strong>FortiAnalyzer<\/strong> <strong>Event<\/strong>.<\/em><\/p>",
+                    "records": "{{vars.input.records[0]['@id']}}"
+                },
                 "resource": {
                     "name": "Outbreak Alert - {{vars.input.params['alert_data']['subject']}}",
                     "type": "\/api\/3\/picklists\/f2fb4c85-baae-407e-b218-1cc54a49546c",
@@ -69,19 +79,37 @@
             "name": "Create Asset",
             "description": null,
             "arguments": {
+                "message": {
+                    "tags": [
+                        "\/api\/3\/tags\/FortiAnalyzer"
+                    ],
+                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
+                    "tenant": "",
+                    "thread": false,
+                    "content": "<p>Created <em><strong>Asset<\/strong><\/em> records for <strong><em>\"Outbreak Alert - {{vars.input.params['alert_data']['subject']}}\"<\/em> <\/strong>based on the <em><strong>Device Information<\/strong><\/em> for <em><strong>FortiAnalyzer<\/strong> <strong>Event<\/strong><\/em>.<\/p>",
+                    "records": "{{vars.input.records[0]['@id']}}",
+                    "parentstepid": "\/api\/3\/workflow_steps\/f3b4136d-0dea-4f8f-82ee-47a339a66530"
+                },
+                "for_each": {
+                    "item": "vars.steps.Get_Device_Information.data.result",
+                    "__bulk": true,
+                    "parallel": false,
+                    "condition": "",
+                    "batch_size": 100
+                },
                 "resource": {
-                    "ip": "{{vars.steps.Get_Device_Information.data.result[0].data.ip}}",
-                    "name": "{{vars.steps.Get_Device_Information.data.result[0].data.name}}",
+                    "ip": "{{vars.item.data.ip}}",
+                    "name": "{{vars.item.data.name}}",
                     "__link": {
                         "alerts": "{{vars.steps.Create_Alert_Record['@id']}}",
                         "recordTags": "{{\"Outbreak Alert\"}},{{vars.input.params['alert_data']['tag']}}"
                     },
-                    "hostname": "{{vars.steps.Get_Device_Information.data.result[0].data.hostname}}",
+                    "hostname": "{{vars.item.data.hostname}}",
                     "__replace": "true",
-                    "deviceUid": "{{vars.steps.Get_Device_Information.data.result[0].data['mgmt_uuid']}}",
-                    "macAddress": "{{vars.steps.Get_Device_Information.data.result[0].data.latitude}}",
-                    "description": "{{vars.steps.Get_Device_Information.data.result[0].data.desc}}",
-                    "serialNumber": "{{vars.steps.Get_Device_Information.data.result[0].data.sn}}"
+                    "deviceUid": "{{vars.item.data['mgmt_uuid']}}",
+                    "macAddress": "{{vars.item.data.latitude}}",
+                    "description": "{{vars.item.data.desc}}",
+                    "serialNumber": "{{vars.item.data.sn}}"
                 },
                 "operation": "Append",
                 "collection": "\/api\/3\/upsert\/assets",
@@ -108,6 +136,17 @@
                 "params": {
                     "name": "{{vars.steps.Create_Alert_Record.computerName}}",
                     "adom_name": "{{vars.input.params['alert_data']['vdom']}}"
+                },
+                "message": {
+                    "tags": [
+                        "\/api\/3\/tags\/FortiAnalyzer"
+                    ],
+                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
+                    "tenant": "",
+                    "thread": false,
+                    "content": "<p>Retrieving device information from Fortinet FortiAnalyzer based on the below details.<\/p>\n<p>- <em><strong>Device Name<\/strong><\/em>: {{vars.steps.Create_Alert_Record.computerName}}<\/p>\n<p>- <strong>ADOM<\/strong>: {{vars.input.params['alert_data']['vdom']}}<\/p>",
+                    "records": "{{vars.input.records[0]['@id']}}",
+                    "parentstepid": "\/api\/3\/workflow_steps\/48ac00a3-1390-4575-8b3e-a2f0c1a047e4"
                 },
                 "version": "3.2.0",
                 "connector": "fortinet-fortianalyzer",
