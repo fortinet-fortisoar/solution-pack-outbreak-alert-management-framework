@@ -13,5 +13,8 @@
     "ServiceNow",
     "Splunk",
     "Subroutine",
-    "ThreatFeed"
+    "Task",
+    "Threat Hunting",
+    "ThreatFeed",
+    "Wizard"
 ]

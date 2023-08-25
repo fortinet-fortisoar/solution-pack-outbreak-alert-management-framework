@@ -83,6 +83,17 @@
                     "ip_group_name": "{{vars.fortigate_address_group_name}}",
                     "ip_block_policy": "{{vars.fortigate_policy_name}}"
                 },
+                "message": {
+                    "tags": [
+                        "\/api\/3\/tags\/Fortinet FortiGate"
+                    ],
+                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
+                    "tenant": "",
+                    "thread": false,
+                    "content": "<div>\n<div>Blocks IP addresses on Fortinet FortiGate using below details.<\/div>\n<div>- <strong>IPv4 Block Policy<\/strong>: {{vars.fortigate_policy_name}}<\/div>\n<div>- <strong>VDOM<\/strong>: {{vars.fortigate_VDOM}}<\/div>\n<\/div>",
+                    "records": "{{vars.input.records[0]['@id']}}",
+                    "parentstepid": "\/api\/3\/workflow_steps\/9a46fce7-99c4-453f-bdfc-e8c76e67944f"
+                },
                 "version": "5.2.3",
                 "connector": "fortigate-firewall",
                 "operation": "block_ip",
@@ -111,6 +122,17 @@
                     "url": "{{vars.url.split(', ')}}",
                     "vdom": "{{vars.fortigate_VDOM}}"
                 },
+                "message": {
+                    "tags": [
+                        "\/api\/3\/tags\/Fortinet FortiGate"
+                    ],
+                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
+                    "tenant": "",
+                    "thread": false,
+                    "content": "<div>\n<div>Blocks URL's on Fortinet FortiGate using below details.<\/div>\n<div>- <strong>VDOM<\/strong>: {{vars.fortigate_VDOM}}<\/div>\n<\/div>",
+                    "records": "{{vars.input.records[0]['@id']}}",
+                    "parentstepid": "\/api\/3\/workflow_steps\/857d4497-a2c0-4926-9924-28dc3f5d5a5a"
+                },
                 "version": "5.2.3",
                 "connector": "fortigate-firewall",
                 "operation": "block_url",
@@ -138,6 +160,7 @@
                 "fileHash_MD5": "{{vars.steps.Get_Threat_Intel_Feeds | json_query(\"[?typeOfFeed.itemValue == 'FileHash-MD5'].value\") | join(', ')}}",
                 "email_address": "{{vars.steps.Get_Threat_Intel_Feeds | json_query(\"[?typeOfFeed.itemValue == 'Email Address'].value\") | join(', ')}}",
                 "fileHash_SHA1": "{{vars.steps.Get_Threat_Intel_Feeds | json_query(\"[?typeOfFeed.itemValue == 'FileHash-SHA1'].value\") | join(', ')}}",
+                "useNockOutput": "{{globalVars.Demo_mode}}",
                 "fortigate_VDOM": "dev-r",
                 "fileHash_SHA256": "{{vars.steps.Get_Threat_Intel_Feeds | json_query(\"[?typeOfFeed.itemValue == 'FileHash-SHA256'].value\") | join(', ')}}",
                 "network_activity": "{{vars.steps.Get_Threat_Intel_Feeds | json_query(\"[?typeOfFeed.itemValue == 'Network Activity'].value\") | join(', ')}}",
@@ -182,6 +205,17 @@
             "name": "Create Task",
             "description": null,
             "arguments": {
+                "message": {
+                    "tags": [
+                        "\/api\/3\/tags\/Task"
+                    ],
+                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
+                    "tenant": "",
+                    "thread": false,
+                    "content": "<p><strong>Configure your firewall to block the malicious Indicators mentioned in t<\/strong>he <a href=\"\/modules\/view-panel\/tasks\/{{vars.result.uuid}}\" title=\"Task #{{vars.result.id}} - {{vars.result.name}}\">Task #{{vars.result.id}} - {{vars.result.name}}<\/a><\/p>",
+                    "records": "{{vars.input.records[0]['@id']}}",
+                    "parentstepid": "\/api\/3\/workflow_steps\/2d12e0c5-5739-47c9-a96e-c18b9a1b86db"
+                },
                 "resource": {
                     "name": "Block Indicator: {{vars.input.records[0].title}}",
                     "type": "\/api\/3\/picklists\/30300411-a2e0-42dc-9180-513904f73ab9",
@@ -242,6 +276,14 @@
                     ]
                 },
                 "module": "threat_intel_feeds?$limit=3000",
+                "message": {
+                    "tags": [],
+                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
+                    "tenant": "",
+                    "thread": false,
+                    "content": "<p>Retrieving threat intel feeds for the Alert: {{vars.input.records[0].title}}<\/p>",
+                    "records": "{{vars.input.records[0]['@id']}}"
+                },
                 "checkboxFields": false,
                 "step_variables": []
             },
@@ -260,7 +302,8 @@
                 "step_variables": {
                     "input": {
                         "params": []
-                    }
+                    },
+                    "useMockOutput": "{{globalVars.Demo_mode}}"
                 }
             },
             "status": null,
@@ -362,6 +405,7 @@
     "recordTags": [
         "Subroutine",
         "Indicators",
+        "Task",
         "Outbreak Alert"
     ]
 }

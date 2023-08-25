@@ -90,6 +90,16 @@
             "name": "Create Record",
             "description": null,
             "arguments": {
+                "message": {
+                    "tags": [
+                        "\/api\/3\/tags\/Splunk"
+                    ],
+                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
+                    "tenant": "",
+                    "thread": false,
+                    "content": "<p>Created <strong><em>\"Outbreak Alert - {{vars.title}} - {{vars.sourcedata.search_name if vars.sourcedata.search_name else vars.sourcedata.rule_name if vars.sourcedata.rule_name else \"Event from Splunk\"}}\"<\/em> in <\/strong>Alert module for Splunk<em>&nbsp;<strong>events<\/strong>.<\/em><\/p>",
+                    "records": "{{vars.input.records[0]['@id']}}"
+                },
                 "resource": {
                     "name": "Outbreak Alert - {{vars.title}} - {{vars.sourcedata.search_name if vars.sourcedata.search_name else vars.sourcedata.rule_name if vars.sourcedata.rule_name else \"Event from Splunk\"}}",
                     "type": "\/api\/3\/picklists\/f2fb4c85-baae-407e-b218-1cc54a49546c",

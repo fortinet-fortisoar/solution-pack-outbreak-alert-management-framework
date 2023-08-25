@@ -63,6 +63,16 @@
                     "earliest_time": "{{vars.input.params['earliest_time:']}}",
                     "additional_search_args": "{\n  \"max_count\": \"{{vars.input.params['max_count']}}\"\n}"
                 },
+                "message": {
+                    "tags": [
+                        "\/api\/3\/tags\/splunk"
+                    ],
+                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
+                    "tenant": "",
+                    "thread": false,
+                    "content": "<p>Retrieving events from Splunk based on below details.<\/p>\n<p>- <em><strong>Query<\/strong><\/em>: {{vars.input.params['splunk_query'].query}}<\/p>",
+                    "records": "{{vars.input.records[0]['@id']}}"
+                },
                 "version": "1.6.3",
                 "connector": "splunk",
                 "operation": "invoke_search",
