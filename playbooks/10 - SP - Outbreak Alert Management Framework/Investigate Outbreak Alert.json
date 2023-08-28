@@ -37,7 +37,7 @@
                 "workflowReference": "\/api\/3\/workflows\/21d97105-d3fd-4ea2-9f34-c4c33e60aff4"
             },
             "status": null,
-            "top": "975",
+            "top": "1110",
             "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
             "group": null,
@@ -45,20 +45,68 @@
         },
         {
             "@type": "WorkflowStep",
-            "name": "Fortinet Fabric Hunting",
+            "name": "Configuration",
             "description": null,
             "arguments": {
-                "tmp": "{% for item in vars.steps.Get_Hunting_Rules %}\n{% if item.fortiSIEM != None %}\n{% set _ = vars.fortisiem_query.append(item.fortiSIEM | from_json) %}\n{% endif %}\n{% if item.fortiAnalyzer != None %}\n{% set _ = vars.fortiAnalyzer_query.append(item.fortiAnalyzer | from_json) %}\n{% endif %}\n{% endfor %}",
+                "to_date": "{{arrow.utcnow().format(\"YYYY-MM-DDTHH:mm:ss.SS\")}}Z",
+                "from_date": "-15",
+                "threat_hunt": "{{globalVars.threat_hunt_integrations}}",
+                "splunk_query": "[]",
+                "q_radar_query": "[]",
+                "elastic_search": "[]",
+                "arc_sight_query": "[]",
+                "fortisiem_query": "[]",
+                "outbreak_alert_iri": "{{vars.input.records[0]['@id']}}",
+                "fortiAnalyzer_query": "[]",
                 "fortisiem_event_count": "5",
+                "azureLogAnalytics_query": "[]",
                 "fortisiem_incidentStatus": "Active",
                 "fortisiem_incident_count": "1000"
             },
             "status": null,
-            "top": "435",
+            "top": "165",
             "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
             "group": null,
-            "uuid": "7f280a37-35dc-4ff6-bb91-807f9751b842"
+            "uuid": "acc4a508-9574-46d2-b13d-d902f7a2deab"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Create IOCs as Threat Intel Feeds",
+            "description": null,
+            "arguments": {
+                "arguments": [],
+                "apply_async": false,
+                "step_variables": [],
+                "pass_parent_env": false,
+                "pass_input_record": true,
+                "workflowReference": "\/api\/3\/workflows\/71c09b38-df72-4ed8-8e84-4c3a2ae1d261"
+            },
+            "status": null,
+            "top": "435",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+            "group": null,
+            "uuid": "6487a8b6-5a7f-4b67-a2cf-4360e2b31ef6"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Find KEVs CVEs",
+            "description": null,
+            "arguments": {
+                "arguments": [],
+                "apply_async": false,
+                "step_variables": [],
+                "pass_parent_env": false,
+                "pass_input_record": true,
+                "workflowReference": "\/api\/3\/workflows\/e9cad34b-4393-4d31-a8f2-82a5a8cb0ade"
+            },
+            "status": null,
+            "top": "300",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+            "group": null,
+            "uuid": "861a11ec-6b1a-4999-9f13-2de5244f37b6"
         },
         {
             "@type": "WorkflowStep",
@@ -78,7 +126,7 @@
                 "workflowReference": "\/api\/3\/workflows\/87f3b5c5-f79e-492f-8540-f1f5ed5e1392"
             },
             "status": null,
-            "top": "570",
+            "top": "840",
             "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
             "group": null,
@@ -111,7 +159,7 @@
                 "workflowReference": "\/api\/3\/workflows\/cc178f00-d898-4514-94e5-3388d5e3ac8e"
             },
             "status": null,
-            "top": "705",
+            "top": "975",
             "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
             "group": null,
@@ -140,7 +188,7 @@
                 "step_variables": []
             },
             "status": null,
-            "top": "165",
+            "top": "570",
             "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928770",
             "group": null,
@@ -194,7 +242,7 @@
                 "unauthenticated_input": false
             },
             "status": null,
-            "top": "1515",
+            "top": "1650",
             "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/fc04082a-d7dc-4299-96fb-6837b1baa0fe",
             "group": null,
@@ -221,7 +269,7 @@
                 "workflowReference": "\/api\/3\/workflows\/bd0c5112-9cfd-428c-b39e-919c859d3032"
             },
             "status": null,
-            "top": "1110",
+            "top": "1245",
             "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
             "group": null,
@@ -242,7 +290,7 @@
                 "workflowReference": "\/api\/3\/workflows\/4d3d05aa-a2c7-460f-80bb-214726e0884f"
             },
             "status": null,
-            "top": "1380",
+            "top": "1515",
             "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
             "group": null,
@@ -250,18 +298,17 @@
         },
         {
             "@type": "WorkflowStep",
-            "name": "SIEM Advanced Hunting",
+            "name": "Set Hunting Rules",
             "description": null,
             "arguments": {
-                "tmp": "{% for item in vars.steps.Get_Hunting_Rules %}\n{% if item.qRadar != None %}\n{% set _ = vars.q_radar_query.append({\"title\": item.title, \"query\": item.qRadar}) %}\n{% endif %}\n{% if item.splunk != None %}\n{% set _ = vars.splunk_query.append({\"title\": item.title, \"query\": item.splunk}) %}\n{% endif %}\n{% if item.arcSight != None %}\n{% set _ = vars.arc_sight_query.append({\"title\": item.title, \"query\": item.arcSight}) %}\n{% endif %}\n{% if item.azureLogAnalytics != None %}\n{% set _ = vars.azureLogAnalytics_query.append({\"title\": item.title, \"query\": item.azureLogAnalytics}) %}\n{% endif %}\n{% if item.elasticSearch != None %}\n{% set _ = vars.elastic_search.append({\"title\": item.title, \"query\": item.elasticSearch}) %}\n{% endif %}\n{% endfor %}",
-                "record_count": "1000"
+                "_tmp": "{% for item in vars.steps.Get_Hunting_Rules %}\n{% if item.fortiSIEM != None %}\n{% set _ = vars.fortisiem_query.append(item.fortiSIEM) %}\n{% endif %}\n{% if item.fortiAnalyzer != None %}\n{% set _ = vars.fortiAnalyzer_query.append(item.fortiAnalyzer) %}\n{% endif %}\n{% if item.qRadar != None %}\n{% set _ = vars.q_radar_query.append({\"title\": item.title, \"query\": item.qRadar}) %}\n{% endif %}\n{% if item.splunk != None %}\n{% set _ = vars.splunk_query.append({\"title\": item.title, \"query\": item.splunk}) %}\n{% endif %}\n{% if item.arcSight != None %}\n{% set _ = vars.arc_sight_query.append({\"title\": item.title, \"query\": item.arcSight}) %}\n{% endif %}\n{% if item.azureLogAnalytics != None %}\n{% set _ = vars.azureLogAnalytics_query.append({\"title\": item.title, \"query\": item.azureLogAnalytics}) %}\n{% endif %}\n{% endfor %}"
             },
             "status": null,
-            "top": "840",
+            "top": "705",
             "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
             "group": null,
-            "uuid": "8ac51aed-78e1-4048-97e7-ef49eadc7974"
+            "uuid": "7f280a37-35dc-4ff6-bb91-807f9751b842"
         },
         {
             "@type": "WorkflowStep",
@@ -287,7 +334,7 @@
                 "workflowReference": "\/api\/3\/workflows\/0285b815-4454-49af-ac72-a737d16fa11c"
             },
             "status": null,
-            "top": "1245",
+            "top": "1380",
             "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
             "group": null,
@@ -327,30 +374,6 @@
             "stepType": "\/api\/3\/workflow_step_types\/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
             "group": null,
             "uuid": "69054683-770e-4caa-8727-b38d9c7da7e9"
-        },
-        {
-            "@type": "WorkflowStep",
-            "name": "Threat Hunting",
-            "description": null,
-            "arguments": {
-                "to_date": "{{arrow.utcnow().format(\"YYYY-MM-DDTHH:mm:ss.SS\")}}Z",
-                "from_date": "-15",
-                "threat_hunt": "{{globalVars.threat_hunt_integrations}}",
-                "splunk_query": "[]",
-                "q_radar_query": "[]",
-                "elastic_search": "[]",
-                "arc_sight_query": "[]",
-                "fortisiem_query": "[]",
-                "outbreak_alert_iri": "{{vars.input.records[0]['@id']}}",
-                "fortiAnalyzer_query": "[]",
-                "azureLogAnalytics_query": "[]"
-            },
-            "status": null,
-            "top": "300",
-            "left": "125",
-            "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
-            "group": null,
-            "uuid": "acc4a508-9574-46d2-b13d-d902f7a2deab"
         }
     ],
     "routes": [
@@ -366,13 +389,33 @@
         },
         {
             "@type": "WorkflowRoute",
-            "name": "Fortinet Fabric Hunting -> Get FortiAnalyzer Events",
-            "targetStep": "\/api\/3\/workflow_steps\/b2fb4b0c-b6cd-43c6-8acd-940f6995d27d",
-            "sourceStep": "\/api\/3\/workflow_steps\/7f280a37-35dc-4ff6-bb91-807f9751b842",
+            "name": "Configuration -> Find KEVs CVEs",
+            "targetStep": "\/api\/3\/workflow_steps\/861a11ec-6b1a-4999-9f13-2de5244f37b6",
+            "sourceStep": "\/api\/3\/workflow_steps\/acc4a508-9574-46d2-b13d-d902f7a2deab",
             "label": null,
             "isExecuted": false,
             "group": null,
-            "uuid": "e5759d8f-0889-402b-84f8-d2865de0dd82"
+            "uuid": "1a01c551-d30c-47bc-8503-2b4e2961c467"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Create IOCs as Threat Intel Feeds -> Get Hunting Rules",
+            "targetStep": "\/api\/3\/workflow_steps\/6b11a28e-3ed5-4725-9228-728236b0ffbc",
+            "sourceStep": "\/api\/3\/workflow_steps\/6487a8b6-5a7f-4b67-a2cf-4360e2b31ef6",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "46195525-63e1-4d11-a408-2c266f14c200"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Find KEVs CVEs -> Create IOCs as Threat Intel Feeds",
+            "targetStep": "\/api\/3\/workflow_steps\/6487a8b6-5a7f-4b67-a2cf-4360e2b31ef6",
+            "sourceStep": "\/api\/3\/workflow_steps\/861a11ec-6b1a-4999-9f13-2de5244f37b6",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "28465e99-0903-43ce-9b07-9a9a68d4c360"
         },
         {
             "@type": "WorkflowRoute",
@@ -386,23 +429,23 @@
         },
         {
             "@type": "WorkflowRoute",
-            "name": "Get FortiSIEM Incident -> SIEM Advanced Hunting",
-            "targetStep": "\/api\/3\/workflow_steps\/8ac51aed-78e1-4048-97e7-ef49eadc7974",
+            "name": "Get FortiSIEM Incident -> Azure Log Analytics Hunting",
+            "targetStep": "\/api\/3\/workflow_steps\/e3623dee-b2f7-4179-a4fb-2145d7af13d0",
             "sourceStep": "\/api\/3\/workflow_steps\/28d36fdd-05ac-46f9-949f-deceaf35ccef",
             "label": null,
             "isExecuted": false,
             "group": null,
-            "uuid": "8be7fd10-9908-4fcd-ad51-270b032a97a5"
+            "uuid": "a2c7feb3-9e47-44af-85eb-992eb5150f22"
         },
         {
             "@type": "WorkflowRoute",
-            "name": "Get Hunting Rules -> Threat Hunting",
-            "targetStep": "\/api\/3\/workflow_steps\/acc4a508-9574-46d2-b13d-d902f7a2deab",
+            "name": "Get Hunting Rules -> Fortinet Fabric Hunting",
+            "targetStep": "\/api\/3\/workflow_steps\/7f280a37-35dc-4ff6-bb91-807f9751b842",
             "sourceStep": "\/api\/3\/workflow_steps\/6b11a28e-3ed5-4725-9228-728236b0ffbc",
             "label": null,
             "isExecuted": false,
             "group": null,
-            "uuid": "21ade366-34a4-452d-9f14-8704e63e305a"
+            "uuid": "24a34d46-3c8c-4dc6-95f5-292adedd9803"
         },
         {
             "@type": "WorkflowRoute",
@@ -426,13 +469,13 @@
         },
         {
             "@type": "WorkflowRoute",
-            "name": "SIEM Advanced Hunting -> Azure Log Analytics Hunting",
-            "targetStep": "\/api\/3\/workflow_steps\/e3623dee-b2f7-4179-a4fb-2145d7af13d0",
-            "sourceStep": "\/api\/3\/workflow_steps\/8ac51aed-78e1-4048-97e7-ef49eadc7974",
+            "name": "Set Hunting Rules -> Get FortiAnalyzer Events",
+            "targetStep": "\/api\/3\/workflow_steps\/b2fb4b0c-b6cd-43c6-8acd-940f6995d27d",
+            "sourceStep": "\/api\/3\/workflow_steps\/7f280a37-35dc-4ff6-bb91-807f9751b842",
             "label": null,
             "isExecuted": false,
             "group": null,
-            "uuid": "4d924c13-6f6c-4fff-9cc7-d4020d59437a"
+            "uuid": "fb8c3e93-41e2-479f-b7eb-81907233ceb6"
         },
         {
             "@type": "WorkflowRoute",
@@ -446,23 +489,13 @@
         },
         {
             "@type": "WorkflowRoute",
-            "name": "Start -> Find Hunting Rules",
-            "targetStep": "\/api\/3\/workflow_steps\/6b11a28e-3ed5-4725-9228-728236b0ffbc",
+            "name": "Start -> Threat Hunting",
+            "targetStep": "\/api\/3\/workflow_steps\/acc4a508-9574-46d2-b13d-d902f7a2deab",
             "sourceStep": "\/api\/3\/workflow_steps\/69054683-770e-4caa-8727-b38d9c7da7e9",
             "label": null,
             "isExecuted": false,
             "group": null,
-            "uuid": "5cc216fd-20be-4a6c-970e-68da0d914730"
-        },
-        {
-            "@type": "WorkflowRoute",
-            "name": "Threat Hunting -> Fortinet Fabric Hunting",
-            "targetStep": "\/api\/3\/workflow_steps\/7f280a37-35dc-4ff6-bb91-807f9751b842",
-            "sourceStep": "\/api\/3\/workflow_steps\/acc4a508-9574-46d2-b13d-d902f7a2deab",
-            "label": null,
-            "isExecuted": false,
-            "group": null,
-            "uuid": "57ff2249-07b9-46f1-be9f-0c67dbdcc3f8"
+            "uuid": "03841d30-3811-4bbd-8ba6-7fcb5689b7dd"
         }
     ],
     "groups": [],

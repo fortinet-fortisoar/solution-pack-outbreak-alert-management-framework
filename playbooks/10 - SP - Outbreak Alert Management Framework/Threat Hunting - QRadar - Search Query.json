@@ -58,6 +58,7 @@
                     "name": "Outbreak Alert - {{vars.input.params['q_radar_query'].title}}",
                     "type": "\/api\/3\/picklists\/f2fb4c85-baae-407e-b218-1cc54a49546c",
                     "state": "\/api\/3\/picklists\/a1bac09b-1441-45aa-ad1b-c88744e48e72",
+                    "source": "QRadar",
                     "status": "\/api\/3\/picklists\/7de816ff-7140-4ee5-bd05-93ce22002146",
                     "filePath": "{{vars.item.Image}}",
                     "severity": "\/api\/3\/picklists\/7efa2220-39bb-44e4-961f-ac368776e3b0",
@@ -79,7 +80,6 @@
                     "destinationPort": "{{vars.item.DestinationPort}}",
                     "alertDetectionDate": "{{arrow.get(vars.item.UtcTime).int_timestamp}}",
                     "escalatedtoincident": "\/api\/3\/picklists\/2128a09c-153d-4db3-985d-de6be33deae5",
-                    "resolvedAutomatedly": false,
                     "alertRemainingAckSLA": 0
                 },
                 "_showJson": false,
