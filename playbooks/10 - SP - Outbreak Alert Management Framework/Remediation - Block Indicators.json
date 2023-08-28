@@ -9,9 +9,7 @@
     "debug": false,
     "singleRecordExecution": false,
     "remoteExecutableFlag": false,
-    "parameters": [
-        "from_date"
-    ],
+    "parameters": [],
     "synchronous": false,
     "collection": "\/api\/3\/workflow_collections\/2ae30943-7a2f-435b-a100-3ec7c3e2294b",
     "versions": [],
@@ -257,21 +255,6 @@
                             "value": "{{vars.input.records[0]['id']}}",
                             "operator": "eq",
                             "_operator": "eq"
-                        },
-                        {
-                            "type": "datetime",
-                            "logic": "AND",
-                            "_field": "createDate",
-                            "_value": "{{vars.input.params['from_date']}}",
-                            "filters": [
-                                {
-                                    "type": "datetime",
-                                    "field": "createDate",
-                                    "value": "{{getRelativeDate(0,0,0,0,1,\"end\")}}",
-                                    "operator": "gt"
-                                }
-                            ],
-                            "_operator": "gt"
                         }
                     ]
                 },

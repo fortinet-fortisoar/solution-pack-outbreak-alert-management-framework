@@ -94,6 +94,7 @@
             "name": "Find KEVs CVEs",
             "description": null,
             "arguments": {
+                "when": "{{vars.input.records[0].cVEList | length > 0}}",
                 "arguments": [],
                 "apply_async": false,
                 "step_variables": [],
@@ -203,7 +204,7 @@
                 "input": {
                     "schema": {
                         "title": "Mitigation Measures",
-                        "description": "Following are the recommended mitigation measures are required for **{{vars.input.records[0].title}} **\n\n{{vars.input.records[0].mitigation}}",
+                        "description": "Following are the recommended mitigation measures are required for **{{vars.input.records[0].title}}**\n\n{{vars.input.records[0].mitigation}}",
                         "inputVariables": []
                     }
                 },
@@ -213,7 +214,7 @@
                     "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
                     "tenant": "",
                     "thread": false,
-                    "content": "<p>Following are the recommended mitigation measures are required for **{{vars.input.records[0].title}} **<\/p>\n<p>&nbsp;<\/p>\n<p>{{vars.input.records[0].mitigation}}<\/p>",
+                    "content": "<p>Following are the recommended mitigation measures are required for <strong>{{vars.input.records[0].title}}<\/strong><\/p>\n<p>&nbsp;<\/p>\n<p>{{vars.input.records[0].mitigation}}<\/p>",
                     "records": "{{vars.input.records[0]['@id']}}",
                     "parentstepid": "\/api\/3\/workflow_steps\/6b11a28e-3ed5-4725-9228-728236b0ffbc"
                 },
@@ -228,7 +229,8 @@
                     "options": [
                         {
                             "option": "OK",
-                            "primary": true
+                            "primary": true,
+                            "step_iri": "\/api\/3\/workflow_steps\/356b5cd0-70cd-4e31-a950-62d4485d9f41"
                         }
                     ],
                     "duplicateOption": false
@@ -280,9 +282,7 @@
             "name": "Remediation",
             "description": null,
             "arguments": {
-                "arguments": {
-                    "from_date": "{{arrow.utcnow().shift(days=vars.from_date).format('YYYY-MM-DDTHH:mm:ss.ssss')}}Z"
-                },
+                "arguments": [],
                 "apply_async": false,
                 "step_variables": [],
                 "pass_parent_env": false,
@@ -374,6 +374,30 @@
             "stepType": "\/api\/3\/workflow_step_types\/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
             "group": null,
             "uuid": "69054683-770e-4caa-8727-b38d9c7da7e9"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Update Remediation Task",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "description": "{{vars.steps.Remediation.description}}\nFollowing are the recommended mitigation measures are required for **{{vars.input.records[0].title}}**\n\n{{vars.input.records[0].mitigation}}"
+                },
+                "operation": "Append",
+                "collection": "{{vars.steps.Remediation['@id']}}",
+                "__recommend": [],
+                "collectionType": "\/api\/3\/tasks",
+                "fieldOperation": {
+                    "recordTags": "Append"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "1785",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
+            "group": null,
+            "uuid": "356b5cd0-70cd-4e31-a950-62d4485d9f41"
         }
     ],
     "routes": [
@@ -446,6 +470,16 @@
             "isExecuted": false,
             "group": null,
             "uuid": "24a34d46-3c8c-4dc6-95f5-292adedd9803"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Mitigation -> Update Remediation Task",
+            "targetStep": "\/api\/3\/workflow_steps\/356b5cd0-70cd-4e31-a950-62d4485d9f41",
+            "sourceStep": "\/api\/3\/workflow_steps\/146df7db-572d-4515-a2d1-615fcb90522f",
+            "label": "OK",
+            "isExecuted": false,
+            "group": null,
+            "uuid": "95c504df-6089-4492-8a74-4e08b84478c6"
         },
         {
             "@type": "WorkflowRoute",
