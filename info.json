@@ -60,6 +60,12 @@
             },
             {
                 "name": "Rule Type"
+            },
+            {
+                "name": "Threat Hunt Tools"
+            },
+            {
+                "name": "Ticketing Tools"
             }
         ],
         "modules": {
@@ -152,6 +158,12 @@
             {
                 "name": "Splunk",
                 "apiName": "splunk"
+            }
+        ],
+        "widgets": [
+            {
+                "apiName": "outbreakAlertConfiguration",
+                "name": "Outbreak Alert Configuration Wizard"
             }
         ]
     }

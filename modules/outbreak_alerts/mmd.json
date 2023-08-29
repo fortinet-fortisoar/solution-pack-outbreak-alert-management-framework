@@ -1,6 +1,6 @@
 {
     "@context": "\/api\/3\/contexts\/StagingModelMetadata",
-    "@id": "\/api\/3\/staging_model_metadatas\/7fc82d4a-6c12-41d7-9acd-c3a27f3ad027",
+    "@id": "\/api\/3\/staging_model_metadatas\/9b570a9f-804c-422f-8ce5-eee86aab1583",
     "@type": "StagingModelMetadata",
     "type": "outbreak_alerts",
     "parentType": null,
@@ -16,7 +16,8 @@
         {
             "outbreak_alerts_unique": {
                 "columns": [
-                    "title"
+                    "title",
+                    "subTitle"
                 ]
             }
         }
@@ -26,10 +27,166 @@
     "attributes": [
         {
             "@type": "AttributeMetadata",
+            "type": "picklists",
+            "name": "ticketingTools",
+            "length": null,
+            "orderIndex": 1,
+            "formType": "picklist",
+            "dataSource": {
+                "model": "picklists",
+                "query": {
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "field": "listName__name",
+                            "operator": "eq",
+                            "value": "Ticketing Tools"
+                        }
+                    ],
+                    "sort": [
+                        {
+                            "field": "orderIndex",
+                            "direction": "ASC"
+                        }
+                    ]
+                },
+                "displayConditions": {
+                    "d44cecbf-fef2-4c20-a1b5-37d58c3b7875": {
+                        "visibility": "visible",
+                        "conditions": null
+                    },
+                    "b4462834-5a47-4dd9-b38a-a1ecac4a13d6": {
+                        "visibility": "visible",
+                        "conditions": null
+                    }
+                }
+            },
+            "searchable": false,
+            "peerReplicable": true,
+            "system": false,
+            "encrypted": false,
+            "gridColumn": false,
+            "collection": false,
+            "inversedField": null,
+            "ownsRelationship": false,
+            "validation": {
+                "required": false,
+                "minlength": 0,
+                "maxlength": 10485761
+            },
+            "bulkAction": {
+                "allow": false,
+                "buttonText": "",
+                "buttonIcon": "",
+                "buttonClass": "btn btn-default btn-sm"
+            },
+            "dataSourceFilters": null,
+            "defaultValue": null,
+            "tooltip": null,
+            "visibility": true,
+            "htmlEscape": false,
+            "orphanRemoval": null,
+            "readable": true,
+            "writeable": true,
+            "identifier": null,
+            "unique": false,
+            "recommend": false,
+            "skipSerialization": false,
+            "displayName": "{{ ticketingTools }}",
+            "descriptions": {
+                "singular": "Ticketing Tools"
+            }
+        },
+        {
+            "@type": "AttributeMetadata",
+            "type": "picklists",
+            "name": "threatHuntTools",
+            "length": null,
+            "orderIndex": 2,
+            "formType": "picklist",
+            "dataSource": {
+                "model": "picklists",
+                "query": {
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "field": "listName__name",
+                            "operator": "eq",
+                            "value": "Threat Hunt Tools"
+                        }
+                    ],
+                    "sort": [
+                        {
+                            "field": "orderIndex",
+                            "direction": "ASC"
+                        }
+                    ]
+                },
+                "displayConditions": {
+                    "0adb1a5f-1f5b-4ee1-9357-e25707be7a32": {
+                        "visibility": "visible",
+                        "conditions": null
+                    },
+                    "7100b5ab-4b28-4ba3-b443-09b42a1af526": {
+                        "visibility": "visible",
+                        "conditions": null
+                    },
+                    "a28c401c-e1b9-41bd-b940-a68ef80e5b0b": {
+                        "visibility": "visible",
+                        "conditions": null
+                    },
+                    "f60f5fce-df81-4603-a6de-82c1e8e9f972": {
+                        "visibility": "visible",
+                        "conditions": null
+                    },
+                    "0e6d00cb-b781-4f63-b476-5c9acdb5b1b8": {
+                        "visibility": "visible",
+                        "conditions": null
+                    }
+                }
+            },
+            "searchable": false,
+            "peerReplicable": true,
+            "system": false,
+            "encrypted": false,
+            "gridColumn": false,
+            "collection": false,
+            "inversedField": null,
+            "ownsRelationship": false,
+            "validation": {
+                "required": false,
+                "minlength": 0,
+                "maxlength": 10485761
+            },
+            "bulkAction": {
+                "allow": false,
+                "buttonText": "",
+                "buttonIcon": "",
+                "buttonClass": "btn btn-default btn-sm"
+            },
+            "dataSourceFilters": null,
+            "defaultValue": null,
+            "tooltip": null,
+            "visibility": true,
+            "htmlEscape": false,
+            "orphanRemoval": null,
+            "readable": true,
+            "writeable": true,
+            "identifier": null,
+            "unique": false,
+            "recommend": false,
+            "skipSerialization": false,
+            "displayName": "{{ threatHuntTools }}",
+            "descriptions": {
+                "singular": "Threat Hunt Tools"
+            }
+        },
+        {
+            "@type": "AttributeMetadata",
             "type": "comments",
             "name": "comments",
             "length": null,
-            "orderIndex": 2,
+            "orderIndex": 3,
             "formType": "manyToMany",
             "dataSource": {
                 "model": "comments"
@@ -70,7 +227,7 @@
             "type": "tasks",
             "name": "tasks",
             "length": null,
-            "orderIndex": 3,
+            "orderIndex": 4,
             "formType": "manyToMany",
             "dataSource": {
                 "model": "tasks"
@@ -111,7 +268,7 @@
             "type": "string",
             "name": "mitigation",
             "length": null,
-            "orderIndex": 4,
+            "orderIndex": 5,
             "formType": "richtext",
             "dataSource": null,
             "searchable": true,
@@ -155,7 +312,7 @@
             "type": "threat_intel_feeds",
             "name": "threatFeeds",
             "length": null,
-            "orderIndex": 5,
+            "orderIndex": 6,
             "formType": "manyToMany",
             "dataSource": {
                 "model": "threat_intel_feeds"
@@ -196,7 +353,7 @@
             "type": "events",
             "name": "events",
             "length": null,
-            "orderIndex": 6,
+            "orderIndex": 7,
             "formType": "manyToMany",
             "dataSource": {
                 "model": "events"
@@ -237,7 +394,7 @@
             "type": "alerts",
             "name": "alerts",
             "length": null,
-            "orderIndex": 7,
+            "orderIndex": 8,
             "formType": "manyToMany",
             "dataSource": {
                 "model": "alerts"
@@ -278,7 +435,7 @@
             "type": "string",
             "name": "iOCCSVFile",
             "length": null,
-            "orderIndex": 8,
+            "orderIndex": 9,
             "formType": "url",
             "dataSource": [],
             "searchable": true,
@@ -323,7 +480,7 @@
             "type": "c_v_es",
             "name": "cVEs",
             "length": null,
-            "orderIndex": 9,
+            "orderIndex": 10,
             "formType": "manyToMany",
             "dataSource": {
                 "model": "c_v_es"
@@ -364,7 +521,7 @@
             "type": "object",
             "name": "sourceData",
             "length": null,
-            "orderIndex": 10,
+            "orderIndex": 11,
             "formType": "object",
             "dataSource": null,
             "searchable": false,
@@ -408,7 +565,7 @@
             "type": "object",
             "name": "cVEList",
             "length": null,
-            "orderIndex": 11,
+            "orderIndex": 12,
             "formType": "object",
             "dataSource": null,
             "searchable": false,
@@ -452,7 +609,7 @@
             "type": "integer",
             "name": "lastRevisedDate",
             "length": null,
-            "orderIndex": 12,
+            "orderIndex": 13,
             "formType": "datetime",
             "dataSource": null,
             "searchable": true,
@@ -496,7 +653,7 @@
             "type": "integer",
             "name": "releaseDate",
             "length": null,
-            "orderIndex": 13,
+            "orderIndex": 14,
             "formType": "datetime",
             "dataSource": null,
             "searchable": true,
@@ -540,7 +697,7 @@
             "type": "picklists",
             "name": "severity",
             "length": null,
-            "orderIndex": 14,
+            "orderIndex": 15,
             "formType": "picklist",
             "dataSource": {
                 "model": "picklists",
@@ -609,7 +766,7 @@
             "type": "string",
             "name": "fortiguardURL",
             "length": null,
-            "orderIndex": 15,
+            "orderIndex": 16,
             "formType": "url",
             "dataSource": null,
             "searchable": true,
@@ -654,7 +811,7 @@
             "type": "string",
             "name": "status",
             "length": null,
-            "orderIndex": 16,
+            "orderIndex": 17,
             "formType": "text",
             "dataSource": null,
             "searchable": true,
@@ -699,7 +856,7 @@
             "type": "string",
             "name": "latestAnnouncement",
             "length": null,
-            "orderIndex": 17,
+            "orderIndex": 18,
             "formType": "richtext",
             "dataSource": null,
             "searchable": true,
@@ -744,7 +901,7 @@
             "type": "string",
             "name": "announcement",
             "length": null,
-            "orderIndex": 18,
+            "orderIndex": 19,
             "formType": "richtext",
             "dataSource": null,
             "searchable": true,
@@ -789,7 +946,7 @@
             "type": "string",
             "name": "background",
             "length": null,
-            "orderIndex": 19,
+            "orderIndex": 20,
             "formType": "richtext",
             "dataSource": null,
             "searchable": true,
@@ -834,7 +991,7 @@
             "type": "string",
             "name": "threatSignal",
             "length": null,
-            "orderIndex": 20,
+            "orderIndex": 21,
             "formType": "text",
             "dataSource": null,
             "searchable": true,
@@ -879,7 +1036,7 @@
             "type": "string",
             "name": "description",
             "length": null,
-            "orderIndex": 21,
+            "orderIndex": 22,
             "formType": "richtext",
             "dataSource": null,
             "searchable": true,
@@ -923,7 +1080,7 @@
             "type": "string",
             "name": "communityLink",
             "length": null,
-            "orderIndex": 22,
+            "orderIndex": 23,
             "formType": "url",
             "dataSource": null,
             "searchable": true,
@@ -968,7 +1125,7 @@
             "type": "string",
             "name": "title",
             "length": null,
-            "orderIndex": 23,
+            "orderIndex": 24,
             "formType": "text",
             "dataSource": null,
             "searchable": false,
@@ -1013,7 +1170,7 @@
             "type": "threat_hunt_rules",
             "name": "threatHuntRules",
             "length": null,
-            "orderIndex": 24,
+            "orderIndex": 25,
             "formType": "manyToMany",
             "dataSource": {
                 "model": "threat_hunt_rules"
@@ -1050,7 +1207,7 @@
             "type": "string",
             "name": "subTitle",
             "length": null,
-            "orderIndex": 25,
+            "orderIndex": 26,
             "formType": "text",
             "dataSource": null,
             "searchable": false,
@@ -1102,7 +1259,7 @@
         "delete_primary_data_after": 60
     },
     "archivalFilters": [],
-    "uuid": "7fc82d4a-6c12-41d7-9acd-c3a27f3ad027",
+    "uuid": "9b570a9f-804c-422f-8ce5-eee86aab1583",
     "displayName": "{{ title }}",
     "descriptions": {
         "singular": "Outbreak Alert",

@@ -1,18 +1,27 @@
 {
     "@context": "\/api\/3\/contexts\/StagingModelMetadata",
-    "@id": "\/api\/3\/staging_model_metadatas\/e6e5bdd6-b285-464d-a0cd-6a481b6a509f",
+    "@id": "\/api\/3\/staging_model_metadatas\/f393864c-d18f-411b-a99f-58f98121a49b",
     "@type": "StagingModelMetadata",
     "type": "threat_hunt_rules",
     "parentType": null,
     "tableName": "threat_hunt_rules",
-    "ownable": false,
-    "userOwnable": false,
-    "queueable": false,
-    "trackable": false,
+    "ownable": true,
+    "userOwnable": true,
+    "queueable": true,
+    "trackable": true,
     "taggable": true,
-    "peerReplicable": false,
+    "peerReplicable": true,
     "defaultSort": [],
-    "uniqueConstraint": [],
+    "uniqueConstraint": [
+        {
+            "threat_hunt_rules_unique": {
+                "columns": [
+                    "ruleType",
+                    "title"
+                ]
+            }
+        }
+    ],
     "indexable": true,
     "writable": true,
     "attributes": [
@@ -771,7 +780,7 @@
         "delete_primary_data_after": 60
     },
     "archivalFilters": [],
-    "uuid": "e6e5bdd6-b285-464d-a0cd-6a481b6a509f",
+    "uuid": "f393864c-d18f-411b-a99f-58f98121a49b",
     "displayName": "{{ title }}",
     "descriptions": {
         "singular": "Threat Hunt Rule",

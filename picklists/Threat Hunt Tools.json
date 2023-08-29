@@ -1,0 +1,60 @@
+{
+    "@context": "\/api\/3\/contexts\/PicklistName",
+    "@id": "\/api\/3\/picklist_names\/fd92c649-832e-425f-891d-1b727ec027de",
+    "@type": "PicklistName",
+    "name": "Threat Hunt Tools",
+    "system": false,
+    "picklists": [
+        {
+            "@id": "\/api\/3\/picklists\/0adb1a5f-1f5b-4ee1-9357-e25707be7a32",
+            "@type": "Picklist",
+            "itemValue": "IBM QRadar",
+            "orderIndex": 3,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/fd92c649-832e-425f-891d-1b727ec027de",
+            "uuid": "0adb1a5f-1f5b-4ee1-9357-e25707be7a32"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/7100b5ab-4b28-4ba3-b443-09b42a1af526",
+            "@type": "Picklist",
+            "itemValue": "Splunk",
+            "orderIndex": 4,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/fd92c649-832e-425f-891d-1b727ec027de",
+            "uuid": "7100b5ab-4b28-4ba3-b443-09b42a1af526"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/a28c401c-e1b9-41bd-b940-a68ef80e5b0b",
+            "@type": "Picklist",
+            "itemValue": "Azure Log Analytics",
+            "orderIndex": 2,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/fd92c649-832e-425f-891d-1b727ec027de",
+            "uuid": "a28c401c-e1b9-41bd-b940-a68ef80e5b0b"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/f60f5fce-df81-4603-a6de-82c1e8e9f972",
+            "@type": "Picklist",
+            "itemValue": "Fortinet FortiSIEM",
+            "orderIndex": 1,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/fd92c649-832e-425f-891d-1b727ec027de",
+            "uuid": "f60f5fce-df81-4603-a6de-82c1e8e9f972"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/0e6d00cb-b781-4f63-b476-5c9acdb5b1b8",
+            "@type": "Picklist",
+            "itemValue": "Fortinet FortiAnalyzer",
+            "orderIndex": 0,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/fd92c649-832e-425f-891d-1b727ec027de",
+            "uuid": "0e6d00cb-b781-4f63-b476-5c9acdb5b1b8"
+        }
+    ],
+    "uuid": "fd92c649-832e-425f-891d-1b727ec027de"
+}
