@@ -13,7 +13,7 @@
     "synchronous": false,
     "collection": "\/api\/3\/workflow_collections\/2ae30943-7a2f-435b-a100-3ec7c3e2294b",
     "versions": [],
-    "triggerStep": "\/api\/3\/workflow_steps\/308b02e7-09d2-4d28-b8e2-0ab38e0b935c",
+    "triggerStep": "\/api\/3\/workflow_steps\/b60125b2-b8d3-4300-9f94-73e2ea0e0d97",
     "steps": [
         {
             "@type": "WorkflowStep",
@@ -78,7 +78,7 @@
                     },
                     "source": "Outbreak Alert",
                     "sourceId": "Outbreak Alert",
-                    "__replace": "true",
+                    "__replace": "false",
                     "confidence": "{{ (vars.item.Confidence) | resolveRange(vars.confidence_map) }}",
                     "recordTags": "{% if vars.item.Tags %}{{(vars.item.Tags.split(\"|\")) | join(\",\") }},{{\"Outbreak Alert\"}}{% endif %}",
                     "reputation": "\/api\/3\/picklists\/7074e547-7785-4979-be32-c6d0c863e4bd",
@@ -133,31 +133,18 @@
             "name": "Start",
             "description": null,
             "arguments": {
-                "resource": "outbreak_alerts",
-                "resources": [
-                    "outbreak_alerts"
-                ],
                 "step_variables": {
                     "input": {
-                        "params": [],
-                        "records": [
-                            "{{vars.input.records[0]}}"
-                        ]
+                        "params": []
                     }
-                },
-                "fieldbasedtrigger": {
-                    "sort": [],
-                    "limit": 30,
-                    "logic": "AND",
-                    "filters": []
                 }
             },
             "status": null,
             "top": "30",
             "left": "125",
-            "stepType": "\/api\/3\/workflow_step_types\/ea155646-3821-4542-9702-b246da430a8d",
+            "stepType": "\/api\/3\/workflow_step_types\/b348f017-9a94-471f-87f8-ce88b6a7ad62",
             "group": null,
-            "uuid": "308b02e7-09d2-4d28-b8e2-0ab38e0b935c"
+            "uuid": "b60125b2-b8d3-4300-9f94-73e2ea0e0d97"
         }
     ],
     "routes": [
@@ -193,13 +180,13 @@
         },
         {
             "@type": "WorkflowRoute",
-            "name": "Start -> Copy of Configuration",
+            "name": "Start -> Configuration",
             "targetStep": "\/api\/3\/workflow_steps\/c9d30f3d-d97d-485b-bc81-f198e800fdb7",
-            "sourceStep": "\/api\/3\/workflow_steps\/308b02e7-09d2-4d28-b8e2-0ab38e0b935c",
+            "sourceStep": "\/api\/3\/workflow_steps\/b60125b2-b8d3-4300-9f94-73e2ea0e0d97",
             "label": null,
             "isExecuted": false,
             "group": null,
-            "uuid": "5d8d67e1-f584-4934-a5ff-8a477fc2444c"
+            "uuid": "2dc98408-5a5d-46a2-8421-9d08670f811e"
         }
     ],
     "groups": [],
@@ -209,7 +196,7 @@
     "isPrivate": false,
     "deletedAt": null,
     "recordTags": [
-        "PostCreate",
+        "Subroutine",
         "Outbreak Alert",
         "ThreatFeed"
     ]

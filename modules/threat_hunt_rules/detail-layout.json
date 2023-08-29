@@ -76,22 +76,7 @@
                                                                                                         "readOnly": true
                                                                                                     }
                                                                                                 ],
-                                                                                                "style": "col-lg-6"
-                                                                                            },
-                                                                                            {
-                                                                                                "fields": [
-                                                                                                    {
-                                                                                                        "name": "createDate",
-                                                                                                        "highlightMode": true,
-                                                                                                        "readOnly": false
-                                                                                                    },
-                                                                                                    {
-                                                                                                        "name": "modifyDate",
-                                                                                                        "highlightMode": true,
-                                                                                                        "readOnly": false
-                                                                                                    }
-                                                                                                ],
-                                                                                                "style": "col-lg-6"
+                                                                                                "style": "col-lg-12"
                                                                                             }
                                                                                         ]
                                                                                     }
@@ -201,12 +186,12 @@
                                                                                                         "readOnly": true
                                                                                                     },
                                                                                                     {
-                                                                                                        "name": "splunk",
+                                                                                                        "name": "azureLogAnalytics",
                                                                                                         "highlightMode": true,
-                                                                                                        "readOnly": true
+                                                                                                        "readOnly": false
                                                                                                     },
                                                                                                     {
-                                                                                                        "name": "azureLogAnalytics",
+                                                                                                        "name": "arcSight",
                                                                                                         "highlightMode": true,
                                                                                                         "readOnly": true
                                                                                                     }
@@ -216,7 +201,7 @@
                                                                                             {
                                                                                                 "fields": [
                                                                                                     {
-                                                                                                        "name": "arcSight",
+                                                                                                        "name": "splunk",
                                                                                                         "highlightMode": true,
                                                                                                         "readOnly": true
                                                                                                     },

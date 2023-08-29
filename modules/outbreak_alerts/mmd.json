@@ -1,6 +1,6 @@
 {
     "@context": "\/api\/3\/contexts\/StagingModelMetadata",
-    "@id": "\/api\/3\/staging_model_metadatas\/55e185d4-d9fc-405a-ba4f-73735a7a2304",
+    "@id": "\/api\/3\/staging_model_metadatas\/7fc82d4a-6c12-41d7-9acd-c3a27f3ad027",
     "@type": "StagingModelMetadata",
     "type": "outbreak_alerts",
     "parentType": null,
@@ -24,6 +24,47 @@
     "indexable": true,
     "writable": true,
     "attributes": [
+        {
+            "@type": "AttributeMetadata",
+            "type": "comments",
+            "name": "comments",
+            "length": null,
+            "orderIndex": 2,
+            "formType": "manyToMany",
+            "dataSource": {
+                "model": "comments"
+            },
+            "searchable": false,
+            "peerReplicable": true,
+            "system": false,
+            "encrypted": false,
+            "gridColumn": false,
+            "collection": true,
+            "inversedField": "outbreakAlerts",
+            "ownsRelationship": true,
+            "validation": {
+                "required": false,
+                "minlength": 0,
+                "maxlength": 10485761
+            },
+            "bulkAction": [],
+            "dataSourceFilters": null,
+            "defaultValue": null,
+            "tooltip": null,
+            "visibility": true,
+            "htmlEscape": false,
+            "orphanRemoval": null,
+            "readable": true,
+            "writeable": true,
+            "identifier": null,
+            "unique": false,
+            "recommend": false,
+            "skipSerialization": false,
+            "displayName": "{{ comments }}",
+            "descriptions": {
+                "singular": "Comments"
+            }
+        },
         {
             "@type": "AttributeMetadata",
             "type": "tasks",
@@ -1061,7 +1102,7 @@
         "delete_primary_data_after": 60
     },
     "archivalFilters": [],
-    "uuid": "55e185d4-d9fc-405a-ba4f-73735a7a2304",
+    "uuid": "7fc82d4a-6c12-41d7-9acd-c3a27f3ad027",
     "displayName": "{{ title }}",
     "descriptions": {
         "singular": "Outbreak Alert",
