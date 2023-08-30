@@ -115,7 +115,15 @@
                     "username": "",
                     "request_headers": ""
                 },
-                "version": "3.2.3",
+                "message": {
+                    "tags": [],
+                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
+                    "tenant": "",
+                    "thread": false,
+                    "content": "<p>Downloading a <em><strong>\"{{vars.input.records[0].title}}\"<\/strong><\/em> outbreak alert IOC file&nbsp; from a url<em> {{vars.input.records[0].iOCCSVFile}}<\/em>.<\/p>",
+                    "records": "{{vars.input.records[0]['@id']}}"
+                },
+                "version": "3.2.4",
                 "connector": "cyops_utilities",
                 "operation": "download_file_from_url",
                 "operationTitle": "File: Download File from URL",
