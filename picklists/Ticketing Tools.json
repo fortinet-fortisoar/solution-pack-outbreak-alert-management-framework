@@ -1,0 +1,30 @@
+{
+    "@context": "\/api\/3\/contexts\/PicklistName",
+    "@id": "\/api\/3\/picklist_names\/3af36608-be78-4c66-8545-3ec9c21358d8",
+    "@type": "PicklistName",
+    "name": "Ticketing Tools",
+    "system": false,
+    "picklists": [
+        {
+            "@id": "\/api\/3\/picklists\/d44cecbf-fef2-4c20-a1b5-37d58c3b7875",
+            "@type": "Picklist",
+            "itemValue": "Jira",
+            "orderIndex": 0,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/3af36608-be78-4c66-8545-3ec9c21358d8",
+            "uuid": "d44cecbf-fef2-4c20-a1b5-37d58c3b7875"
+        },
+        {
+            "@id": "\/api\/3\/picklists\/b4462834-5a47-4dd9-b38a-a1ecac4a13d6",
+            "@type": "Picklist",
+            "itemValue": "ServiceNow",
+            "orderIndex": 1,
+            "color": null,
+            "icon": null,
+            "listName": "\/api\/3\/picklist_names\/3af36608-be78-4c66-8545-3ec9c21358d8",
+            "uuid": "b4462834-5a47-4dd9-b38a-a1ecac4a13d6"
+        }
+    ],
+    "uuid": "3af36608-be78-4c66-8545-3ec9c21358d8"
+}
