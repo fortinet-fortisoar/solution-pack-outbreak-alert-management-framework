@@ -22,8 +22,10 @@
             "name": "Configuration",
             "description": null,
             "arguments": {
-                "global_variable": "threat_hunt_integrations",
-                "threat_hunt_config": "{% set env = [] %}{% for item in vars.request.picklist %}{% set _ = env.append(item.itemValue) %}{% endfor %}{{env}}"
+                "ticketing_config": "{% set env = [] %}{% for item in vars.request.ticketTools %}{% set _ = env.append(item.itemValue) %}{% endfor %}{{env}}",
+                "ticketing_ga_name": "ticketing_integrations",
+                "threat_hunt_config": "{% set env = [] %}{% for item in vars.request.huntTools %}{% set _ = env.append(item.itemValue) %}{% endfor %}{{env}}",
+                "threat_hunt_ga_name": "threat_hunt_integrations"
             },
             "status": null,
             "top": "165",
@@ -34,14 +36,14 @@
         },
         {
             "@type": "WorkflowStep",
-            "name": "Create CICD Env Global Variable",
+            "name": "Create Threat Hunt Tools Global Variable",
             "description": null,
             "arguments": {
                 "params": {
-                    "macro": "{{vars.global_variable}}",
+                    "macro": "{{vars.threat_hunt_ga_name}}",
                     "value": "{{vars.threat_hunt_config | toJSON}}"
                 },
-                "version": "3.2.3",
+                "version": "3.2.4",
                 "connector": "cyops_utilities",
                 "operation": "updatemacro",
                 "operationTitle": "FSR: Create\/Update Global Variables",
@@ -53,6 +55,28 @@
             "stepType": "\/api\/3\/workflow_step_types\/0109f35d-090b-4a2b-bd8a-94cbc3508562",
             "group": null,
             "uuid": "f3d6023c-b0a3-41f0-a9d8-0ab95712ce62"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Create Ticketing Tools Global Variable",
+            "description": null,
+            "arguments": {
+                "params": {
+                    "macro": "{{vars.ticketing_ga_name}}",
+                    "value": "{{vars.ticketing_config | toJSON}}"
+                },
+                "version": "3.2.4",
+                "connector": "cyops_utilities",
+                "operation": "updatemacro",
+                "operationTitle": "FSR: Create\/Update Global Variables",
+                "step_variables": []
+            },
+            "status": null,
+            "top": "435",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/0109f35d-090b-4a2b-bd8a-94cbc3508562",
+            "group": null,
+            "uuid": "62b97adc-0349-4e44-a3ad-fa09521518e4"
         },
         {
             "@type": "WorkflowStep",
@@ -86,6 +110,16 @@
         },
         {
             "@type": "WorkflowRoute",
+            "name": "Create Threat Hunt Tools Global Variable -> Copy of Create Threat Hunt Tools Global Variable",
+            "targetStep": "\/api\/3\/workflow_steps\/62b97adc-0349-4e44-a3ad-fa09521518e4",
+            "sourceStep": "\/api\/3\/workflow_steps\/f3d6023c-b0a3-41f0-a9d8-0ab95712ce62",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "5e0e0eb7-fcd5-47ba-870f-23e99811899f"
+        },
+        {
+            "@type": "WorkflowRoute",
             "name": "Start -> Configuration",
             "targetStep": "\/api\/3\/workflow_steps\/964230c4-0350-49c9-bd4d-65f3eecca44d",
             "sourceStep": "\/api\/3\/workflow_steps\/8c74baab-71ab-44dd-821f-e1b783ed3da8",
@@ -103,6 +137,8 @@
     "deletedAt": null,
     "recordTags": [
         "Threat Hunting",
-        "Wizard"
+        "Outbreak Alert",
+        "Wizard",
+        "Ticketing Tool"
     ]
 }
