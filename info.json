@@ -158,6 +158,10 @@
             {
                 "name": "Splunk",
                 "apiName": "splunk"
+            },
+            {
+                "name": "ElasticSearch",
+                "apiName": "elasticsearch"
             }
         ],
         "widgets": [
