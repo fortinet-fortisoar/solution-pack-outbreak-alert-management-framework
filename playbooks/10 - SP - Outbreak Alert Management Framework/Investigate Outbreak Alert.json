@@ -183,8 +183,9 @@
                     "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
                     "tenant": "",
                     "thread": false,
-                    "content": "<p>Initiating <strong><em>Outbreak Alert: {{vars.input.records[0].title}}<\/em><\/strong> Investigation<\/p>",
-                    "records": "{{vars.input.records[0]['@id']}}"
+                    "content": "<p>Retrieving Threat Hunt Rules for <em><strong>Outbreak Alert: {{vars.input.records[0].title}}<\/strong><\/em><\/p>",
+                    "records": "{{vars.input.records[0]['@id']}}",
+                    "parentstepid": "\/api\/3\/workflow_steps\/69054683-770e-4caa-8727-b38d9c7da7e9"
                 },
                 "step_variables": []
             },
@@ -346,6 +347,14 @@
             "description": null,
             "arguments": {
                 "route": "b5814fbf-0355-4ed4-8b95-a9ed38bc1b25",
+                "message": {
+                    "tags": [],
+                    "type": "\/api\/3\/picklists\/ff599189-3eeb-4c86-acb0-a7915e85ac3b",
+                    "tenant": "",
+                    "thread": false,
+                    "content": "<p>Initiating <strong><em>Outbreak Alert: {{vars.input.records[0].title}}<\/em><\/strong> Investigation<\/p>",
+                    "records": "{{vars.input.records[0]['@id']}}"
+                },
                 "resources": [
                     "outbreak_alerts"
                 ],
