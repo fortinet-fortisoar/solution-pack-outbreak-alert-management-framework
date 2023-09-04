@@ -1,10 +1,10 @@
 {
     "@type": "Workflow",
     "triggerLimit": null,
-    "name": "Create ServiceNow Ticket",
+    "name": "Create Ticket in Ticketing Tools",
     "aliasName": null,
     "tag": null,
-    "description": "Create the ServiceNow ticket for the outbreak alert",
+    "description": "Create the ServiceNow\/Jira ticket for the outbreak alert",
     "isActive": true,
     "debug": false,
     "singleRecordExecution": false,
@@ -27,7 +27,7 @@
             },
             "status": null,
             "top": "165",
-            "left": "300",
+            "left": "475",
             "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
             "group": null,
             "uuid": "b8fcb218-fe0b-4647-be4a-7200483efa63"
@@ -67,6 +67,36 @@
             "stepType": "\/api\/3\/workflow_step_types\/0bfed618-0316-11e7-93ae-92361f002671",
             "group": null,
             "uuid": "44b3599f-80ad-4f87-a536-d32ac3f5564c"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Create Ticket",
+            "description": null,
+            "arguments": {
+                "name": "Jira",
+                "config": "5e039627-92c8-4e14-a9fd-fba653921a9b",
+                "params": {
+                    "parent": "",
+                    "priority": "{{vars.input.records[0].severity.itemValue | resolveRange(vars.alert_severity_map)}}",
+                    "issue_type": "[System] Incident",
+                    "project_key": "SOLUTIONS",
+                    "other_fields": "",
+                    "ticket_summary": "{{vars.input.records[0].name}}",
+                    "ticket_description": "{{vars.input.records[0].description}}"
+                },
+                "version": "1.2.0",
+                "connector": "jira",
+                "operation": "create_ticket",
+                "mock_result": "{\n  \"data\": {\n    \"id\": \"10019\",\n    \"key\": \"SOLUTIONS-5\",\n    \"self\": \"https:\/\/cybersponse.atlassian.net\/rest\/api\/2\/issue\/10019\",\n    \"status\": \"Open\"\n  },\n  \"status\": \"Success\",\n  \"message\": \"\",\n  \"operation\": null,\n  \"execution_time\": \"1 seconds 908 ms\"\n}",
+                "operationTitle": "Create Ticket",
+                "step_variables": []
+            },
+            "status": null,
+            "top": "435",
+            "left": "825",
+            "stepType": "\/api\/3\/workflow_step_types\/0bfed618-0316-11e7-93ae-92361f002671",
+            "group": null,
+            "uuid": "2e4424ac-6398-43aa-9957-6caae9ae2474"
         },
         {
             "@type": "WorkflowStep",
@@ -142,27 +172,33 @@
         },
         {
             "@type": "WorkflowStep",
-            "name": "Is ServiceNow Configured",
+            "name": "Is Ticketing Tool Configured",
             "description": null,
             "arguments": {
                 "conditions": [
                     {
-                        "option": "Yes",
+                        "option": "ServiceNow",
                         "step_iri": "\/api\/3\/workflow_steps\/3df84496-77ae-44b5-b4c5-61b90c10e80a",
                         "condition": "{{ \"ServiceNow\" in vars.ticketing_integrations }}",
                         "step_name": "Get Users"
                     },
                     {
-                        "option": "No",
+                        "option": "No Config",
                         "default": true,
                         "step_iri": "\/api\/3\/workflow_steps\/e3eb4837-309e-4bcc-ac97-ab6d7f829a9e",
                         "step_name": "No Operation"
+                    },
+                    {
+                        "option": "Jira",
+                        "step_iri": "\/api\/3\/workflow_steps\/2e4424ac-6398-43aa-9957-6caae9ae2474",
+                        "condition": "{{ \"Jira\" in vars.ticketing_integrations }}",
+                        "step_name": "Create Ticket"
                     }
                 ]
             },
             "status": null,
             "top": "300",
-            "left": "300",
+            "left": "475",
             "stepType": "\/api\/3\/workflow_step_types\/12254cf5-5db7-4b1a-8cb1-3af081924b28",
             "group": null,
             "uuid": "25870fce-b023-44ba-8ec8-e053c0a93f09"
@@ -224,14 +260,38 @@
             },
             "status": null,
             "top": "30",
-            "left": "300",
+            "left": "475",
             "stepType": "\/api\/3\/workflow_step_types\/ea155646-3821-4542-9702-b246da430a8d",
             "group": null,
             "uuid": "db1d442a-8697-4e76-ab52-0769b595f9c4"
         },
         {
             "@type": "WorkflowStep",
-            "name": "Update Ticket ID",
+            "name": "Update Jira Ticket ID",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "jiraTicketID": "{{vars.steps.Create_Ticket.data.id}}"
+                },
+                "operation": "Append",
+                "collection": "{{vars.input.records[0]['@id']}}",
+                "__recommend": [],
+                "collectionType": "\/api\/3\/alerts",
+                "fieldOperation": {
+                    "recordTags": "Append"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "570",
+            "left": "825",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
+            "group": null,
+            "uuid": "a6ab9a9c-deb8-4d9a-978a-a96d95e67dbc"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Update ServiceNow Ticket ID",
             "description": null,
             "arguments": {
                 "resource": {
@@ -275,6 +335,16 @@
         },
         {
             "@type": "WorkflowRoute",
+            "name": "Create Ticket -> Copy of Update Ticket ID",
+            "targetStep": "\/api\/3\/workflow_steps\/a6ab9a9c-deb8-4d9a-978a-a96d95e67dbc",
+            "sourceStep": "\/api\/3\/workflow_steps\/2e4424ac-6398-43aa-9957-6caae9ae2474",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "b187f93c-31b2-47ec-9e46-82c8b3ad5afe"
+        },
+        {
+            "@type": "WorkflowRoute",
             "name": "Get Assignment Groups -> Get Location",
             "targetStep": "\/api\/3\/workflow_steps\/fd1ea99f-9325-4472-bfd3-214dbad5d8e2",
             "sourceStep": "\/api\/3\/workflow_steps\/6fc71c5d-c6e1-47ea-b1fd-ac4f4fe11302",
@@ -305,10 +375,20 @@
         },
         {
             "@type": "WorkflowRoute",
+            "name": "Is ServiceNow Configured -> Create Ticket",
+            "targetStep": "\/api\/3\/workflow_steps\/2e4424ac-6398-43aa-9957-6caae9ae2474",
+            "sourceStep": "\/api\/3\/workflow_steps\/25870fce-b023-44ba-8ec8-e053c0a93f09",
+            "label": "Jira",
+            "isExecuted": false,
+            "group": null,
+            "uuid": "e02d7fa7-35f0-4453-9dc0-219bdaa6e4a5"
+        },
+        {
+            "@type": "WorkflowRoute",
             "name": "Is ServiceNow Configured -> Get Users",
             "targetStep": "\/api\/3\/workflow_steps\/3df84496-77ae-44b5-b4c5-61b90c10e80a",
             "sourceStep": "\/api\/3\/workflow_steps\/25870fce-b023-44ba-8ec8-e053c0a93f09",
-            "label": "Yes",
+            "label": "ServiceNow",
             "isExecuted": false,
             "group": null,
             "uuid": "d979c4f5-467c-4c38-880b-e60969e24d05"
@@ -318,7 +398,7 @@
             "name": "Is ServiceNow Configured -> No Operation",
             "targetStep": "\/api\/3\/workflow_steps\/e3eb4837-309e-4bcc-ac97-ab6d7f829a9e",
             "sourceStep": "\/api\/3\/workflow_steps\/25870fce-b023-44ba-8ec8-e053c0a93f09",
-            "label": "No",
+            "label": "No Config",
             "isExecuted": false,
             "group": null,
             "uuid": "b70b492f-bc8c-4add-a90c-1ae74ddd1d9d"
@@ -343,6 +423,7 @@
     "recordTags": [
         "PostCreate",
         "ServiceNow",
-        "Outbreak Alert"
+        "Outbreak Alert",
+        "JIRA"
     ]
 }
