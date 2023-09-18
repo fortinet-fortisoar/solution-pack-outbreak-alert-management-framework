@@ -11,9 +11,8 @@
     "remoteExecutableFlag": false,
     "parameters": [
         "splunk_query",
-        "earliest_time:",
-        "latest_time",
-        "max_count"
+        "earliest_time",
+        "head_limit"
     ],
     "synchronous": false,
     "collection": "\/api\/3\/workflow_collections\/2ae30943-7a2f-435b-a100-3ec7c3e2294b",
@@ -56,12 +55,12 @@
                 "config": "7c495a0e-8f63-4218-a584-df2443e7c99e",
                 "params": {
                     "app": "-",
-                    "query": "{{vars.input.params['splunk_query'].query}}",
+                    "query": "{{vars.input.params['splunk_query'].query}} | head limit={{vars.head_limit}}",
                     "exec_mode": "One Shot",
                     "auto_cancel": "0",
-                    "latest_time": "{{vars.input.params['latest_time']}}",
-                    "earliest_time": "{{vars.input.params['earliest_time:']}}",
-                    "additional_search_args": "{\n  \"max_count\": \"{{vars.input.params['max_count']}}\"\n}"
+                    "latest_time": "",
+                    "earliest_time": "{{vars.input.params['earliest_time']}}",
+                    "additional_search_args": ""
                 },
                 "message": {
                     "tags": [

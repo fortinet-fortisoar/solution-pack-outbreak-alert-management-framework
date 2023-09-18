@@ -5,7 +5,7 @@
     "aliasName": null,
     "tag": null,
     "description": "Create the ServiceNow\/Jira ticket for the outbreak alert",
-    "isActive": true,
+    "isActive": false,
     "debug": false,
     "singleRecordExecution": false,
     "remoteExecutableFlag": false,
@@ -422,8 +422,8 @@
     "deletedAt": null,
     "recordTags": [
         "PostCreate",
-        "ServiceNow",
         "Outbreak Alert",
+        "ServiceNow",
         "JIRA"
     ]
 }

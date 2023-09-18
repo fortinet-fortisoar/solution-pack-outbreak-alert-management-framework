@@ -33,7 +33,7 @@
                     "records": "{{vars.input.records[0]['@id']}}"
                 },
                 "resource": {
-                    "name": "Outbreak Alert - {{vars.input.params['alert_data']['subject']}}",
+                    "name": "Outbreak Threat Hunt Alert - {{vars.input.params['alert_data']['subject']}}",
                     "type": "\/api\/3\/picklists\/f2fb4c85-baae-407e-b218-1cc54a49546c",
                     "state": "{{vars.input.params['alert_data']['eventstatus']| resolveRange(vars.alerts_status_map)}}",
                     "__link": {
@@ -106,6 +106,7 @@
                     },
                     "hostname": "{{vars.item.data.hostname}}",
                     "__replace": "true",
+                    "assetType": "\/api\/3\/picklists\/15fa2e79-88ac-4a63-a623-3ac03980b850",
                     "deviceUid": "{{vars.item.data['mgmt_uuid']}}",
                     "macAddress": "{{vars.item.data.latitude}}",
                     "description": "{{vars.item.data.desc}}",

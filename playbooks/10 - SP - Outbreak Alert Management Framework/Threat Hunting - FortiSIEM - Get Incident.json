@@ -27,11 +27,10 @@
             "name": "Configuration",
             "description": null,
             "arguments": {
-                "alerts_severity_map": "{'MINIMAL': {{'Severity'| picklist('Minimal') }}, 'LOW': {{'Severity'| picklist('Low') }}, 'MEDIUM': {{'Severity'| picklist('Medium') }}, 'HIGH': {{'Severity'| picklist('High') }}, 'CRITICAL': {{'Severity'| picklist('Critical') }}}",
-                "incident_source_data": "{{vars.steps.Get_Outbreak_Alert_Incident.data.data}}"
+                "alerts_severity_map": "{'MINIMAL': {{'Severity'| picklist('Minimal') }}, 'LOW': {{'Severity'| picklist('Low') }}, 'MEDIUM': {{'Severity'| picklist('Medium') }}, 'HIGH': {{'Severity'| picklist('High') }}, 'CRITICAL': {{'Severity'| picklist('Critical') }}}"
             },
             "status": null,
-            "top": "300",
+            "top": "165",
             "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
             "group": null,
@@ -166,16 +165,18 @@
                     "content": "<p>Retrieving a list and details of incidents from the Fortinet FortiSIEM server based below detials.<\/p>\n<p>- <em><strong>Event Type<\/strong><\/em>: {{vars.input.params['fortiSIEM_query']}}<\/p>\n<p>- <em><strong>Incident Status<\/strong><\/em>: {{vars.input.params['fortisiem_incidentStatus']}}<\/p>\n<p>- <em><strong>Severity<\/strong><\/em>: High and Medium<\/p>",
                     "records": "{{vars.input.records[0]['@id']}}"
                 },
-                "version": "5.0.1",
+                "version": "5.1.1",
                 "connector": "fortinet-fortisiem",
                 "operation": "get_incidents",
                 "mock_result": "{\n  \"data\": {\n    \"data\": [\n      {\n        \"count\": 744,\n        \"customer\": \"test1\",\n        \"eventName\": \"Network Device Degraded: Lossy Ping Response\",\n        \"eventType\": \"{{vars.fortiSIEM_query}}\",\n        \"incidentId\": 2115,\n        \"incidentSrc\": \"\",\n        \"attackTactic\": \"Impact\",\n        \"incidentReso\": 1,\n        \"eventSeverity\": 8,\n        \"incidentRptIp\": \"10.132.252.22\",\n        \"incidentTitle\": \"Network Device FGVM01TM23001213 degraded due to more than 75 pct packet loss\",\n        \"incidentDetail\": \"pktLossPct:100.00, \",\n        \"incidentStatus\": 3,\n        \"incidentTarget\": {\n          \"hostName\": \"FGVM01TM23001213\",\n          \"hostIpAddr\": \"10.132.252.22\"\n        },\n        \"attackTechnique\": [\n          {\n            \"name\": \"System Shutdown\/Reboot\",\n            \"techniqueid\": \"T1529\"\n          }\n        ],\n        \"eventSeverityCat\": \"MEDIUM\",\n        \"incidentLastSeen\": 1690137210000,\n        \"incidentFirstSeen\": 1690047270000,\n        \"incidentRptDevName\": \"FGVM01TM23001213\",\n        \"phIncidentCategory\": 1,\n        \"incidentClearedTime\": 1690137230000,\n        \"incidentClearedReason\": \"Incident cleared by system because it has expired\",\n        \"phSubIncidentCategory\": \"Impact\"\n      },\n      {\n        \"count\": 744,\n        \"customer\": \"test1\",\n        \"eventName\": \"Network Device Down: no ping response\",\n        \"eventType\": \"PH_RULE_NON_RESPONSIVE_NET_DEV\",\n        \"incidentId\": 2116,\n        \"incidentSrc\": \"\",\n        \"attackTactic\": \"Impact\",\n        \"incidentReso\": 1,\n        \"eventSeverity\": 10,\n        \"incidentRptIp\": \"10.132.252.22\",\n        \"incidentTitle\": \"Network Device FGVM01TM23001213 down due to total ping loss\",\n        \"incidentDetail\": \"\",\n        \"incidentStatus\": 3,\n        \"incidentTarget\": {\n          \"hostName\": \"FGVM01TM23001213\",\n          \"hostIpAddr\": \"10.132.252.22\"\n        },\n        \"attackTechnique\": [\n          {\n            \"name\": \"System Shutdown\/Reboot\",\n            \"techniqueid\": \"T1529\"\n          }\n        ],\n        \"eventSeverityCat\": \"HIGH\",\n        \"incidentLastSeen\": 1690137210000,\n        \"incidentFirstSeen\": 1690047270000,\n        \"incidentRptDevName\": \"FGVM01TM23001213\",\n        \"phIncidentCategory\": 1,\n        \"incidentClearedTime\": 1690137230000,\n        \"incidentClearedReason\": \"Incident cleared by system because it has expired\",\n        \"phSubIncidentCategory\": \"Impact\"\n      }\n    ],\n    \"size\": 2,\n    \"start\": 0,\n    \"total\": 2\n  },\n  \"status\": \"Success\",\n  \"message\": \"\",\n  \"operation\": null,\n  \"execution_time\": \"477 ms\"\n}",
                 "operationTitle": "List Incidents",
                 "pickFromTenant": false,
-                "step_variables": []
+                "step_variables": {
+                    "incident_source_data": "{{vars.steps.Get_Outbreak_Alert_Incident.data.data}}"
+                }
             },
             "status": null,
-            "top": "165",
+            "top": "300",
             "left": "125",
             "stepType": "\/api\/3\/workflow_step_types\/0bfed618-0316-11e7-93ae-92361f002671",
             "group": null,
@@ -204,13 +205,13 @@
     "routes": [
         {
             "@type": "WorkflowRoute",
-            "name": "Configuration -> Create Record",
-            "targetStep": "\/api\/3\/workflow_steps\/6747061f-16d5-4cca-bc53-d74b0b8da604",
+            "name": "Configuration -> Get Outbreak Alert Incident",
+            "targetStep": "\/api\/3\/workflow_steps\/0174b7c5-b39d-41c2-801c-40274bd79943",
             "sourceStep": "\/api\/3\/workflow_steps\/7ab3c059-7e0b-43c3-9e9e-1e95206df2c6",
             "label": null,
             "isExecuted": false,
             "group": null,
-            "uuid": "4036d1a3-b8dd-45fe-b706-9a41fb7b1e42"
+            "uuid": "da12c63e-d6b1-42a7-b8c5-4c451376dce8"
         },
         {
             "@type": "WorkflowRoute",
@@ -224,23 +225,23 @@
         },
         {
             "@type": "WorkflowRoute",
-            "name": "Get Outbreak Alert Incident -> Configuration",
-            "targetStep": "\/api\/3\/workflow_steps\/7ab3c059-7e0b-43c3-9e9e-1e95206df2c6",
+            "name": "Get Outbreak Alert Incident -> Create Alert Record",
+            "targetStep": "\/api\/3\/workflow_steps\/6747061f-16d5-4cca-bc53-d74b0b8da604",
             "sourceStep": "\/api\/3\/workflow_steps\/0174b7c5-b39d-41c2-801c-40274bd79943",
             "label": null,
             "isExecuted": false,
             "group": null,
-            "uuid": "3c9deb9d-afa6-4547-bd8e-5ea46113c353"
+            "uuid": "2ab4492b-e83a-4b2a-8ad7-d3e4157c8dc5"
         },
         {
             "@type": "WorkflowRoute",
-            "name": "Start -> Get Outbreak Alert Incident",
-            "targetStep": "\/api\/3\/workflow_steps\/0174b7c5-b39d-41c2-801c-40274bd79943",
+            "name": "Start -> Configuration",
+            "targetStep": "\/api\/3\/workflow_steps\/7ab3c059-7e0b-43c3-9e9e-1e95206df2c6",
             "sourceStep": "\/api\/3\/workflow_steps\/b6c84c29-a80d-4103-a3e8-19325c1d179f",
             "label": null,
             "isExecuted": false,
             "group": null,
-            "uuid": "ae492d46-4add-4b10-b9b9-eeeb609db84b"
+            "uuid": "50a13dc8-8797-4067-896a-9bea3c7d5913"
         }
     ],
     "groups": [],
