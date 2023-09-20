@@ -55,7 +55,7 @@
             },
             "dataSourceFilters": null,
             "defaultValue": null,
-            "tooltip": null,
+            "tooltip": "Signature Based Threat Hunting(STH) query for FortiAnalyzer",
             "visibility": [
                 {
                     "sort": [],
@@ -82,7 +82,7 @@
             "skipSerialization": false,
             "displayName": "{{ sTHFortiAnalyzer }}",
             "descriptions": {
-                "singular": "STH FortiAnalyzer"
+                "singular": "STH FortiAnalyzer Query"
             }
         },
         {
@@ -115,7 +115,7 @@
             },
             "dataSourceFilters": null,
             "defaultValue": null,
-            "tooltip": null,
+            "tooltip": "Signature Based Threat Hunting(STH) query for FortiSIEM",
             "visibility": [
                 {
                     "sort": [],
@@ -142,7 +142,7 @@
             "skipSerialization": false,
             "displayName": "{{ sTHFortiSIEM }}",
             "descriptions": {
-                "singular": "STH FortiSIEM"
+                "singular": "STH FortiSIEM Query"
             }
         },
         {
