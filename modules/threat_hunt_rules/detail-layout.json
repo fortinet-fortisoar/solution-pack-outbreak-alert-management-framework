@@ -160,7 +160,7 @@
                                             }
                                         },
                                         {
-                                            "title": "Advanced Hunting",
+                                            "title": "Signature-Based Hunt Rules",
                                             "active": 0,
                                             "widget": {
                                                 "type": "rows",
@@ -181,19 +181,28 @@
                                                                                             {
                                                                                                 "fields": [
                                                                                                     {
+                                                                                                        "name": "sTHFortiSIEM",
+                                                                                                        "highlightMode": true,
+                                                                                                        "linky": true,
+                                                                                                        "readOnly": true
+                                                                                                    },
+                                                                                                    {
                                                                                                         "name": "qRadar",
                                                                                                         "highlightMode": true,
-                                                                                                        "readOnly": true
+                                                                                                        "readOnly": true,
+                                                                                                        "linky": true
                                                                                                     },
                                                                                                     {
                                                                                                         "name": "azureLogAnalytics",
                                                                                                         "highlightMode": true,
-                                                                                                        "readOnly": false
+                                                                                                        "readOnly": true,
+                                                                                                        "linky": true
                                                                                                     },
                                                                                                     {
                                                                                                         "name": "arcSight",
                                                                                                         "highlightMode": true,
-                                                                                                        "readOnly": true
+                                                                                                        "readOnly": true,
+                                                                                                        "linky": true
                                                                                                     }
                                                                                                 ],
                                                                                                 "style": "col-lg-6"
@@ -201,14 +210,22 @@
                                                                                             {
                                                                                                 "fields": [
                                                                                                     {
+                                                                                                        "name": "sTHFortiAnalyzer",
+                                                                                                        "highlightMode": true,
+                                                                                                        "linky": true,
+                                                                                                        "readOnly": true
+                                                                                                    },
+                                                                                                    {
                                                                                                         "name": "splunk",
                                                                                                         "highlightMode": true,
-                                                                                                        "readOnly": true
+                                                                                                        "readOnly": true,
+                                                                                                        "linky": true
                                                                                                     },
                                                                                                     {
                                                                                                         "name": "elasticSearch",
                                                                                                         "highlightMode": true,
-                                                                                                        "readOnly": true
+                                                                                                        "readOnly": true,
+                                                                                                        "linky": true
                                                                                                     }
                                                                                                 ],
                                                                                                 "style": "col-lg-6"
@@ -256,7 +273,7 @@
                                             }
                                         },
                                         {
-                                            "title": "Fortinet Fabric Hunting",
+                                            "title": "Fortinet Fabric Hunt Rules",
                                             "active": 0,
                                             "widget": {
                                                 "type": "rows",

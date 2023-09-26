@@ -111,27 +111,26 @@
                                                                                                     {
                                                                                                         "name": "subTitle",
                                                                                                         "highlightMode": true,
-                                                                                                        "readOnly": true
+                                                                                                        "readOnly": true,
+                                                                                                        "linky": true
                                                                                                     },
                                                                                                     {
                                                                                                         "name": "severity",
                                                                                                         "highlightMode": true,
-                                                                                                        "readOnly": true
-                                                                                                    },
-                                                                                                    {
-                                                                                                        "name": "status",
-                                                                                                        "highlightMode": true,
-                                                                                                        "readOnly": true
+                                                                                                        "readOnly": true,
+                                                                                                        "linky": true
                                                                                                     },
                                                                                                     {
                                                                                                         "name": "communityLink",
                                                                                                         "highlightMode": true,
-                                                                                                        "readOnly": true
+                                                                                                        "readOnly": true,
+                                                                                                        "linky": true
                                                                                                     },
                                                                                                     {
                                                                                                         "name": "fortiguardURL",
                                                                                                         "highlightMode": true,
-                                                                                                        "readOnly": true
+                                                                                                        "readOnly": true,
+                                                                                                        "linky": true
                                                                                                     }
                                                                                                 ],
                                                                                                 "style": "col-lg-6"
@@ -141,37 +140,44 @@
                                                                                                     {
                                                                                                         "name": "threatSignal",
                                                                                                         "highlightMode": true,
-                                                                                                        "readOnly": false
+                                                                                                        "readOnly": false,
+                                                                                                        "linky": true
                                                                                                     },
                                                                                                     {
                                                                                                         "name": "createDate",
                                                                                                         "highlightMode": true,
-                                                                                                        "readOnly": false
+                                                                                                        "readOnly": false,
+                                                                                                        "linky": true
                                                                                                     },
                                                                                                     {
                                                                                                         "name": "modifyDate",
                                                                                                         "highlightMode": true,
-                                                                                                        "readOnly": false
+                                                                                                        "readOnly": false,
+                                                                                                        "linky": true
                                                                                                     },
                                                                                                     {
                                                                                                         "name": "releaseDate",
                                                                                                         "highlightMode": true,
-                                                                                                        "readOnly": true
+                                                                                                        "readOnly": true,
+                                                                                                        "linky": true
                                                                                                     },
                                                                                                     {
                                                                                                         "name": "lastRevisedDate",
                                                                                                         "highlightMode": true,
-                                                                                                        "readOnly": true
+                                                                                                        "readOnly": true,
+                                                                                                        "linky": true
                                                                                                     },
                                                                                                     {
                                                                                                         "name": "serviceNowTicketID",
                                                                                                         "highlightMode": true,
-                                                                                                        "readOnly": false
+                                                                                                        "readOnly": false,
+                                                                                                        "linky": true
                                                                                                     },
                                                                                                     {
                                                                                                         "name": "jiraTicketID",
                                                                                                         "highlightMode": true,
-                                                                                                        "readOnly": false
+                                                                                                        "readOnly": false,
+                                                                                                        "linky": true
                                                                                                     }
                                                                                                 ],
                                                                                                 "style": "col-lg-6"

@@ -10,7 +10,9 @@
     "singleRecordExecution": false,
     "remoteExecutableFlag": false,
     "parameters": [
-        "q_radar_query"
+        "q_radar_query",
+        "max_event",
+        "last_pull_time_hrs"
     ],
     "synchronous": false,
     "collection": "\/api\/3\/workflow_collections\/2ae30943-7a2f-435b-a100-3ec7c3e2294b",
@@ -55,7 +57,7 @@
                     "batch_size": 100
                 },
                 "resource": {
-                    "name": "Outbreak Alert - {{vars.input.params['q_radar_query'].title}}",
+                    "name": "Outbreak Threat Hunt Alert - {{vars.input.params['q_radar_query'].title}}",
                     "type": "\/api\/3\/picklists\/f2fb4c85-baae-407e-b218-1cc54a49546c",
                     "state": "\/api\/3\/picklists\/a1bac09b-1441-45aa-ad1b-c88744e48e72",
                     "source": "QRadar",
@@ -80,6 +82,7 @@
                     "destinationPort": "{{vars.item.DestinationPort}}",
                     "alertDetectionDate": "{{arrow.get(vars.item.UtcTime).int_timestamp}}",
                     "escalatedtoincident": "\/api\/3\/picklists\/2128a09c-153d-4db3-985d-de6be33deae5",
+                    "resolvedAutomatedly": false,
                     "alertRemainingAckSLA": 0
                 },
                 "_showJson": false,
@@ -106,7 +109,7 @@
                 "name": "IBM QRadar",
                 "config": "7ba1257e-cc5e-4992-bac1-9371acbcb5b5",
                 "params": {
-                    "search_string": "{{vars.input.params['q_radar_query'].query}}"
+                    "search_string": "{{vars.input.params['q_radar_query'].query}} LIMIT {{vars.max_event}} LAST {{(vars.input.params['last_pull_time_hrs'] | string).split('-')[-1]}} HOURS"
                 },
                 "message": {
                     "tags": [
@@ -118,7 +121,7 @@
                     "content": "<p>Retrieving events from IBM QRadar based on below details.<\/p>\n<p>- <em><strong>Query<\/strong><\/em>: {{vars.input.params['q_radar_query'].query}}<\/p>",
                     "records": "{{vars.input.records[0]['@id']}}"
                 },
-                "version": "1.6.0",
+                "version": "1.6.1",
                 "connector": "qradar",
                 "operation": "query_qradar",
                 "mock_result": "{\n  \"data\": {\n    \"events\": [\n      {\n        \"utf8_payload\": \"<13>Jul 28 01:59:51 DESKTOP-PCGUGDK AgentDevice=WindowsLog\\tAgentLogFile=Microsoft-Windows-Sysmon\/Operational\\tPluginVersion=WC.MSEVEN6.10.1.2.20\\tSource=Microsoft-Windows-Sysmon\\tComputer=DESKTOP-PCGUGDK\\tOriginatingComputer=DESKTOP-PCGUGDK\\tUser=SYSTEM\\tDomain=NT AUTHORITY\\tEventID=3\\tEventIDCode=3\\tEventType=4\\tEventCategory=3\\tRecordNumber=4353180\\tTimeGenerated=1690534789\\tTimeWritten=1690534789\\tLevel=Informational\\tKeywords=0\\tTask=SysmonTask-SYSMONEVENT_NETWORK_CONNECT\\tOpcode=Data Collection Start\\tMessage=Network connection detected: RuleName: Usermode UtcTime: 2023-07-28 08:59:07.659 ProcessGuid: {61a3cfef-a879-64a3-4b00-000000001100} ProcessId: 3716 Image: C:\\\\Users\\\\admin\\\\Downloads\\\\fortiagent.exe User: NT AUTHORITY\\\\SYSTEM Protocol: tcp Initiated: true SourceIsIpv6: false SourceIp: 10.132.253.159 SourceHostname: DESKTOP-PCGUGDK SourcePort: 60444 SourcePortName: - DestinationIsIpv6: false DestinationIp: 10.132.253.34 DestinationHostname: qa-fortitester-sys1.fortisoar.in DestinationPort: 443 DestinationPortName: https\\n\"\n      },\n      {\n        \"utf8_payload\": \"<13>Jul 28 02:00:21 DESKTOP-PCGUGDK AgentDevice=WindowsLog\\tAgentLogFile=Microsoft-Windows-Sysmon\/Operational\\tPluginVersion=WC.MSEVEN6.10.1.2.20\\tSource=Microsoft-Windows-Sysmon\\tComputer=DESKTOP-PCGUGDK\\tOriginatingComputer=DESKTOP-PCGUGDK\\tUser=SYSTEM\\tDomain=NT AUTHORITY\\tEventID=3\\tEventIDCode=3\\tEventType=4\\tEventCategory=3\\tRecordNumber=4353191\\tTimeGenerated=1690534798\\tTimeWritten=1690534798\\tLevel=Informational\\tKeywords=0\\tTask=SysmonTask-SYSMONEVENT_NETWORK_CONNECT\\tOpcode=Data Collection Start\\tMessage=Network connection detected: RuleName: Usermode UtcTime: 2023-07-28 08:59:16.606 ProcessGuid: {61a3cfef-a879-64a3-4b00-000000001100} ProcessId: 3716 Image: C:\\\\Users\\\\admin\\\\Downloads\\\\fortiagent.exe User: NT AUTHORITY\\\\SYSTEM Protocol: tcp Initiated: true SourceIsIpv6: false SourceIp: 10.132.253.159 SourceHostname: DESKTOP-PCGUGDK SourcePort: 60455 SourcePortName: - DestinationIsIpv6: false DestinationIp: 10.132.253.34 DestinationHostname: qa-fortitester-sys1.fortisoar.in DestinationPort: 443 DestinationPortName: https\\n\"\n      }\n    ]\n  },\n  \"status\": \"Success\",\n  \"message\": \"\",\n  \"operation\": null,\n  \"execution_time\": \"417 ms\"\n}",

@@ -11,7 +11,6 @@
     "remoteExecutableFlag": false,
     "parameters": [
         "fortiAnalyzer_query",
-        "to_date",
         "from_date"
     ],
     "synchronous": false,
@@ -69,10 +68,10 @@
                 "name": "Fortinet FortiAnalyzer",
                 "config": "1493e9a2-b4f9-44db-b9d3-26e4128eaa36",
                 "params": {
-                    "end": "{{vars.to_date}}",
+                    "end": "",
                     "devid": "",
                     "limit": 50,
-                    "start": "{{arrow.utcnow().shift(days=vars.from_date).format(\"YYYY-MM-DDTHH:mm:ss.SS\")}}Z",
+                    "start": "{{arrow.utcnow().shift(hours=vars.from_date).format(\"YYYY-MM-DDTHH:mm:ss.SS\")}}Z",
                     "filter": "{{vars.fortiAnalyzer_query[0].filter}}",
                     "offset": 0,
                     "alertid": "",

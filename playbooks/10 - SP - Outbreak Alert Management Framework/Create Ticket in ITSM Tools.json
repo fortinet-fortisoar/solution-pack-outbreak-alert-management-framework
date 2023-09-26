@@ -1,11 +1,11 @@
 {
     "@type": "Workflow",
     "triggerLimit": null,
-    "name": "Create Ticket in Ticketing Tools",
+    "name": "Create Ticket in ITSM Tools",
     "aliasName": null,
     "tag": null,
     "description": "Create the ServiceNow\/Jira ticket for the outbreak alert",
-    "isActive": true,
+    "isActive": false,
     "debug": false,
     "singleRecordExecution": false,
     "remoteExecutableFlag": false,
@@ -422,8 +422,8 @@
     "deletedAt": null,
     "recordTags": [
         "PostCreate",
-        "ServiceNow",
         "Outbreak Alert",
+        "ServiceNow",
         "JIRA"
     ]
 }
