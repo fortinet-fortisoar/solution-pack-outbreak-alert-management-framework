@@ -213,7 +213,7 @@
                                                                                                         "name": "sTHFortiAnalyzer",
                                                                                                         "highlightMode": true,
                                                                                                         "linky": true,
-                                                                                                        "readOnly": false
+                                                                                                        "readOnly": true
                                                                                                     },
                                                                                                     {
                                                                                                         "name": "splunk",
