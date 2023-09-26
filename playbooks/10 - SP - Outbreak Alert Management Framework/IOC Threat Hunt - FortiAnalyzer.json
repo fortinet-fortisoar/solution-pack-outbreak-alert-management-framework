@@ -384,7 +384,7 @@
     "isPrivate": false,
     "deletedAt": null,
     "recordTags": [
-        "PostCreate",
+        "Subroutine",
         "Outbreak Alert",
         "FortiAnalyzer",
         "IOC Hunt"
