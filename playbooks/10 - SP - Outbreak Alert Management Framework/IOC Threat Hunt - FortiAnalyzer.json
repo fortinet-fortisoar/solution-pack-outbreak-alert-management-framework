@@ -212,7 +212,7 @@
         },
         {
             "@type": "WorkflowStep",
-            "name": "Found FortiSIEM Search Results",
+            "name": "Found FortiAnalyzer Search Results",
             "description": null,
             "arguments": {
                 "conditions": [
@@ -220,7 +220,7 @@
                         "option": "Yes",
                         "step_iri": "\/api\/3\/workflow_steps\/2d81931a-355c-46f8-88f6-86e6076a371a",
                         "condition": "{{ vars.steps.Hunt_IOC.data.result.data | length > 0 }}",
-                        "step_name": "Format FortiSIEM Hunt Summary"
+                        "step_name": "Format FortiAnalyzer Hunt Summary"
                     },
                     {
                         "option": "No",
