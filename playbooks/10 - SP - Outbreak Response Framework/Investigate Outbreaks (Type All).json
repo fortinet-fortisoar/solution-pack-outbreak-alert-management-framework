@@ -1,0 +1,141 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "Investigate Outbreaks (Type All)",
+    "aliasName": null,
+    "tag": null,
+    "description": "Investigate all active Outbreak Alert on different SIEM tools, remediate and mitigate",
+    "isActive": true,
+    "debug": false,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [],
+    "synchronous": false,
+    "collection": "\/api\/3\/workflow_collections\/2ae30943-7a2f-435b-a100-3ec7c3e2294b",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/f934b4c4-9512-419d-9b93-49d47e67bcf6",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Find Active Outbreak Alerts",
+            "description": null,
+            "arguments": {
+                "query": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                        {
+                            "type": "object",
+                            "field": "recordStatus",
+                            "value": "\/api\/3\/picklists\/7d98e1b0-8d42-497d-a1d1-3b1ef2ce2efe",
+                            "_value": {
+                                "@id": "\/api\/3\/picklists\/7d98e1b0-8d42-497d-a1d1-3b1ef2ce2efe",
+                                "display": "Active",
+                                "itemValue": "Active"
+                            },
+                            "operator": "eq"
+                        }
+                    ]
+                },
+                "module": "outbreak_alerts?$limit=30",
+                "step_variables": []
+            },
+            "status": null,
+            "top": "165",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928770",
+            "group": null,
+            "uuid": "6074a631-bf4d-4028-b301-57e3b99d7217"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Investigate Outbreak Alert",
+            "description": null,
+            "arguments": {
+                "for_each": {
+                    "item": "{{vars.steps.Find_Active_Outbreak_Alerts}}",
+                    "parallel": false,
+                    "condition": ""
+                },
+                "arguments": {
+                    "record_metadata": "{{vars.item}}"
+                },
+                "apply_async": false,
+                "step_variables": [],
+                "pass_parent_env": false,
+                "pass_input_record": true,
+                "workflowReference": "\/api\/3\/workflows\/93d93b2d-1598-4bb7-9fa6-85c2f8b9d876"
+            },
+            "status": null,
+            "top": "300",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+            "group": null,
+            "uuid": "0b8d5adc-b7e0-4247-92bd-10128c8fb193"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "route": "f6faaf59-492d-430a-927b-6ffa56650c5b",
+                "resources": [
+                    "outbreak_alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                    "input": {
+                        "params": [],
+                        "records": "{{vars.input.records}}"
+                    }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "showToasterMessage": {
+                    "visible": false,
+                    "messageVisible": true
+                },
+                "singleRecordExecution": false
+            },
+            "status": null,
+            "top": "30",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+            "group": null,
+            "uuid": "f934b4c4-9512-419d-9b93-49d47e67bcf6"
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Find Active Outbreak Alerts -> Investigate Outbreak Alert",
+            "targetStep": "\/api\/3\/workflow_steps\/0b8d5adc-b7e0-4247-92bd-10128c8fb193",
+            "sourceStep": "\/api\/3\/workflow_steps\/6074a631-bf4d-4028-b301-57e3b99d7217",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "ca05f1cc-8ddd-4e19-865a-27b62f89cd38"
+        },
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Find Active Outbreak Alerts",
+            "targetStep": "\/api\/3\/workflow_steps\/6074a631-bf4d-4028-b301-57e3b99d7217",
+            "sourceStep": "\/api\/3\/workflow_steps\/f934b4c4-9512-419d-9b93-49d47e67bcf6",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "bb3ace2f-eacc-4066-b0db-ef911fb437e7"
+        }
+    ],
+    "groups": [],
+    "priority": "\/api\/3\/picklists\/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+    "uuid": "70d2c10e-50d4-43ce-b606-0f0d0d305fad",
+    "owners": [],
+    "isPrivate": false,
+    "deletedAt": null,
+    "recordTags": [
+        "Outbreak Alert",
+        "ManualTrigger"
+    ]
+}

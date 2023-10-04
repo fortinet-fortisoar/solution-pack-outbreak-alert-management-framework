@@ -5,11 +5,12 @@
     "config": {
         "navigation": [
             {
-                "title": "Outbreak Alert Management",
+                "editMode": false,
                 "icon": "icon icon-fraud-management",
                 "items": [
                     {
-                        "title": "Outbreak Alerts",
+                        "editMode": false,
+                        "icon": "icon icon-vulnerability",
                         "require": {
                             "module": "outbreak_alerts",
                             "action": "read"
@@ -20,11 +21,11 @@
                                 "module": "outbreak_alerts"
                             }
                         },
-                        "icon": "icon icon-vulnerability",
-                        "editMode": false
+                        "title": "Outbreak Alerts"
                     },
                     {
-                        "title": "Threat Hunt Rules",
+                        "editMode": false,
+                        "icon": "icon icon-rule-engine",
                         "require": {
                             "module": "threat_hunt_rules",
                             "action": "read"
@@ -35,11 +36,10 @@
                                 "module": "threat_hunt_rules"
                             }
                         },
-                        "icon": "icon icon-rule-engine",
-                        "editMode": false
+                        "title": "Hunt Rules"
                     }
                 ],
-                "editMode": false
+                "title": "Outbreak Management"
             }
         ]
     },
