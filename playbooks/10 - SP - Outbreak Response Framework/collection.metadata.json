@@ -1,7 +1,7 @@
 {
     "@context": "\/api\/3\/contexts\/WorkflowCollection",
     "@type": "WorkflowCollection",
-    "name": "10 - SP - Outbreak Alert Management Framework",
+    "name": "10 - SP - Outbreak Response Framework",
     "description": null,
     "visible": true,
     "image": null,

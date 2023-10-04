@@ -1,0 +1,117 @@
+{
+    "@type": "Workflow",
+    "triggerLimit": null,
+    "name": "Stop Outbreak Alert Record Tracking",
+    "aliasName": null,
+    "tag": null,
+    "description": "Inactivate the selected outbreak alert record",
+    "isActive": true,
+    "debug": false,
+    "singleRecordExecution": false,
+    "remoteExecutableFlag": false,
+    "parameters": [],
+    "synchronous": false,
+    "collection": "\/api\/3\/workflow_collections\/2ae30943-7a2f-435b-a100-3ec7c3e2294b",
+    "versions": [],
+    "triggerStep": "\/api\/3\/workflow_steps\/c743a37a-ca8a-4eb6-8d19-c857495a7ec4",
+    "steps": [
+        {
+            "@type": "WorkflowStep",
+            "name": "Start",
+            "description": null,
+            "arguments": {
+                "route": "759060a9-c9eb-4689-aa0e-f6750e37a87b",
+                "title": "Stop Tacking",
+                "resources": [
+                    "outbreak_alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                    "input": {
+                        "params": [],
+                        "records": "{{vars.input.records}}"
+                    }
+                },
+                "displayConditions": {
+                    "outbreak_alerts": {
+                        "sort": [],
+                        "limit": 30,
+                        "logic": "AND",
+                        "filters": [
+                            {
+                                "type": "object",
+                                "field": "recordStatus",
+                                "value": "\/api\/3\/picklists\/7d98e1b0-8d42-497d-a1d1-3b1ef2ce2efe",
+                                "_value": {
+                                    "@id": "\/api\/3\/picklists\/7d98e1b0-8d42-497d-a1d1-3b1ef2ce2efe",
+                                    "display": "Active",
+                                    "itemValue": "Active"
+                                },
+                                "operator": "eq"
+                            }
+                        ]
+                    }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": false,
+                "showToasterMessage": {
+                    "visible": false,
+                    "messageVisible": true
+                },
+                "singleRecordExecution": false
+            },
+            "status": null,
+            "top": "30",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+            "group": null,
+            "uuid": "c743a37a-ca8a-4eb6-8d19-c857495a7ec4"
+        },
+        {
+            "@type": "WorkflowStep",
+            "name": "Update Outbreak Alert Status Inactive",
+            "description": null,
+            "arguments": {
+                "resource": {
+                    "recordStatus": "\/api\/3\/picklists\/7d98e1b0-8d42-497d-a1d1-3b1ef2ce2efe"
+                },
+                "operation": "Append",
+                "collection": "{{vars.input.records[0]['@id']}}",
+                "__recommend": [],
+                "collectionType": "\/api\/3\/outbreak_alerts",
+                "fieldOperation": {
+                    "recordTags": "Append"
+                },
+                "step_variables": []
+            },
+            "status": null,
+            "top": "165",
+            "left": "125",
+            "stepType": "\/api\/3\/workflow_step_types\/b593663d-7d13-40ce-a3a3-96dece928722",
+            "group": null,
+            "uuid": "ab9dfbf4-40fc-4765-92c6-92b865eae2ee"
+        }
+    ],
+    "routes": [
+        {
+            "@type": "WorkflowRoute",
+            "name": "Start -> Update Outbreak Alert Status Inactive",
+            "targetStep": "\/api\/3\/workflow_steps\/ab9dfbf4-40fc-4765-92c6-92b865eae2ee",
+            "sourceStep": "\/api\/3\/workflow_steps\/c743a37a-ca8a-4eb6-8d19-c857495a7ec4",
+            "label": null,
+            "isExecuted": false,
+            "group": null,
+            "uuid": "3dc631cd-a278-4378-a59a-d6a6211ac8ce"
+        }
+    ],
+    "groups": [],
+    "priority": "\/api\/3\/picklists\/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+    "uuid": "818751f8-5b17-4d90-8b31-e94cf73143de",
+    "owners": [],
+    "isPrivate": false,
+    "deletedAt": null,
+    "recordTags": [
+        "Outbreak Alert",
+        "ManualTrigger"
+    ]
+}

@@ -1,7 +1,7 @@
 {
     "@type": "Workflow",
     "triggerLimit": null,
-    "name": "Investigate Outbreak Alert",
+    "name": "Investigate Outbreak",
     "aliasName": null,
     "tag": null,
     "description": "Investigate Outbreak Alert on different SIEM tools, remediate and mitigate",

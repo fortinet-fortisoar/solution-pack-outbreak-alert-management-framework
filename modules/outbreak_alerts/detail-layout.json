@@ -32,7 +32,7 @@
                                     "wid": "9a1e5385-5fb4-4c53-ab7a-c2c013fe5c99",
                                     "tabs": [
                                         {
-                                            "title": "Alert Details",
+                                            "title": "Outbreak Details",
                                             "active": 0,
                                             "widget": {
                                                 "type": "rows",
@@ -109,15 +109,27 @@
                                                                                             {
                                                                                                 "fields": [
                                                                                                     {
+                                                                                                        "name": "severity",
+                                                                                                        "highlightMode": true,
+                                                                                                        "readOnly": true,
+                                                                                                        "linky": true
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "name": "assignedTo",
+                                                                                                        "highlightMode": true,
+                                                                                                        "linky": true,
+                                                                                                        "readOnly": false
+                                                                                                    },
+                                                                                                    {
                                                                                                         "name": "subTitle",
                                                                                                         "highlightMode": true,
                                                                                                         "readOnly": true,
                                                                                                         "linky": true
                                                                                                     },
                                                                                                     {
-                                                                                                        "name": "severity",
+                                                                                                        "name": "threatSignal",
                                                                                                         "highlightMode": true,
-                                                                                                        "readOnly": true,
+                                                                                                        "readOnly": false,
                                                                                                         "linky": true
                                                                                                     },
                                                                                                     {
@@ -138,10 +150,16 @@
                                                                                             {
                                                                                                 "fields": [
                                                                                                     {
-                                                                                                        "name": "threatSignal",
+                                                                                                        "name": "recordStatus",
                                                                                                         "highlightMode": true,
-                                                                                                        "readOnly": false,
-                                                                                                        "linky": true
+                                                                                                        "linky": true,
+                                                                                                        "readOnly": true
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "name": "assignedDate",
+                                                                                                        "highlightMode": true,
+                                                                                                        "linky": true,
+                                                                                                        "readOnly": false
                                                                                                     },
                                                                                                     {
                                                                                                         "name": "createDate",
@@ -165,18 +183,6 @@
                                                                                                         "name": "lastRevisedDate",
                                                                                                         "highlightMode": true,
                                                                                                         "readOnly": true,
-                                                                                                        "linky": true
-                                                                                                    },
-                                                                                                    {
-                                                                                                        "name": "serviceNowTicketID",
-                                                                                                        "highlightMode": true,
-                                                                                                        "readOnly": false,
-                                                                                                        "linky": true
-                                                                                                    },
-                                                                                                    {
-                                                                                                        "name": "jiraTicketID",
-                                                                                                        "highlightMode": true,
-                                                                                                        "readOnly": false,
                                                                                                         "linky": true
                                                                                                     }
                                                                                                 ],
@@ -229,7 +235,8 @@
                                                             "wid": "d0a6ba3f-2f57-4903-ae33-abcbf4511532",
                                                             "collapsible": false,
                                                             "collapsibleIndex": 0,
-                                                            "_collapsed": false
+                                                            "_collapsed": false,
+                                                            "container": true
                                                         },
                                                         {
                                                             "columns": [
@@ -256,7 +263,7 @@
                                                                                             }
                                                                                         },
                                                                                         "icon": "fa fa-exchange",
-                                                                                        "show": true,
+                                                                                        "show": false,
                                                                                         "visible": true
                                                                                     },
                                                                                     {
@@ -286,7 +293,7 @@
                                                                                             }
                                                                                         },
                                                                                         "icon": "fa fa-th",
-                                                                                        "show": false,
+                                                                                        "show": true,
                                                                                         "visible": true
                                                                                     },
                                                                                     {
@@ -310,7 +317,8 @@
                                                                 }
                                                             ],
                                                             "wid": "222cc8a7-0f97-4600-a66a-3bb48af2d7f1",
-                                                            "_collapsed": false
+                                                            "_collapsed": false,
+                                                            "container": true
                                                         }
                                                     ]
                                                 }
@@ -320,7 +328,7 @@
                                             "visible": true
                                         },
                                         {
-                                            "title": "Mitigation Details",
+                                            "title": "Mitigation",
                                             "active": 0,
                                             "icon": "fa fa-minus-square-o",
                                             "show": false,
