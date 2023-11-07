@@ -1,64 +1,131 @@
-[Home](../README.md) |
- | -------------------------------------------- |
+| [Home](../README.md) |
+|----------------------|
 
 # Usage
 
-In this section we detail the various user flows to understand the scenarios where this solution pack’s automation addresses our needs.
+In this section, we detail the various user flows to understand the scenarios where this solution pack’s automation may address your needs.
 
 ## Outbreak Response Framework Flowchart 
  
- ![Outbreak Alerts Flowchart](./res/outbreak-alert-flow.png)
+ ![Outbreak Alerts Flowchart](./res/outbreak-alert-flow.svg)
 
-The following pointers help understand the flow of "Outbreak Response Framework" solution pack 
+The following is an ideal flow to use the **Outbreak Response Framework** solution pack:
 
-1. Install Outbreak Response Framework Solution Pack :   Installation of this solution pack creates/install the [Contents](./contents.md) in FortiSOAR
+1. Install **Outbreak Response Framework** Solution Pack and its contents listed in the [Contents](./contents.md) section.
 
-2. Configuration Wizard: After installation of "Outbreak Response Framework" solution pack "Outbreak Response Framework Configuration" wizard will launch autoamtically and user should need to [Setup Outbreak Response Framework on FortiSOAR](./setup.md#setup-outbreak-response-framework-on-fortisoar)
+2. Complete the *Outbreak Response Framework*'s **Configuration Wizard**. The wizard launches automatically after installation to help set up the *Outbreak Response Framework*. The [Setup](./setup.md#setup-outbreak-response-framework-on-fortisoar) section details the configuration process.
 
-3. Install Outbreak Response Solution Pack :
-Example: Outbreak Response - Progress MOVEit Transfer SQL Injection Vulnerability" which will install 
-    1. Outbreak Alert
-        - [Outbreak Alert details](/README.md#outbreak-alerts)
+3. Activate the **Create Ticket in ITSM Tools** playbook, under the **10 - SP - Outbreak Response Framework** playbook collection, to create tickets to track and manage hunts. Perform this step only if you have added a ticketing/ITSM solution in the configuration wizard.
+
+4. Install individual *Outbreak Response* solution packs. The [**EXAMPLE: Outbreak Response - Progress MOVEit Transfer SQL Injection Vulnerability**](#example-outbreak-response---progress-moveit-transfer-sql-injection-vulnerability) section explains the response of this solution pack to *Progress MOVEit Transfer SQL Injection Vulnerability* by way of an example.
+
+5. **Fetch CVEs for KEVs**: Using NVD integration FortiSOAR checks if an associated CVE is tagged as a KEVs. Once found, it creates the CVE records in the vulnerability module and links those records to outbreak alerts.
+
+6. **Ingest IOCs as Threat Feeds**: IOCs associated with the Outbreak are ingested as threat feeds in FortiSOAR using Fortinet FortiGuard Outbreak connector.
+
+    Users are notified and the alert severity is raised if an alert containing these IOCs is found in FortiSOAR.
+
+7. **IOC Threat Hunt**: You can perform IOC Threat Hunt, and create IOC hunt alerts of type *Outbreak* in FortiSOAR, using any of the following:
+
+    - Fortinet Fabric solutions (FortiSIEM/FortiAnalyzer)
+
+    - Other SIEM solutions (QRadar/Splunk)
+
+8. **Sigma Rules**: You can perform signature Based Threat Hunt using Sigma Rules:
+
+    1. Perform Signature-based Threat Hunting using Fortinet Fabric solutions (FortiSIEM/FortiAnalyzer) and create alerts of type *Outbreak* in FortiSOAR
+
+        ![FortiSIEM Fabric Rule](./res/fsm_fortinet_fabric.png)
+
+        ![FortiAnalyzer Fabric Rule](./res/faz_fortinet_fabric.png)
+
+    2. Perform Signature-based Threat Hunting using other SIEM solutions (QRadar/Splunk/Azure Log Analytics) and create alerts  of type *Outbreak* in FortiSOAR.
+
+        ![Signature Based Threat Hunting Rules](./res/sigma_rule.png)
+
+8. **Ticketing/ITSM**: If any vulnerability is found using the IOC Threat Hunt or Signature Based Threat Hunt automatically Alert is created for that vulnerability in FortiSOAR and as part of your response or threat management strategy automatically creates tickets using Ticketing/ITSM Integrations (Jira/ServiceNow) for Outbreak Alert(vulnerability). This step is performed only if you have added a ticketing/ITSM solution in the configuration wizard.
+
+9. **Remediation**: We can take remediation using two ways
+
+    1. **Automatically**: FortiSOAR automatically blocks indicators, of type **_IP_** and **_URL_**, using the FortiGate Integration. For rest of the indicators, a FortiSOAR task is created.
+
+    2. **Manually**: FortiSOAR automatically creates a FortiSOAR task to block all the indicators using the FortiGate Integration.
+
+10. **Mitigation**: For every Outbreak Alert have associated mitigation. FortiSOAR provides the mitigation recommendations using public sources, like patch available, etc.
+
+    ![Mitigation](./res/mitigation.png)
+
+## Example: Outbreak Response - Progress MOVEit Transfer SQL Injection Vulnerability
+
+Before performing the steps outlined in this section, we recommend setting the global variable `Demo_mode` to `true`. Once done, the following steps generate example data for a better understanding of this solution packs functionality.
+
+1. Install **Outbreak Response Framework** Solution Pack.
+
+2. Complete the *Outbreak Response Framework*'s **Configuration Wizard**.
+
+3. Activate the **Create Ticket in ITSM Tools** playbook, under the **10 - SP - Outbreak Response Framework** playbook collection, to create tickets to track and manage hunts. Perform this step only if you have added a ticketing/ITSM solution in the configuration wizard.
+
+4. Install **Outbreak Response - Progress MOVEit Transfer SQL Injection Vulnerability**.
+
+5. Navigate to the **Outbreak Management** menu and select **Outbreak Alerts** to view the following screen:
+
+    ![](./res/outbreak-alerts-moveit.png)
+
+6. Click to open the alert and view the following screen that contains description and background information:
+
+    ![](./res/outbreak-alerts-moveit-details.png)
+
+7. Click the **Execute** button and select **Investigate Outbreak** to begin investigation. Since the global variable `Demo_mode` is set to `true`, you are given example data to view and understand the information retrieved from investigation.
+
+    ![](./res/outbreak-alerts-moveit-investigate-outbreak.png)
+
+8. Scroll the alert details page to view CVE IDs, correlations, and alerts, apart from other information:
+
+    ![](./res/outbreak-alerts-moveit-more-details.png)
+
+    The following information becomes available as the **Outbreak Response** solution pack creates the following:
+
+    1. Outbreak Alerts: The outbreak alerts contain the following
+
+        - Outbreak Alert details
+
         - Mitigation Details
-    2. [Threat Hunt Rules](/README.md#threat-hunt-rules)
-        - Yara Rules: YARA is a tool that you can use to help malware researchers identify and classify malware samples that focus on scanning and identifying malicious files. YARA rules are used to help cyber defenders look for the potential poison in their systems.
+
+    2. Threat Hunt Rules: The following rules are created with the solution pack:
+
+        - Yara Rules: YARA Rules help malware researchers identify and classify malware samples that focus on scanning and identifying malicious files.
+
         ![Yara Rules](./res/yara_rule.png)
-        - Sigma Rules: It provides a standard format for log events. They are for searching/pattern matching through log data. Sigma rule is a YAML file with standardized sections and structured fields. Using Sigma Rules we can create Signature Based Threat Hunt Rules for various Threat Detection Integrations (SIEM/Analyzer/EDR etc.)
-        - Fortinet Fabric Rules: With every Outbreak Alert FortiGuard provides the FortiAnalyzer and FortiSIEM fabric solution
 
-4. Create CVE's for KEV's: If any CVE(s) is associated with Outbreak Alert then FortiSOAR checks if they are tagged as KEV's (using the NVD integration) and creates the CVE's records in vulnarability module and link those record to Outbreak Alert
+        - Sigma Rules: Sigma Rules provide a standard format for log events. They are helpful in searching or pattern matching through log data.
+        
+            Using Sigma Rules we can create signature-based Threat Hunt Rules for various Threat Detection Integrations like SIEM, Analyzer, or EDR.
+        
+        - Fortinet Fabric Rules: With every Outbreak Alert FortiGuard provides FortiAnalyzer and FortiSIEM as part of Fortinet fabric solution.
 
-5. Ingest IOCs as Threat Feeds: IOCs associated to the Outbreak are ingested as threat feeds in FortiSOAR Say, a new IOC is added to the same outbreak, user does not need to update the solution pack, as we will be hosting the IOCs on our public github page, where our team will be updating them. so threat hunting queries always get the latest IOCs.
+9. Head over to the **Dashboard** and select **Outbreak Response Overview** to view following information.
 
-If any other ALERT in FortiSOAR containing those IOCs is found, user is notified and severity is raised.
+    ![Outbreak Dashboard](./res/dashboard-outbreak-response-overview.png)
 
-6. IOC Threat Hunt:
+## Workaround - Uniqueness Constraint Violation
 
-    a. Perform IOC Threat Hunting using Fortinet Fabric solutions (FortiSIEM/FortiAnalyzer) and creates Outbreak IOC Hunt Alerts in FortiSOAR
+Under demo mode when *Threat Hunting - FortiAnalyzer - Get Related Assets* playbook creates an asset, a uniqueness constraint violation occurs. This section offers a workaround.
 
-    b. Perform IOC Threat Hunting using SIEM solutions (QRadar/Splunk) and creates Outbreak IOC Hunt Alerts in FortiSOAR
+1. Navigate to **Automation** > **Playbooks**.
 
-7. Signature Based Threat Hunt (Sigma Rules):
+2. Click to open the **10 - SP - Outbreak Response Framework** playbook collection.
 
-    a.Perform Signature Based Threat Hunting using Fortinet Fabric solutions (FortiSIEM/FortiAnalyzer) and creates Outbreak Alerts in FortiSOAR
-    ![FortiSIEM Fabric Rule](./res/fsm_fortinet_fabric.png)
+3. Click to open the **Threat Hunting - FortiAnalyzer - Get Related Assets** playbook.
 
-    ![FortiAnalyzer Fabric Rule](./res/faz_fortinet_fabric.png)
+4. Double-click to open **Create Asset** step.
 
-    b. Perform Signature Based Threat Hunting using SIEM solutions (QRadar/Splunk/Azure Log Analytics) and creates Outbreak Alerts in FortiSOAR.
-    ![Signature Based Threat Hunting Rules](./res/sigma_rule.png)
+5. Click the Correlations tab under **Fields**.
 
-7. Ticketing/ITSM: If any vulnerability found using the IOC Threat Hunt or Signature Based Threat Hunt automatically Alert is created for that vulnerability in FortiSOAR and as part of your response or threat management strategy automatically creates tickets using Ticketing/ITSM Integrations (Jira/ServiceNow) for Outbreak Alert(vulnerability) 
+6. Select **Overwrite** and then **Append**.
 
-8. Remediation: We can take remediation using two ways
-
-    a. Automatically: FortiSOAR automatically blocks all the indicators using the FortiGate Integration
-
-    b. Manually: FortiSOAR automatically creates the FortiSOAR Task to block all the indicators
-
-9. Mitigation: For every Outbreak Alert have associated mitigation. FortiSOAR provide the mitigation recommendations using public sources, like patch available etc.
-![Mitigation](./res/mitigation.png)
+7. Click **Save** and **Save Playbook** to save the changes to the playbook.
 
 # Next Steps
+
 | [Installation](./setup.md#installation) | [Configuration](./setup.md#configuration) | [Contents](./contents.md) |
-| ----------------------------------------- | ------------------------------------------- | --------------------------- |
+|-----------------------------------------|-------------------------------------------|---------------------------|

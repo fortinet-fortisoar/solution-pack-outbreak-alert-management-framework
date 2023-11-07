@@ -1,7 +1,0 @@
-[
-    {
-        "name": "outbreakAlertConfiguration",
-        "title": "Outbreak Alert Configuration Wizard",
-        "install_mode": "rpm"
-    }
-]
