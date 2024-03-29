@@ -4,7 +4,8 @@
 - **Certified**: Yes
 - **Publisher**: Fortinet
 - **Compatible Version**: 7.4.0 and later
- 
+- [**Release Notes**](./docs/release_notes.md)
+  
 <table>
     <tr>
         <th>NOTE</th>
