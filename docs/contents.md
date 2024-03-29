@@ -84,8 +84,6 @@ The **Outbreak Response Framework** solution pack contains the following resourc
 
 ![](./res/icon-inactive.svg): To create tickets in your Ticketing or ITSM integrations, **_activate_** the *Create Ticket in ITSM Tools* playbook.
 
-![](./res/icon-known-issue.svg): Under demo mode when *Threat Hunting - FortiAnalyzer - Get Related Assets* playbook creates an asset, a uniqueness constraint violation occurs. For a possible solution, refer to the section **Usage** > **Workaround uniqueness constraint violation** [here](./usage.md#workaround---uniqueness-constraint-violation).
-
 ## System View
 
 | Name                | Description                               |
