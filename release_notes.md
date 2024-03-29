@@ -9,4 +9,4 @@
   - Japanese
   - Korean
 
-> **Note:** This change is applicable from FortiSOAR 7.5.0 and later.
+  > **Note:** Language Support change is applicable from FortiSOAR 7.5.0 and later.
