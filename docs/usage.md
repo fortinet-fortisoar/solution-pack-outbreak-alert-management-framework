@@ -15,9 +15,7 @@ The following is an ideal flow to use the **Outbreak Response Framework** soluti
 
 2. Complete the *Outbreak Response Framework*'s **Configuration Wizard**. The wizard launches automatically after installation to help set up the *Outbreak Response Framework*. The [Setup](./setup.md#setup-outbreak-response-framework-on-fortisoar) section details the configuration process.
 
-3. Activate the **Create Ticket in ITSM Tools** playbook, under the **10 - SP - Outbreak Response Framework** playbook collection, to create tickets to track and manage hunts. Perform this step only if you have added a ticketing/ITSM solution in the configuration wizard.
-
-4. Install individual *Outbreak Response* solution packs. The [**EXAMPLE: Outbreak Response - Progress MOVEit Transfer SQL Injection Vulnerability**](#example-outbreak-response---progress-moveit-transfer-sql-injection-vulnerability) section explains the response of this solution pack to *Progress MOVEit Transfer SQL Injection Vulnerability* by way of an example.
+3. Install individual *Outbreak Response* solution packs. The [**EXAMPLE: Outbreak Response - Progress MOVEit Transfer SQL Injection Vulnerability**](#example-outbreak-response---progress-moveit-transfer-sql-injection-vulnerability) section explains the response of this solution pack to *Progress MOVEit Transfer SQL Injection Vulnerability* by way of an example.
 
 5. **Fetch CVEs for KEVs**: Using NVD integration FortiSOAR checks if an associated CVE is tagged as a KEVs. Once found, it creates the CVE records in the vulnerability module and links those records to outbreak alerts.
 
@@ -43,9 +41,7 @@ The following is an ideal flow to use the **Outbreak Response Framework** soluti
 
         ![Signature Based Threat Hunting Rules](./res/sigma_rule.png)
 
-8. **Ticketing/ITSM**: If any vulnerability is found using the IOC Threat Hunt or Signature Based Threat Hunt automatically Alert is created for that vulnerability in FortiSOAR and as part of your response or threat management strategy automatically creates tickets using Ticketing/ITSM Integrations (Jira/ServiceNow) for Outbreak Alert(vulnerability). This step is performed only if you have added a ticketing/ITSM solution in the configuration wizard.
-
-9. **Remediation**: We can take remediation using two ways
+8. **Remediation**: We can take remediation using two ways
 
     1. **Automatically**: FortiSOAR automatically blocks indicators, of type **_IP_** and **_URL_**, using the FortiGate Integration. For rest of the indicators, a FortiSOAR task is created.
 

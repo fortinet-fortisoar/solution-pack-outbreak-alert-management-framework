@@ -7,14 +7,21 @@ The **Outbreak Response Framework** solution pack contains the following resourc
 
 ## Picklist
 
-| Name                    | Description                                                                        |
-|:------------------------|------------------------------------------------------------------------------------|
-| AlertType               | List of Alert Type (Added "Outbreak Alert" item)                                   |
-| Outbreak Alert Severity | List of outbreak severity item values (Medium, High and Critical)                  |
-| Rule Type               | List of Outbreak Alert Threat Hunt Rule item values (Yara, Sigma, Fortinet Fabric) |
-| Threat Hunt Tools       | List of Threat Hunt Integration item value which will used for Threat Hunting      |
-| Ticketing Tools         | List of Ticketing/ITSM Integrations (Jira/ServiceNow)                              |
-| Record Status           | List of Outbreak Alert status item value(Active, Resolved)                         |
+| Name                                                    | Description                                                                                                 |
+|:--------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|
+| AlertType![Removed](./res/icon-removed.svg)             | List of Alert Type (Added "Outbreak Alert" item)                                                            |
+| Outbreak Alert Severity                                 | List of outbreak severity item values (Medium, High and Critical)                                           |
+| Threat Hunt Rule Type![Renamed](./res/icon-renamed.svg) | (Previously *Rule Type*) List of Outbreak Alert Threat Hunt Rule item values (Yara, Sigma, Fortinet Fabric) |
+| Threat Hunt Tools                                       | List of Threat Hunt Integration item value which will used for Threat Hunting                               |
+| Outbreak Alert Status![Renamed](./res/icon-renamed.svg) | (Previously *Record Status*) List of Outbreak Alert status item value(Active, Resolved)                     |
+
+## Record Sets
+
+| Name                                | Description                                                                                                                              |
+|:------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------|
+| `outbreak-threat-hunt-tools`        | Saves the names of outbreak hunt tools and helps the outbreak configuration wizard to select the required tools.   |
+| `outbreak-auto-install-time-frame`  | Saves the number of days for which the outbreak response solution packs are set to install during configuration.   |
+| `outbreak-threat-hunt-tools-params` | Saves the outbreak hunt tools parameters and helps the outbreak configuration wizard to populate these parameters. |
 
 ## Module Schema
 
@@ -40,15 +47,19 @@ The **Outbreak Response Framework** solution pack contains the following resourc
 
 ## Widgets
 
-| Name                                | Description                                                                                                                                                                                                                                                                |
-|:------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Outbreak Alert Configuration Wizard | Outbreak Response Framework Configuration Wizard will provide to select the "Threat Detection Integrations" sources to run outbreak response hunt activities and "Ticketing/ITSM Integrations" sources as part of your response or threat management strategy in FortiSOAR |
+| Name                                                | Description                                                                                                                                                                                                                   |
+|:----------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Outbreak Response Framework Configuration Wizard    | Outbreak Response Framework Configuration Wizard has options to select the Threat Detection Integrations sources to run outbreak response hunt activities as part of your response or threat management strategy in FortiSOAR |
+| Playbook Execution Wizard![new](./res/icon-new.svg) | The Playbook Execution Wizard widget renders playbook execution logs and related comments on the wizard                                                                                                                       |
+| Playbook Buttons![new](./res/icon-new.svg)          | The Playbook Buttons widget creates playbook buttons on a records detailed view                                                                                                                                               |
 
 ## Roles
 
 | Name                 | Description                              |
 |:---------------------|:-----------------------------------------|
 | Full App Permissions | Essentially the root user, use carefully |
+|SOC Manager||
+|SOC Analyst||
 
 ## Playbook Collection
 
@@ -81,8 +92,6 @@ The **Outbreak Response Framework** solution pack contains the following resourc
 | IOC Threat Hunt                                                                    | Hunt the IOCs on different SIEM and analyzer Solutions                                                               |
 
 >**Warning:** We recommend that you clone these playbooks before customizing to avoid loss of information while upgrading the solution pack.
-
-![](./res/icon-inactive.svg): To create tickets in your Ticketing or ITSM integrations, **_activate_** the *Create Ticket in ITSM Tools* playbook.
 
 ![](./res/icon-known-issue.svg): Under demo mode when *Threat Hunting - FortiAnalyzer - Get Related Assets* playbook creates an asset, a uniqueness constraint violation occurs. For a possible solution, refer to the section **Usage** > **Workaround uniqueness constraint violation** [here](./usage.md#workaround---uniqueness-constraint-violation).
 
