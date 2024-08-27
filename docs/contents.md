@@ -55,45 +55,37 @@ The **Outbreak Response Framework** solution pack contains the following resourc
 
 ## Roles
 
-| Name                 | Description                              |
-|:---------------------|:-----------------------------------------|
-| Full App Permissions | Essentially the root user, use carefully |
-|SOC Manager||
-|SOC Analyst||
+| Name                 | Description                                                                                                        |
+|:---------------------|:-------------------------------------------------------------------------------------------------------------------|
+| Full App Permissions | Essentially the root user, use carefully                                                                           |
+| SOC Manager          | Responsible for Incident Investigation and other remediation and containment-related tasks.                        |
+| SOC Analyst          | Responsible for Alert Triages, false-positive filtering, and escalating potentially malicious alerts to Incidents. |
 
 ## Playbook Collection
 
 | 10 - SP - Outbreak Response Framework |
 |:-------------------------------------:|
 
-| Playbook Name                                                                      | Description                                                                                                          |
-|:-----------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------|
-| Configure Threat Hunt Integration                                                  | Configure the threat hunt integration for outbreak alert                                                             |
-| Threat Hunting - QRadar - Search Query                                             | Executes an outbreak alert Ariel query on the QRadar server and create FortiSOAR Alert                               |
-| Create IOCs as Threat Intel Feeds                                                  | Create the Threat Feeds in Threat Intel Module for the specified outbreak alert IOCs                                 |
-| IOC Threat Hunt - Splunk                                                           | Performs Splunk IOC Hunting on the specified IOC.                                                                    |
-| Remediation - Block Indicators                                                     | Blocks malicious outbreak alert indicators                                                                           |
-| Create Ticket in ITSM Tools![](./res/icon-inactive.svg)                            | Create the ServiceNow/Jira ticket for the outbreak alert                                                             |
-| Investigate Outbreaks (Type All)                                                   | Investigate all active Outbreak Alert on different SIEM tools, remediate and mitigate                                |
-| Threat Hunting - FortiSIEM - Fetch Associated Events                               | Retrieves all associated events for a specified incident from the Fortinet FortiSIEM server based on the incident ID |
-| Threat Hunting - Splunk - Search Query                                             | Invokes a search on the Splunk server based on the outbreak alert search query                                       |
-| IOC Threat Hunt - FortiSIEM                                                        | Performs FortiSIEM IOC Hunting on the specified IOC.                                                                 |
-| Stop Outbreak Alert Record Tracking                                                | Inactivate the selected outbreak alert record                                                                        |
-| Threat Hunting - FortiAnalyzer - Get Related Assets![](./res/icon-known-issue.svg) | Retrieves device information from Fortinet FortiAnalyzer based on the device name                                    |
-| IOC Threat Hunt - FortiAnalyzer                                                    | Performs FortiAnalyzer IOC Hunting on the specified IOC.                                                             |
-| Threat Hunting - Azure Log Analytics - Search Query                                | Retrieves data using a outbreak alert query from Azure Log Analytics and create FortiSOAR events                     |
-| IOC Threat Hunt - QRadar                                                           | Performs QRadar IOC Hunting on the specified IOC.                                                                    |
-| Investigate Outbreak                                                               | Investigate Outbreak Alert on different SIEM tools, remediate and mitigate                                           |
-| Threat Hunting - Splunk - Update Notable Fields                                    | Invokes a search on the Splunk server based on the notable data                                                      |
-| Threat Hunting - FortiSIEM - Get Incident                                          | Retrieves a list and details of incidents from the Fortinet FortiSIEM server based on the outbreak alert event type  |
-| Threat Hunting - FortiAnalyzer - Get Events                                        | Retrieve all events from FortiAnalyzer based on the outbreak alert filter query                                      |
-| Threat Hunting - Splunk - Create Inbound Alert                                     | Creates an alert in FortiSOAR with the event data                                                                    |
-| Find Known Exploited Vulnerabilities (KEV) CVEs                                    | Fetch Known Exploited Vulnerabilities (KEV) CVEs from NIST and create CVE record.                                    |
-| IOC Threat Hunt                                                                    | Hunt the IOCs on different SIEM and analyzer Solutions                                                               |
+| Playbook Name                                               | Description                                                                                                                                  |
+|:------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------|
+| Investigate Outbreaks (Type All)                            | Investigate New and Tracking outbreaks across various SIEM tools, then take action to remediate and mitigate them.                           |
+| Investigate Outbreak                                        | Investigate the Outbreak Alert using various threat-hunting tools to understand the scope and impact of the threat                           |
+| Stop Outbreak Alert Record Tracking                         | Update the status of the outbreak alert to "Resolved," and include the resolved notes and resolved reason in the associated outbreak alert.  |
+| Find and Link Affected Assets                               | Examine vulnerabilities associated with the outbreak CVEs, and if any are found, identify the affected assets and link them to the outbreak. |
+| Remediate and Mitigate Outbreak Response Alert              | Block all types of outbreak response alert indicators on the firewall according to their block status and take steps to mitigate them.       |
+| Outbreak Alert Time Frame Analysis                          | Identify and deactivate outbreak alerts whose investigation time frame has expired.                                                          |
+| Automated Deployment: Outbreak Alert Response Solution Pack | Automate Installation of Recent Outbreak Alert Solutions Pack (Last x Days) with Email Notification                                          |
+| > Automated Deployment > Get Outbreak CVEs and IOC Details  | Retrieve Outbreak CVEs and IOC details, and set the last investigation time for newly installed outbreak alerts.                             |
+| Configure Outbreak Response Framework                       | Set up the outbreak response framework, configure global value key store entries, and set up schedules for use in outbreak investigations.   |
+| Get Outbreak CVEs and IOCs Details                          | Obtain outbreak alert CVE details from NIST and IOC information from Fortinet FortiGuard.                                                    |
+| Find Known Exploited Vulnerabilities (KEV) CVEs             | Fetch Known Exploited Vulnerabilities (KEV) CVEs from NIST and create CVE record.                                                            |
+| Find Known Exploited Vulnerabilities (KEV) CVEs             | Retrieve Known Exploited Vulnerabilities (KEV) CVEs from NIST and create a CVE record.                                                       |
+| Create IOCs as Threat Intel Feeds                           | Obtain the IOCs from Fortinet FortiGuard and create the threat feeds in the Threat Intel module for the specified outbreak alert.            |
 
->**Warning:** We recommend that you clone these playbooks before customizing to avoid loss of information while upgrading the solution pack.
+>[!Warning]
+>We recommend that you clone these playbooks before customizing to avoid loss of information while upgrading the solution pack.
 
-![](./res/icon-known-issue.svg): Under demo mode when *Threat Hunting - FortiAnalyzer - Get Related Assets* playbook creates an asset, a uniqueness constraint violation occurs. For a possible solution, refer to the section **Usage** > **Workaround uniqueness constraint violation** [here](./usage.md#workaround---uniqueness-constraint-violation).
+<!-- ![](./res/icon-known-issue.svg): Under demo mode when *Threat Hunting - FortiAnalyzer - Get Related Assets* playbook creates an asset, a uniqueness constraint violation occurs. For a possible solution, refer to the section **Usage** > **Workaround uniqueness constraint violation** [here](./usage.md#workaround---uniqueness-constraint-violation). -->
 
 ## System View
 
