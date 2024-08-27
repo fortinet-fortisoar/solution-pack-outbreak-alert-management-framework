@@ -83,9 +83,13 @@ After installation of the **Outbreak Response Framework** solution pack, run the
         - *High*
         - *Medium*
 
-    - **Outbreak Alert Update Notification**:  Specify email addresses authorized to receive outbreak updates. You can specify multiple email addresses separated by a comma (`,`).
+    - **Outbreak Alert Update Notification**:  Specify email addresses authorized to receive outbreak updates. You can specify multiple email addresses separated by a comma.
 
-8. Click **Finish** to complete the configuration process.
+8. **Summary**
+
+    Click the button **Ingest Now** to install the outbreak response solution packs of the severity selected on the previous screen.
+
+    Click **Finish** to complete the configuration process.
 
     ![All set](./res/config-wizard-06.png)
 

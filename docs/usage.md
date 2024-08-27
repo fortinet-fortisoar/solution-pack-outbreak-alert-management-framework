@@ -7,31 +7,36 @@ In this section, we detail the various user flows to understand the scenarios wh
 
 ## Outbreak Response Framework Flowchart 
  
- ![Outbreak Alerts Flowchart](./res/outbreak-alert-flow.svg)
+ <!-- ![Outbreak Alerts Flowchart](./res/outbreak-alert-flow.svg) -->
 
 The following is an ideal flow to use the **Outbreak Response Framework** solution pack:
 
-1. Install **Outbreak Response Framework** Solution Pack and its contents listed in the [Contents](./contents.md) section.
+1. Install **Outbreak Response Framework** solution pack.
 
-2. Complete the *Outbreak Response Framework*'s **Configuration Wizard**. The wizard launches automatically after installation to help set up the *Outbreak Response Framework*. The [Setup](./setup.md#setup-outbreak-response-framework-on-fortisoar) section details the configuration process.
+2. Complete the *Outbreak Response Framework*'s **Configuration Wizard**. The [Setup](./setup.md#setup-outbreak-response-framework-on-fortisoar) section details the configuration process.
 
-3. Install individual *Outbreak Response* solution packs. The [**EXAMPLE: Outbreak Response - Progress MOVEit Transfer SQL Injection Vulnerability**](#example-outbreak-response---progress-moveit-transfer-sql-injection-vulnerability) section explains the response of this solution pack to *Progress MOVEit Transfer SQL Injection Vulnerability* by way of an example.
+3. Install individual *Outbreak Response* solution packs. You can specify if the outbreak response solution packs are installed automatically.
 
-5. **Fetch CVEs for KEVs**: Using NVD integration FortiSOAR checks if an associated CVE is tagged as a KEVs. Once found, it creates the CVE records in the vulnerability module and links those records to outbreak alerts.
+    Additionally, to install outbreak response solution packs, click **Ingest Now** button on the summary page.
+    
+>[!Note]
+>The [**EXAMPLE: Outbreak Response - Progress MOVEit Transfer SQL Injection Vulnerability**](#example-outbreak-response---progress-moveit-transfer-sql-injection-vulnerability) section explains the response of **Outbreak Response Framework** solution pack to *Progress MOVEit Transfer SQL Injection Vulnerability* by way of an example.
 
-6. **Ingest IOCs as Threat Feeds**: IOCs associated with the Outbreak are ingested as threat feeds in FortiSOAR using Fortinet FortiGuard Outbreak connector.
+4. **Fetch CVEs for KEVs**: Using NIST integration FortiSOAR checks if an associated CVE is tagged as a KEV. Once found, it creates CVE records in the vulnerability module and links those records to outbreak alerts.
+
+5. **Ingest IOCs as Threat Feeds**: IOCs associated with the Outbreak are ingested as threat feeds in FortiSOAR using Fortinet FortiGuard Outbreak connector.
 
     Users are notified and the alert severity is raised if an alert containing these IOCs is found in FortiSOAR.
 
-7. **IOC Threat Hunt**: You can perform IOC Threat Hunt, and create IOC hunt alerts of type *Outbreak* in FortiSOAR, using any of the following:
+6. **IOC Threat Hunt**: You can perform IOC Threat Hunt, and create IOC hunt alerts of type *Outbreak* in FortiSOAR, using any of the following:
 
     - Fortinet Fabric solutions (FortiSIEM/FortiAnalyzer)
 
     - Other SIEM solutions (QRadar/Splunk)
 
-8. **Sigma Rules**: You can perform signature Based Threat Hunt using Sigma Rules:
+7. **Sigma Rules**: You can perform signature Based Threat Hunt using Sigma Rules:
 
-    1. Perform Signature-based Threat Hunting using Fortinet Fabric solutions (FortiSIEM/FortiAnalyzer) and create alerts of type *Outbreak* in FortiSOAR
+    1. Perform Signature-based Threat Hunting using Fortinet Fabric solutions (FortiSIEM/FortiAnalyzer) and create alerts of type *Outbreak* in FortiSOAR.
 
         ![FortiSIEM Fabric Rule](./res/fsm_fortinet_fabric.png)
 
@@ -47,7 +52,7 @@ The following is an ideal flow to use the **Outbreak Response Framework** soluti
 
     2. **Manually**: FortiSOAR automatically creates a FortiSOAR task to block all the indicators using the FortiGate Integration.
 
-10. **Mitigation**: For every Outbreak Alert have associated mitigation. FortiSOAR provides the mitigation recommendations using public sources, like patch available, etc.
+9. **Mitigation**: For every Outbreak Alert have associated mitigation. FortiSOAR provides the mitigation recommendations using public sources, like patch available, etc.
 
     ![Mitigation](./res/mitigation.png)
 
@@ -95,7 +100,7 @@ Before performing the steps outlined in this section, we recommend setting the g
 
         - Sigma Rules: Sigma Rules provide a standard format for log events. They are helpful in searching or pattern matching through log data.
         
-            Using Sigma Rules we can create signature-based Threat Hunt Rules for various Threat Detection Integrations like SIEM, Analyzer, or EDR.
+        Using Sigma Rules we can create signature-based Threat Hunt Rules for various Threat Detection Integrations like SIEM, Analyzer, or EDR.
         
         - Fortinet Fabric Rules: With every Outbreak Alert FortiGuard provides FortiAnalyzer and FortiSIEM as part of Fortinet fabric solution.
 
@@ -103,7 +108,7 @@ Before performing the steps outlined in this section, we recommend setting the g
 
     ![Outbreak Dashboard](./res/dashboard-outbreak-response-overview.png)
 
-## Workaround - Uniqueness Constraint Violation
+<!-- ## Workaround - Uniqueness Constraint Violation
 
 Under demo mode when *Threat Hunting - FortiAnalyzer - Get Related Assets* playbook creates an asset, a uniqueness constraint violation occurs. This section offers a workaround.
 
@@ -119,7 +124,7 @@ Under demo mode when *Threat Hunting - FortiAnalyzer - Get Related Assets* playb
 
 6. Select **Overwrite** and then **Append**.
 
-7. Click **Save** and **Save Playbook** to save the changes to the playbook.
+7. Click **Save** and **Save Playbook** to save the changes to the playbook. -->
 
 # Next Steps
 

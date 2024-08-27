@@ -32,6 +32,11 @@ Dive deep into the details of every Outbreak Alert with our robust Threat Hunt R
 
 Unlock the full potential of your cybersecurity defenses with the *Outbreak Response Framework* &mdash; because in the fight against cyber threats, staying informed and proactive makes all the difference.
 
+## Additional Resources
+
+- [Overview of Outbreak Response Framework](./docs/background-information.md)
+- [Using Pluggable Threat Hunting Framework](./docs/pluggable-threat-hunting.md)
+- [Triggering and Monitoring Playbooks Using Playbook Execution Wizard](./docs/trigger-and-monitor-pb-with-peb.md)
 
 # Next Steps
 | [Installation](./docs/setup.md#installation) | [Configuration](./docs/setup.md#configuration) | [Usage](./docs/usage.md) | [Contents](./docs/contents.md) |
