@@ -9,19 +9,19 @@ The **Outbreak Response Framework** solution pack contains the following resourc
 
 | Name                                                    | Description                                                                                                 |
 |:--------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|
-| AlertType![Removed](./res/icon-removed.svg)             | List of Alert Type (Added "Outbreak Alert" item)                                                            |
 | Outbreak Alert Severity                                 | List of outbreak severity item values (Medium, High and Critical)                                           |
-| Threat Hunt Rule Type![Renamed](./res/icon-renamed.svg) | (Previously *Rule Type*) List of Outbreak Alert Threat Hunt Rule item values (Yara, Sigma, Fortinet Fabric) |
 | Threat Hunt Tools                                       | List of Threat Hunt Integration item value which will used for Threat Hunting                               |
+| Threat Hunt Rule Type![Renamed](./res/icon-renamed.svg) | (Previously *Rule Type*) List of Outbreak Alert Threat Hunt Rule item values (Yara, Sigma, Fortinet Fabric) |
 | Outbreak Alert Status![Renamed](./res/icon-renamed.svg) | (Previously *Record Status*) List of Outbreak Alert status item value(Active, Resolved)                     |
+| AlertType![Removed](./res/icon-removed.svg)             | List of Alert Type (Added "Outbreak Alert" item)                                                            |
 
 ## Record Sets
 
-| Name                                | Description                                                                                                                              |
-|:------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------|
-| `outbreak-threat-hunt-tools`        | Saves the names of outbreak hunt tools and helps the outbreak configuration wizard to select the required tools.   |
-| `outbreak-auto-install-time-frame`  | Saves the number of days for which the outbreak response solution packs are set to install during configuration.   |
-| `outbreak-threat-hunt-tools-params` | Saves the outbreak hunt tools parameters and helps the outbreak configuration wizard to populate these parameters. |
+| Name                                | Description                                                                                                                                                                         |
+|:------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `outbreak-threat-hunt-tools`        | Saves the names of outbreak hunt tools, like FortiSIEM, FortiAnalyzer, etc., and helps the outbreak configuration wizard to select the required tools.                              |
+| `outbreak-auto-install-time-frame`  | Saves the number of days for which the outbreak response solution packs are set to install during configuration.                                                                    |
+| `outbreak-threat-hunt-tools-params` | Saves the outbreak hunt tools parameters, like ADOM name for FortiAnalyzer and `splunk_index` for Splunk, and helps the outbreak configuration wizard to populate these parameters. |
 
 ## Module Schema
 

@@ -1,37 +1,52 @@
 # What's New
 
-- **Outbreak Management** - A new look!
-    Clicking the Outbreak Management in the navigation menu opens a page containing following tabs:
-        - **Dashboard**: Displays the Outbreak Response Overview with visuals like:
-            - Outbreak Status (Last 30 Days)
-            - KEVs For Outbreak CVEs (Last 30 Days)
-            - Recent Outbreaks Detected
-            - Top 10 Outbreak Threat Feeds
-            - and many more!
-        - **Outbreaks**: Displays the outbreak alert records
-        - **Hunt Rules**: Contains Fortinet Fabric Rules, Sigma Rules, and YARA Rules rules related to installed outbreak response solution packs
+#### Outbreak Management - A New Look!
 
-- Following new pages have been added:
-    - **Configure Integration**: Contains separate configuration tab for each integration selected on the *Select Integration* page.
-    - **Investigation Schedule**: Automate the investigation frequency and customize the investigation window.
-    - **Installation & Notification**: Receive notifications when an outbreak specific solution pack becomes available and automatically install them.
-    - Added a new **Ingest Now** button appears on the **Summary** page to install the latest outbreak response solution packs.
+Get ready to experience a revamped Outbreak Management interface designed to streamline your workflow and enhance your visibility. When you click *Outbreak Management* in the navigation menu, you’re greeted with an intuitive layout featuring these powerful tabs:
 
-- The following widgets have been added to this solution pack:
-    - Playbook Execution Wizard
-    - Playbook Buttons
+- **Dashboard**: Stay informed with a dynamic Outbreak Response Overview, showcasing:
+    - Outbreak Status (Last 30 Days)
+    - KEVs For Outbreak CVEs (Last 30 Days)
+    - Recent Outbreaks Detected
+    - Top 10 Outbreak Threat Feeds
+    - …and so much more!
+
+- **Outbreaks**: Access comprehensive records of all outbreak alerts at your fingertips.
+
+- **Hunt Rules**: Explore and manage Fortinet Fabric Rules, Sigma Rules, and YARA Rules linked to your outbreak response solution packs.
+
+#### Wizard Enhancements
+
+The wizard has received several key upgrades, making your configuration process smoother and more efficient:
+
+- Each integration now has its dedicated configuration tab for a more organized setup experience.
+  
+- Take control of your security operations by automating investigation frequencies and tailoring your investigation windows to fit your needs.
+  
+- Never miss an update! Opt for automatic installation and get near-instant notifications when outbreak-specific solution packs are available.
+
+- A brand-new **Ingest Now** button on the *Summary* page allows you to install the latest outbreak response solution packs instantly.
+
+#### New Widgets Added
+
+We’ve added cutting-edge widgets to boost your productivity:
+
+- **Playbook Execution Wizard**: Simplify and streamline your playbook execution with an intuitive, user-friendly wizard.
+
+- **Playbook Buttons**: Execute your playbooks with a single click, directly from the dashboard.
 
 - The picklist *Rule Type* has been renamed to **Threat Hunt Rule Type**.
-- The picklist *Record Status* has been renamed to **Outbreak Alert Status**.
+
+- The picklist *Record Status* has been renamed to **Outbreak Alert Status** to provide clearer context and more specific terminology, reflecting its focus on outbreak-related alerts. This change enhances user understanding and aligns with the outbreak management system's terminology, making it easier for analysts to identify and manage relevant alerts.
     - This picklist has additional options - `New` and `Deactivate`.
     - The picklist item *Active* has been renamed to **Tracking**.
 
-- Following *Record Sets* have been added:
+- The addition of the following Record Sets aims to enhance the configuration experience by offering more granular control and customization options:
     - `outbreak-threat-hunt-tools`
     - `outbreak-auto-install-time-frame`
     - `outbreak-threat-hunt-tools-params`
 
-- The following hunt playbooks have been moved to SOAR Framework's *05 - Hunt* collection and hence *deprecated* in **10 - SP - Outbreak Response Framework**:
+- The following hunt playbooks have been moved to SOAR Framework's **05 - Hunt** playbook collection to consolidate all hunt-related playbooks in one location. This reorganization simplifies navigation and management by keeping all hunt playbooks together, which streamlines processes and reduces confusion. As a result, the hunt playbooks in **10 - SP - Outbreak Response Framework** have been deprecated to prevent redundancy and to ensure that users can easily find and execute hunt playbooks within a single, cohesive framework:
 
     - IOC Hunting
     - IOC Hunting – FortiSIEM
@@ -54,9 +69,9 @@
     - Threat Hunting (Signature Based) - Get Events - FortiAnalyzer
     - Threat Hunting (Signature Based)  - FortiAnalyzer > Log Search
 
-- Removed Ticketing/ITSM integration page
+- Removed Ticketing/ITSM integration page from the configuration wizard
 
-- Removed dependency on the following connectors as IT/SM tools are no longer supported:
+- The dependency on the following connectors as IT/SM tools and their presence in the configuration wizard has been removed to simplify the setup process and streamline operations. By eliminating these connectors, the system reduces complexity, minimizes potential points of failure, and enhances performance. This change also reflects a shift towards a more integrated and automated environment, where essential functions are handled natively within the outbreak management framework, reducing reliance on external tools and ensuring a more seamless user experience:
     - Azure Log Analytics
     - Fortinet FortiGate
     - Jira
