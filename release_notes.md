@@ -2,7 +2,9 @@
 
 ### Outbreak Management - A New Look!
 
-Get ready to experience a revamped Outbreak Management interface designed to streamline your workflow and enhance your visibility. When you click *Outbreak Management* in the navigation menu, you’re greeted with an intuitive layout featuring these powerful tabs:
+Get ready to experience a revamped Outbreak Management, designed to streamline your investigation workflow and enhance your visibility of your environment to respond and remediate these Outbreak Alerts effectively and efficiently.
+
+When you click Outbreak Management in the navigation menu, you’re greeted with an intuitive layout featuring these powerful tabs:
 
 - **Dashboard**: Stay informed with a dynamic Outbreak Response Overview, showcasing:
     - Outbreak Status (Last 30 Days)
@@ -17,15 +19,26 @@ Get ready to experience a revamped Outbreak Management interface designed to str
 
 #### Improved Solution Pack Configuration Experience
 
-The wizard has received several key upgrades, making your configuration process smoother and more efficient:
+The wizard has received several key upgrades, making your configuration process seamless:
 
-- Each integration now has its dedicated configuration tab for a more organized setup experience.
+- Each integration now has its dedicated configuration tab for a more organized setup experience and ensures that key configuration details are present.
   
 - Take control of your security operations by automating investigation frequencies and tailoring your investigation windows to fit your needs.
   
-- Never miss an update! Opt for automatic installation and get near-instant notifications when outbreak-specific solution packs are available.
+- Never miss an update! Opt for automatic installation and get notified when outbreak-specific response solution packs are installed.
 
 - A brand-new **Ingest Now** button on the *Summary* page allows you to install the latest outbreak response solution packs instantly.
+
+#### Improved Investigation Flow
+
+- Introducing enhanced automation with the following new schedules to streamline outbreak response tasks:
+
+    - `Investigate_Outbreak-Alerts`: Automatically identify new and ongoing outbreak alerts and forward them for thorough investigation using advanced threat-hunting tools.
+    - `Outbreak_Alert-Time-Frame-Analysis`: Efficiently identify and deactivate outdated outbreak alerts based on their investigation time frame.
+    - `Outbreak_Automated-Deployment-Outbreak-Alert-Response-Solution-Pack`: Seamlessly install the latest outbreak alert solutions pack (from the past X days) with automated email notifications.
+    - `Outbreak_Ingest-Tracking-Outbreak-CVEs-and-IOCs`: Retrieve outbreak alert CVEs (KVE) from NIST and IOCs from Fortinet FortiGuard, focusing on those marked as ‘Tracking’.
+
+- As an investigation result, we now create incidents in place of alerts.
 
 #### Pluggable Threat Hunt Framework
 
@@ -42,20 +55,29 @@ We’ve integrated cutting-edge widgets to execute your playbooks with a single 
 - Playbook Execution Wizard
 - Playbook Buttons
 
-#### Record and Picklist Enhancements
+#### Picklist Enhancements
 
-The following picklists and the containing items were renamed to provide clearer context and more specific terminology, reflecting its focus on outbreak-related alerts. This change enhances user understanding and aligns with the outbreak management system's terminology, making it easier for analysts to identify and manage relevant alerts.
+The following picklists and the containing items were renamed to provide clearer context and more specific terminology, reflecting its focus on outbreak-related alerts. This change enhances user understanding and aligns with the outbreak management system's terminology, making it easier for analysts to identify and manage relevant outbreak alerts.
 
 - The picklist *Rule Type* has been renamed to **Threat Hunt Rule Type**.
 
 - The picklist *Record Status* has been renamed to **Outbreak Alert Status**
-    - This picklist has additional options - `New` and `Deactivate`.
-    - The picklist item *Active* has been renamed to **Tracking**.
+    - This picklist has additional options - `New` and `Deactivate` to clearly indicate outbreak alerts' statuses.
+    - The picklist item *Active* has been renamed to **Tracking** to mark that an outbreak alert is ready to investigate.
 
-- The addition of the following Record Sets aims to enhance the configuration experience by offering more granular control and customization options for threat hunt integrations:
+#### New Key Store Records
+
+- The addition of the following Record Sets for use by the Configuration Wizard imparts a modular structure to threat hunt integrations and automatic installation of outbreak-specific response solution packs:
     - `outbreak-threat-hunt-tools`
-    - `outbreak-auto-install-time-frame`
     - `outbreak-threat-hunt-tools-params`
+    - `outbreak-auto-install-time-frame`
+
+- Effortlessly manage your threat hunt integrations. Each integration and its precise hunt parameters are stored in the `outbreak-threat-hunting-workflow-config` key store record, ensuring a streamlined and efficient threat-hunting process.
+
+- Enjoy seamless automation with the installation of outbreak-specific response solution packs. All associated parameters are stored in the `outbreak-alert-config` key store record, providing an easy setup for optimal protection.
+
+>[!NOTE]
+> The `outbreak-threat-hunting-workflow-config` and the `outbreak-alert-config` key store records are created *after* the Outbreak Response Framework configuration completes.
 
 #### Playbook Enhancements
 
@@ -82,13 +104,12 @@ The following picklists and the containing items were renamed to provide clearer
     - Threat Hunting (Signature Based) - Get Events - FortiAnalyzer
     - Threat Hunting (Signature Based)  - FortiAnalyzer > Log Search
 
-#### Miscellaneous Enhancements
+#### Miscellaneous Updates
 
-Removed Ticketing/ITSM integration page from the configuration wizard
+We have streamlined our integrations by removing the following connectors from the Outbreak Response Framework:
 
-- The dependency on the following connectors as ITSM tools and their presence in the configuration wizard has been removed to simplify the setup process and streamline operations. By eliminating these connectors, the system reduces complexity, minimizes potential points of failure, and enhances performance. This change also reflects a shift towards a more integrated and automated environment, where essential functions are handled natively within the outbreak management framework, reducing reliance on external tools and ensuring a more seamless user experience:
+- *Fortinet FortiGate*: Playbooks are now natively available in the SOAR Framework solution pack.
+- *Azure Log Analytics*: Usage data indicates minimal engagement.
+- *Jira* and *ServiceNow*: Integration no longer contributes to investigative processes.
 
-    - Azure Log Analytics
-    - Fortinet FortiGate
-    - Jira
-    - ServiceNow
+The Ticketing/ITSM integration page has been removed from the Configuration Wizard.
