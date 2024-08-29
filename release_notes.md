@@ -31,27 +31,28 @@ The wizard has received several key upgrades, making your configuration process 
 
 The Pluggable Threat Hunting framework integrates threat detection tools, such as FortiSIEM, FortiAnalyzer, QRadar, and Splunk, for efficient outbreak alert threat hunting and integrates the following hunting categories:
 
-- **Fabric Hunting**
-- **Indicator of Compromise (IOC) Hunting**
-- **Signature Hunting**
+- Fabric Hunting
+- Indicator of Compromise (IoC) Hunting
+- Signature Hunting
 
 #### Widget Additions
 
-We’ve integrated cutting-edge widgets to boost your productivity:
+We’ve integrated cutting-edge widgets to execute your playbooks with a single click and track the execution with an intuitive, user-friendly wizard.
 
-- **Playbook Execution Wizard**: Simplify and streamline your playbook execution with an intuitive, user-friendly wizard.
+- Playbook Execution Wizard
+- Playbook Buttons
 
-- **Playbook Buttons**: Execute your playbooks with a single click, directly from the dashboard.
+#### Record and Picklist Enhancements
 
-#### Record and Picklist Additions
+The following picklists and the containing items were renamed to provide clearer context and more specific terminology, reflecting its focus on outbreak-related alerts. This change enhances user understanding and aligns with the outbreak management system's terminology, making it easier for analysts to identify and manage relevant alerts.
 
 - The picklist *Rule Type* has been renamed to **Threat Hunt Rule Type**.
 
-- The picklist *Record Status* has been renamed to **Outbreak Alert Status** to provide clearer context and more specific terminology, reflecting its focus on outbreak-related alerts. This change enhances user understanding and aligns with the outbreak management system's terminology, making it easier for analysts to identify and manage relevant alerts.
+- The picklist *Record Status* has been renamed to **Outbreak Alert Status**
     - This picklist has additional options - `New` and `Deactivate`.
     - The picklist item *Active* has been renamed to **Tracking**.
 
-- The addition of the following Record Sets aims to enhance the configuration experience by offering more granular control and customization options:
+- The addition of the following Record Sets aims to enhance the configuration experience by offering more granular control and customization options for threat hunt integrations:
     - `outbreak-threat-hunt-tools`
     - `outbreak-auto-install-time-frame`
     - `outbreak-threat-hunt-tools-params`
