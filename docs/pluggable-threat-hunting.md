@@ -3,7 +3,7 @@
 
 # Using Pluggable Threat Hunting Framework
 
-The Pluggable Threat Hunting framework is designed to integrate various threat detection tools, such as FortiSIEM, FortiAnalyzer, QRadar, and Splunk, for efficient outbreak alert threat hunting. The framework supports the following hunting categories:
+The Pluggable Threat Hunting framework is designed to integrate various threat detection tools, such as FortiSIEM, FortiAnalyzer, QRadar, and Splunk, for efficient outbreak alert threat hunting. The framework integrates the following hunting categories:
 
 - **Fabric Hunting**
 - **Indicator of Compromise (IOC) Hunting**
@@ -13,14 +13,14 @@ The Pluggable Threat Hunting framework is designed to integrate various threat d
 
 1. **Saving Action Playbooks**
 
-   All action playbooks related to Threat Detection Integration must be saved in the `05-Hunt` playbook collection. This collection serves as a repository for all the hunting playbooks, ensuring that they are organized and easily accessible.
+   All action playbooks created for Threat Detection Integration must be saved in the `05-Hunt` playbook collection. This collection serves as a repository for all the hunting playbooks, ensuring that they are organized and easily accessible.
 
 >[!NOTE]
 > The *`05-Hunt`* playbook collection is a part of SOAR Framework solution pack.
 
 2. **Tagging Threat Hunting Playbooks**
 
-   Each threat hunt playbook must be tagged with a specific identifier to facilitate its retrieval and execution. The tagging convention follows the format `[ThreatDetectionIntegration_Hunting]`. For example:
+   Each threat hunt playbook must be tagged with a specific identifier to facilitate its retrieval and execution. The tagging convention follows the format `[<ThreatDetectionIntegration>_Hunting]`. For example:
 
    - **Fortinet Fabric Hunt Playbooks**:
      - `Fortinet_FortiAnalyzer_Fabric_Hunting`
@@ -40,7 +40,7 @@ The Pluggable Threat Hunting framework is designed to integrate various threat d
 
 3. **Configuring the Outbreak Response Framework**
 
-   The **Outbreak Response Framework Configuration Wizard** widget retrieves all selected threat detection integration playbook IRIs (Internal Resource Identifiers) that have been tagged with `[ThreatDetectionIntegration_Hunting]`. The widget then stores these IRIs in the key store module's record named `outbreak-threat-hunting-workflow-config`.
+   The **Outbreak Response Framework Configuration Wizard** widget retrieves all selected threat detection integration playbook IRIs (Internal Resource Identifiers) that have been tagged with `[<ThreatDetectionIntegration>_Hunting]`. The widget then stores these IRIs in the key store module's record named `outbreak-threat-hunting-workflow-config`.
 
 4. **Executing Threat Hunting Operations**
 

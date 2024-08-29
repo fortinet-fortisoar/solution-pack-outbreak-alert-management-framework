@@ -20,7 +20,7 @@ The **Outbreak Response Framework** solution pack contains the following resourc
 | Name                                | Description                                                                                                                                                                         |
 |:------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `outbreak-threat-hunt-tools`        | Saves the names of outbreak hunt tools, like FortiSIEM, FortiAnalyzer, etc., and helps the outbreak configuration wizard to select the required tools.                              |
-| `outbreak-auto-install-time-frame`  | Saves the number of days for which the outbreak response solution packs are set to install during configuration.                                                                    |
+| `outbreak-auto-install-time-frame`  | Saves the number of days for which the outbreak-specific response solution packs are set to install during configuration.                                                                    |
 | `outbreak-threat-hunt-tools-params` | Saves the outbreak hunt tools parameters, like ADOM name for FortiAnalyzer and `splunk_index` for Splunk, and helps the outbreak configuration wizard to populate these parameters. |
 
 ## Module Schema
@@ -93,6 +93,14 @@ The **Outbreak Response Framework** solution pack contains the following resourc
 |:--------------------|-------------------------------------------|
 | Outbreak Management | Displays details of the selected outbreak |
 
+## Schedules
+
+| Name                                                                  | Description                                                                                                                             |
+|:----------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|
+| `Investigate_Outbreak-Alerts`                                         | Automatically identify new and ongoing outbreak alerts and forward them for thorough investigation using advanced threat-hunting tools. |
+| `Outbreak_Alert-Time-Frame-Analysis`                                  | Efficiently identify and deactivate outdated outbreak alerts based on their investigation time frame.                                   |
+| `Outbreak_Automated-Deployment-Outbreak-Alert-Response-Solution-Pack` | Seamlessly install the latest outbreak alert solutions pack (from the past X days) with automated email notifications.                  |
+| `Outbreak_Ingest-Tracking-Outbreak-CVEs-and-IOCs`                     | Retrieve outbreak alert CVEs (KVE) from NIST and IOCs from Fortinet FortiGuard, focusing on those marked as ‘Tracking’.                 |
 
 # Next Steps
 

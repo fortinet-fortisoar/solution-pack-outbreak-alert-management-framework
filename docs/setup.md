@@ -36,7 +36,7 @@ For optimal performance of the **Outbreak Response Framework** solution pack, in
 
 ## Setup Outbreak Response Framework on FortiSOAR
 
-After installation of the **Outbreak Response Framework** solution pack, run the configuration wizard to ready your FortiSOAR environment to investigate Outbreak Alerts. This wizard helps you select the configured **Threat Detection Integrations** on FortiSOAR.
+After installation of the **Outbreak Response Framework** solution pack, run the configuration wizard to ready your FortiSOAR environment to investigate Outbreak Alerts. This wizard helps you select and configure **Threat Detection Integrations** on FortiSOAR.
 
 1. Log in to FortiSOAR, after [installation](#installation) completes.
 
@@ -76,8 +76,6 @@ After installation of the **Outbreak Response Framework** solution pack, run the
 
     ![Installation and notification page](./res/config-wizard-05.png)
 
-    - **Automatically install outbreak response solution packs**: Select this option to automatically install outbreak response solution packs once an outbreak is reported.
-
     - **Auto Installation Criteria**: Select the severity of the outbreak to install the corresponding solution pack. You can select one or more severity from the following options:
         - *Critical*
         - *High*
@@ -87,71 +85,11 @@ After installation of the **Outbreak Response Framework** solution pack, run the
 
 8. **Summary**
 
-    Click the button **Ingest Now** to install the outbreak response solution packs of the severity selected on the previous screen.
+    Click the button **Ingest Now** to install the outbreak-specific response solution packs of the severity selected on the previous screen.
 
     Click **Finish** to complete the configuration process.
 
     ![All set](./res/config-wizard-06.png)
-
-## Configure the Threat Detection Integration Parameters
-
-Each Threat Detection Integration requires some configuration changes.
-
-1. Open the **Investigate Outbreak** playbook from the *10 - SP - Outbreak Response Framework* playbook collection.
-
-2. Open the **Set Variable** step for each configured threat detection integration.
-
-3. Create variables for each configured threat detection integration as follows:
-
-    1. For **Fortinet FortiSIEM** configuration create and specify values for following variables:
-
-        - `fsm_event_count`
-        - `fsm_incident_count`
-        - `fsm_max_log_record`
-        - `fsm_incident_status`
-
-        Following screenshot shows the variables with example values:
-
-        ![Fortinet FortiSIEM Config](./res/config_fsm.png)
-
-    2. For **Fortinet FortiAnalyzer** configuration create following variables:
-
-        - `faz_ADOM`
-        - `faz_device_id`
-        - `faz_device_name`
-        - `faz_max_log_record`
-
-        Following screenshot shows the variables with example values:
-
-        ![Fortinet FortiAnalyzer Config](./res/config_faz.png)
-
-    3. For **Fortinet FortiGate** configuration create and specify values for following variables:
-
-        - `fgt_policy_name`
-        - `fgt_address_group`
-        - `fgt_vdom`
-
-        Following screenshot shows the variables with example values:
-
-        ![Fortinet FortiGate Config](./res/config_fgt.png)
-
-    4. For **IBM QRadar** configuration create and specify values for following variables:
-
-        - `qradar_max_events`
-
-        Following screenshot shows the variables with example values:
-
-        ![IBM QRadar Config](./res/config_qradar.png)
-
-    5. For **Splunk** configuration create and specify values for following variables:
-
-        - `splunk_index`
-        - `splunk_head_limit`
-        - `splunk_sourcetype`
-
-        Following screenshot shows the variables with example values:
-
-        ![Splunk Config](./res/config_splunk.png)
 
 # Next Steps
 

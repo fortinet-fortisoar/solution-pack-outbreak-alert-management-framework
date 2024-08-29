@@ -15,7 +15,7 @@ When you click Outbreak Management in the navigation menu, you’re greeted with
 
 - **Outbreaks**: Access comprehensive records of all outbreak alerts at your fingertips.
 
-- **Hunt Rules**: Explore and manage Fortinet Fabric Rules, Sigma Rules, and YARA Rules linked to your outbreak response solution packs.
+- **Hunt Rules**: Explore and manage Fortinet Fabric Rules, Sigma Rules, and YARA Rules linked to your outbreak-specific response solution packs.
 
 #### Improved Solution Pack Configuration Experience
 
@@ -27,7 +27,7 @@ The wizard has received several key upgrades, making your configuration process 
   
 - Never miss an update! Opt for automatic installation and get notified when outbreak-specific response solution packs are installed.
 
-- A brand-new **Ingest Now** button on the *Summary* page allows you to install the latest outbreak response solution packs instantly.
+- A brand-new **Ingest Now** button on the *Summary* page allows you to install the latest outbreak-specific response solution packs instantly.
 
 #### Improved Investigation Flow
 

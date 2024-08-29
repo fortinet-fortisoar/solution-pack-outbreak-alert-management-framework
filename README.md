@@ -6,11 +6,19 @@
 - **Compatible Version**: 7.6.0 and later
  
 >[!NOTE]
->Preview releases are a beta release. This means that release is intended to get feedback and might not be best suited for production level deployments. The functionality might change in backward-incompatible ways or have limited support. A beta release is not subject to any SLA, Quality Assurance or deprecation policy. Feature availability and support for preview releases will continue to improve as the solution/feature matures.
+>Preview releases are a beta release. This means that the release is intended to get feedback and might not be best suited for production level deployments. The functionality might change in backward-incompatible ways or have limited support. A beta release is not subject to any SLA, Quality Assurance or deprecation policy. Feature availability and support for preview releases will continue to improve as the solution matures.
 
 ## Protect Your Organization with the Outbreak Response Framework
 
 In a world where cyber threats evolve at breakneck speed, the *Outbreak Response Framework* emerges as your first line of defense. Get ahead of the curve with up-to-the-minute intelligence on the latest cybersecurity threats targeting companies, organizations, and industries worldwide. Empower your team to take the reins and fortify your systems against emerging risks.
+
+*FortiGuard Outbreak Alerts* provide key information about on-going cybersecurity attack with significant ramifications affecting numerous companies, organizations and industries. These Outbreak Alerts help understand what happened, the technical details of the attack, and how organizations can protect themselves from this and similar other attacks.
+
+The Alert includes:
+
+- Details of the attack including timeline, technology affected, and where applicable patches/ mitigation recommendations can be found
+- Recommended Fortinet products that would break the attack sequence, and threat hunting tools to help you determine if you were affected
+- Additional related research from FortiGuard Labs
 
 ## Stay Informed with Outbreak Alerts
 
