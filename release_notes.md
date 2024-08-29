@@ -1,6 +1,6 @@
-# What's New
+## What's New
 
-#### Outbreak Management - A New Look!
+### Outbreak Management - A New Look!
 
 Get ready to experience a revamped Outbreak Management interface designed to streamline your workflow and enhance your visibility. When you click *Outbreak Management* in the navigation menu, you’re greeted with an intuitive layout featuring these powerful tabs:
 
@@ -15,7 +15,7 @@ Get ready to experience a revamped Outbreak Management interface designed to str
 
 - **Hunt Rules**: Explore and manage Fortinet Fabric Rules, Sigma Rules, and YARA Rules linked to your outbreak response solution packs.
 
-#### Wizard Enhancements
+#### Improved Solution Pack Configuration Experience
 
 The wizard has received several key upgrades, making your configuration process smoother and more efficient:
 
@@ -27,13 +27,23 @@ The wizard has received several key upgrades, making your configuration process 
 
 - A brand-new **Ingest Now** button on the *Summary* page allows you to install the latest outbreak response solution packs instantly.
 
-#### New Widgets Added
+#### Pluggable Threat Hunt Framework
 
-We’ve added cutting-edge widgets to boost your productivity:
+The Pluggable Threat Hunting framework integrates threat detection tools, such as FortiSIEM, FortiAnalyzer, QRadar, and Splunk, for efficient outbreak alert threat hunting and integrates the following hunting categories:
+
+- **Fabric Hunting**
+- **Indicator of Compromise (IOC) Hunting**
+- **Signature Hunting**
+
+#### Widget Additions
+
+We’ve integrated cutting-edge widgets to boost your productivity:
 
 - **Playbook Execution Wizard**: Simplify and streamline your playbook execution with an intuitive, user-friendly wizard.
 
 - **Playbook Buttons**: Execute your playbooks with a single click, directly from the dashboard.
+
+#### Record and Picklist Additions
 
 - The picklist *Rule Type* has been renamed to **Threat Hunt Rule Type**.
 
@@ -45,6 +55,8 @@ We’ve added cutting-edge widgets to boost your productivity:
     - `outbreak-threat-hunt-tools`
     - `outbreak-auto-install-time-frame`
     - `outbreak-threat-hunt-tools-params`
+
+#### Playbook Enhancements
 
 - The following hunt playbooks have been moved to SOAR Framework's **05 - Hunt** playbook collection to consolidate all hunt-related playbooks in one location. This reorganization simplifies navigation and management by keeping all hunt playbooks together, which streamlines processes and reduces confusion. As a result, the hunt playbooks in **10 - SP - Outbreak Response Framework** have been deprecated to prevent redundancy and to ensure that users can easily find and execute hunt playbooks within a single, cohesive framework:
 
@@ -69,9 +81,12 @@ We’ve added cutting-edge widgets to boost your productivity:
     - Threat Hunting (Signature Based) - Get Events - FortiAnalyzer
     - Threat Hunting (Signature Based)  - FortiAnalyzer > Log Search
 
-- Removed Ticketing/ITSM integration page from the configuration wizard
+#### Miscellaneous Enhancements
 
-- The dependency on the following connectors as IT/SM tools and their presence in the configuration wizard has been removed to simplify the setup process and streamline operations. By eliminating these connectors, the system reduces complexity, minimizes potential points of failure, and enhances performance. This change also reflects a shift towards a more integrated and automated environment, where essential functions are handled natively within the outbreak management framework, reducing reliance on external tools and ensuring a more seamless user experience:
+Removed Ticketing/ITSM integration page from the configuration wizard
+
+- The dependency on the following connectors as ITSM tools and their presence in the configuration wizard has been removed to simplify the setup process and streamline operations. By eliminating these connectors, the system reduces complexity, minimizes potential points of failure, and enhances performance. This change also reflects a shift towards a more integrated and automated environment, where essential functions are handled natively within the outbreak management framework, reducing reliance on external tools and ensuring a more seamless user experience:
+
     - Azure Log Analytics
     - Fortinet FortiGate
     - Jira
