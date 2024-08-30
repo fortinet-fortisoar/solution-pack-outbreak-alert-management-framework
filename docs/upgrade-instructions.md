@@ -23,23 +23,27 @@ This section points out some actions to take after the upgrade to **Outbreak Res
 
 Perform these actions after a successful upgrade to **Outbreak Response Framework** `v2.0.0`.
 
-1. Edit the picklist **Outbreak Alert Status**. For information on editing picklists, refer (Editing Picklist)[https://docs.fortinet.com/document/fortisoar/7.6.0/administration-guide/97786/application-editor#Picklist_Editor] on FortiSOAR product documentation.
+1. **Edit Picklist**
 
-2. Add a new picklist item **Deactivated**
+    1. Edit the picklist **Outbreak Alert Status**. For information on editing picklists, refer (Editing Picklist)[https://docs.fortinet.com/document/fortisoar/7.6.0/administration-guide/97786/application-editor#Picklist_Editor] on FortiSOAR product documentation.
 
-3. Open the playbook **> Investigate Outbreak Alert** under the playbook collection *10 - SP - Outbreak Response Framework*.
+    2. Add a new picklist item **Deactivated**
 
-4. Edit the playbook step **Update Last Pull Time**.
+2. **Playbook Changes**
 
-5. Scroll down to the **Status** field and set it to **`Tracking`**.
+    - Edit playbook **> Investigate Outbreak Alert** under the playbook collection *10 - SP - Outbreak Response Framework*.
 
-3. Open the playbook **Outbreak Alert Time Frame Analysis** under the playbook collection *10 - SP - Outbreak Response Framework*.
+        1. Edit the playbook step **Update Last Pull Time**.
 
-4. Edit the playbook step **Update Outbreak Alert Status**.
+        2. Scroll down to the **Status** field and set it to **`Tracking`**.
 
-5. Scroll down to the **Status** field and set it to **`Deactivated`**.
+    - Edit playbook **Outbreak Alert Time Frame Analysis** under the playbook collection *10 - SP - Outbreak Response Framework*.
 
-6. Run the **Outbreak Response Framework** configuration wizard again. Refer to the section [Configuration Wizard](./setup.md#setup-outbreak-response-framework-on-fortisoar).
+        1. Edit the playbook step **Update Outbreak Alert Status**.
+
+        2. Scroll down to the **Status** field and set it to **`Deactivated`**.
+
+3. Run the **Outbreak Response Framework** configuration wizard again. For information on the wizard, refer [Configuration Wizard](./setup.md#setup-outbreak-response-framework-on-fortisoar).
 
 # Next Steps
 
