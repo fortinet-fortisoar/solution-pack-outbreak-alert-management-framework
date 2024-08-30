@@ -41,3 +41,7 @@ Perform these actions after a successful upgrade to **Outbreak Response Framewor
 
 6. Run the **Outbreak Response Framework** configuration wizard again. Refer to the section [Configuration Wizard](./setup.md#setup-outbreak-response-framework-on-fortisoar).
 
+# Next Steps
+
+| [Installation](./setup.md#installation) | [Configuration](./setup.md#configuration) | [Contents](./contents.md) |
+|-----------------------------------------|-------------------------------------------|---------------------------|
