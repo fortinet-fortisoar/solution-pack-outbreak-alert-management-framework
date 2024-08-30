@@ -1,5 +1,8 @@
 ## What's New
 
+>[!NOTE]
+>This solution pack requires FortiSOAR `v7.6.0` and later.
+
 ### Outbreak Management - A New Look!
 
 Get ready to experience a revamped Outbreak Management, designed to streamline your investigation workflow and enhance your visibility of your environment to respond and remediate these Outbreak Alerts effectively and efficiently.
@@ -81,7 +84,7 @@ The following picklists and the containing items were renamed to provide clearer
 
 #### Playbook Enhancements
 
-- The following hunt playbooks have been moved to SOAR Framework's **05 - Hunt** playbook collection to consolidate all hunt-related playbooks in one location. This reorganization simplifies navigation and management by keeping all hunt playbooks together, which streamlines processes and reduces confusion. As a result, the hunt playbooks in **10 - SP - Outbreak Response Framework** have been deprecated to prevent redundancy and to ensure that users can easily find and execute hunt playbooks within a single, cohesive framework:
+- The following hunt playbooks are created within SOAR Framework's **05 - Hunt** playbook collection to consolidate all hunt-related playbooks in one location. This reorganization simplifies navigation and management by keeping all hunt playbooks together, which streamlines processes and reduces confusion:
 
     - IOC Hunting
     - IOC Hunting – FortiSIEM
