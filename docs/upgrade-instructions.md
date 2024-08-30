@@ -25,7 +25,7 @@ Perform these actions after a successful upgrade to **Outbreak Response Framewor
 
 1. **Edit Picklist**
 
-    1. Edit the picklist **Outbreak Alert Status**. For information on editing picklists, refer (Editing Picklist)[https://docs.fortinet.com/document/fortisoar/7.6.0/administration-guide/97786/application-editor#Picklist_Editor] on FortiSOAR product documentation.
+    1. Edit the picklist **Outbreak Alert Status**. For information on editing picklists, refer [Editing Picklist](https://docs.fortinet.com/document/fortisoar/7.6.0/administration-guide/97786/application-editor#Picklist_Editor) on FortiSOAR product documentation.
 
     2. Add a new picklist item **Deactivated**
 
