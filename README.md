@@ -43,6 +43,7 @@ Unlock the full potential of your cybersecurity defenses with the *Outbreak Resp
 
 ## Additional Resources
 
+- [Upgrade Instructions](./docs/upgrade-instructions.md)
 - [Overview of Outbreak Response Framework](./docs/background-information.md)
 - [Using Pluggable Threat Hunting Framework](./docs/pluggable-threat-hunting.md)
 - [Triggering and Monitoring Playbooks Using Playbook Execution Wizard](./docs/trigger-and-monitor-pb-with-peb.md)
