@@ -40,7 +40,7 @@ The Pluggable Threat Hunting framework is designed to integrate various threat d
 
 3. **Configuring the Outbreak Response Framework**
 
-   The **Outbreak Response Framework Configuration Wizard** widget retrieves all selected threat detection integration playbook IRIs (Internal Resource Identifiers) that have been tagged with `[<ThreatDetectionIntegration>_Hunting]`. The widget then stores these IRIs in the key store module's record named `outbreak-threat-hunting-workflow-config`.
+   The **Outbreak Response Framework Configuration Wizard** widget retrieves all selected threat detection integration playbook IRIs (Internal Resource Identifiers) that have been tagged with `[<ThreatDetectionIntegration>_Hunting]`. The widget then stores these IRIs in the key store module's `outbreak-threat-hunting-workflow-config` record.
 
 4. **Executing Threat Hunting Operations**
 

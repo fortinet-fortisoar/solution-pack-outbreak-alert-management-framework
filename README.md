@@ -4,6 +4,7 @@
 - **Certified**: Yes
 - **Publisher**: Fortinet
 - **Compatible Version**: 7.6.0 and later
+- [Release Notes](./release_notes.md)
  
 >[!NOTE]
 >Preview releases are a beta release. This means that the release is intended to get feedback and might not be best suited for production level deployments. The functionality might change in backward-incompatible ways or have limited support. A beta release is not subject to any SLA, Quality Assurance or deprecation policy. Feature availability and support for preview releases will continue to improve as the solution matures.
@@ -42,6 +43,7 @@ Unlock the full potential of your cybersecurity defenses with the *Outbreak Resp
 
 ## Additional Resources
 
+- [Upgrade Instructions](./docs/upgrade-instructions.md)
 - [Overview of Outbreak Response Framework](./docs/background-information.md)
 - [Using Pluggable Threat Hunting Framework](./docs/pluggable-threat-hunting.md)
 - [Triggering and Monitoring Playbooks Using Playbook Execution Wizard](./docs/trigger-and-monitor-pb-with-peb.md)
