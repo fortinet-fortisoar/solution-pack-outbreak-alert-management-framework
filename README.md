@@ -1,118 +1,52 @@
 # Release Information 
 
-- **Version**: 1.0.0![](./docs/res/icon-preview.svg)
+- **Version**: 2.0.0![](./docs/res/icon-preview.svg)
 - **Certified**: Yes
 - **Publisher**: Fortinet
-- **Compatible Version**: 7.4.0 and later
+- **Compatible Version**: 7.6.0 and later
+- [Release Notes](./release_notes.md)
  
-<table>
-    <tr>
-        <th>NOTE</th>
-        <td>Preview releases are a beta release. This means that release is intended to get feedback and might not be best suited for production level deployments. The functionality might change in backward-incompatible ways or have limited support. A beta release is not subject to any SLA, Quality Assurance or deprecation policy. Feature availability and support for preview releases will continue to improve as the solution/feature matures.</td>
-    </tr>
-</table>
+>[!NOTE]
+>Preview releases are a beta release. This means that the release is intended to get feedback and might not be best suited for production level deployments. The functionality might change in backward-incompatible ways or have limited support. A beta release is not subject to any SLA, Quality Assurance or deprecation policy. Feature availability and support for preview releases will continue to improve as the solution matures.
 
-# Overview 
-Outbreak Response Framework provides vital information about ongoing cybersecurity attacks that affect numerous companies, organizations, and industries. The goal is to notify organizations about the latest cybersecurity threats and empower them to take proactive measures to secure their systems. 
- 
-## Outbreak Alerts
-A new FortiGuard Outbreak Detection Service is now available through FortiSOAR&trade;'s **Outbreak Response Framework** Solution Pack.
+## Protect Your Organization with the Outbreak Response Framework
 
-FortiGuard Alerts typically provide details about emerging threats and security incidents. These alerts include information such as the type of threat (e.g., malware, ransomware, phishing), the targeted systems or applications, the potential impact, and recommended actions to mitigate the risk.
+In a world where cyber threats evolve at breakneck speed, the *Outbreak Response Framework* emerges as your first line of defense. Get ahead of the curve with up-to-the-minute intelligence on the latest cybersecurity threats targeting companies, organizations, and industries worldwide. Empower your team to take the reins and fortify your systems against emerging risks.
 
-You might find specifics about the characteristics of the threat, such as its propagation methods, known vulnerabilities it exploits, and any indicators of compromise (IoCs) that can help identify its presence in a network. Additionally, FortiGuard Outbreak Alerts may offer insights into the threat actor or group behind the attack and their motives.
+*FortiGuard Outbreak Alerts* provide key information about on-going cybersecurity attack with significant ramifications affecting numerous companies, organizations and industries. These Outbreak Alerts help understand what happened, the technical details of the attack, and how organizations can protect themselves from this and similar other attacks.
 
-The **Outbreak Response Framework** solution pack investigates the Outbreak Alert that contains the following information:
+The Alert includes:
 
-- A narrative of the attack containing the following, its timeline, and affected technologies:
+- Details of the attack including timeline, technology affected, and where applicable patches/ mitigation recommendations can be found
+- Recommended Fortinet products that would break the attack sequence, and threat hunting tools to help you determine if you were affected
+- Additional related research from FortiGuard Labs
 
-    - **Description**: Detailed information on the vulnerability
+## Stay Informed with Outbreak Alerts
 
-    - **Background**: Reasons and factors involved in vulnerability exposure
+With FortiSOAR™’s **Outbreak Response Framework** Solution Pack, you gain access to the all-new FortiGuard Outbreak Detection Service. Discover details about fresh threats, be it malware, ransomware, or phishing, along with actionable insights on their impact, mitigation tactics, and the perpetrators behind them.
 
-    - **Announcement**: Zero-day information on the vulnerability
+## Visualize the Threat Landscape
 
-    - **Latest Developments**: Measures taken to prevent vulnerability
-
-    - **CVE List**: CVEs that provide a reference for publicly known information-security vulnerabilities and exposures
-
-- List of Indicators of Compromise(IOCs)
-
-## Outbreak Dashboard
-
-The **Outbreak Response Overview** dashboard gives the Outbreak information in easy to understand visuals:
+Navigate complex cyber threats effortlessly with our **Outbreak Response Overview** dashboard. It transforms critical data into clear, easy-to-understand visuals, empowering your team to make informed decisions quickly.
 
 ![Outbreak Dashboard](./docs/res/dashboard-outbreak-response-overview.png)
- 
-## Threat Hunt Rules
-The **Outbreak Response Framework** solution pack investigates the Outbreak alert using its associated Threat Hunt Rules. Every Outbreak alert has the following three types of Threat Hunt Rules:
 
-1. **Fortinet Fabric Rules**: Currently, the **Outbreak Response Framework** solution pack provides the following two types of Fortinet Fabric rules:
+## Supercharge Your Threat Hunting
 
-    1. **FortiAnalyzer**: FortiAnalyzer is a centralized logging and reporting appliance designed by Fortinet for their Fortinet Security Fabric. It plays a crucial role in handling outbreaks by collecting, analyzing, and reporting on security events and logs from various Fortinet security devices deployed throughout an organization. Here's how FortiAnalyzer typically manages outbreak alerts:
+Dive deep into the details of every Outbreak Alert with our robust Threat Hunt Rules. Whether through the centralized power of Fortinet Fabric, the adaptability of Sigma, or the pattern-matching precision of YARA, your organization will be equipped to detect and neutralize threats like never before.
 
-        1. Centralized Logging
+- **Fortinet Fabric Rules**: Harness the centralized might of FortiAnalyzer and the comprehensive coverage of FortiSIEM to monitor, analyze, and report on security events.
+- **Sigma Rules**: Collaborate with the cybersecurity community to develop agile, platform-agnostic detection rules.
+- **YARA Rules**: Customize your threat detection with scalable, flexible rules that integrate seamlessly into your existing security systems.
 
-        2. Real-time Monitoring
+Unlock the full potential of your cybersecurity defenses with the *Outbreak Response Framework* &mdash; because in the fight against cyber threats, staying informed and proactive makes all the difference.
 
-        3. Threat Detection and Analysis
+## Additional Resources
 
-        4. Log Correlation
-
-        5. Alerting and Notification
-
-        6. Historical Analysis
-
-        7. Reporting and Visualization
-
-    2. **FortiSIEM**: FortiSIEM is a Security Information and Event Management (SIEM) solution offered by Fortinet. It provides organizations with comprehensive security information and event management capabilities, enabling them to detect, respond to, and mitigate security threats. Here's how FortiSIEM typically handles outbreaks:
-
-        1. Log Collection and Aggregation
-
-        2. Real-time Monitoring
-
-        3. Behavioral Analysis
-
-        4. Threat Intelligence Integration
-
-        5. Incident Detection and Response
-
-        6. Forensic Analysis
-
-        7. Incident Workflow and Collaboration
-
-        8. Reporting and Compliance
-
-2. **Sigma Rules (Signature-Based Threat Hunt Rules)**:  Sigma rules play a crucial role in threat detection and are especially valuable in the context of outbreak alerts. Sigma is a generic and open standard for writing cybersecurity detection rules that helps share and collaborate on threat detection strategies across different security platforms.
-
-    Here's how Sigma rules help detect outbreak alerts:
-
-    1. *Consistency Across Platforms*: Sigma rules are platform-agnostic, meaning they can be translated and implemented on various Security Information and Event Management (SIEM) systems. This consistency allows organizations to use the same rule set across different security tools, promoting a unified and streamlined approach to threat detection.
-
-    2. *Rapid Rule Development*: Sigma provides a simple and expressive language for creating detection rules. This simplicity helps security teams rapidly develop and deploy the rules without going through the intricacies of each specific SIEM or security solution. In the context of outbreak alerts, this agility is crucial for quickly responding to emerging threats.
-
-    3. *Community Collaboration*: Sigma rules can be shared and contributed to by the cybersecurity community. This collaborative approach enables security professionals to benefit from each other's expertise and quickly adapt to new threat landscapes. In the case of outbreak alerts, having a community-contributed rule can provide early detection capabilities for the latest threats.
-
-    4. *Granular Threat Detection*: Sigma rules can be fine-tuned to detect specific behaviors or patterns associated with an outbreak. Whether identifying known indicators of compromise (IoCs) or recognizing unusual network traffic patterns, Sigma rules allow for granular and targeted threat detection, enhancing the ability to detect outbreaks early.
-
-    5. *Adaptability to New Threats*: Outbreak alerts often involve new and evolving threats. You can modify and adapt Sigma rules to address the characteristics of emerging threats. This adaptability is crucial in staying ahead of cyber criminals who constantly enhance their tactics, techniques, and procedures (TTPs).
-
-3. **YARA Rules**: YARA rules help detect outbreaks and other security threats. It is a pattern-matching and rule-based language designed to help researchers and defenders identify and classify malware based on textual or binary patterns. Here's how YARA rules can be beneficial in detecting outbreak alerts:
-
-    1. *Pattern Matching*: YARA rules allow for the definition of specific patterns or signatures associated with malicious files or behaviors. In the context of outbreak alerts, these patterns could include unique strings, file structures, or other characteristics that indicate a particular malware or threat.
-
-    2. *Flexibility and Customization*: YARA rules are highly flexible and can be customized to target specific threat attributes. Security researchers can create rule sets that focus on the unique features of an outbreak, allowing for precise detection tailored to the distinct characteristics of the threat.
-
-    3. *Scalability*: YARA rules can be scaled to cover a range of files and activities. This scalability is crucial in case of outbreaks where the volume of malicious activity is significant. You can apply YARA rules to large datasets for identifying and isolating hostile entities.
-
-    4. *Indicators of Compromise (IoCs)*: You can use YARA rules to define IoCs associated with an outbreak. These could include file hashes, registry entries, or network behavior patterns. By incorporating these IoCs into YARA rules, organizations can automate the detection of malicious entities based on known indicators.
-
-    5. *Community Collaboration*: YARA rules benefit from community collaboration, similar to Sigma rules. Security professionals often share YARA rules to help others detect and respond to emerging threats. This collaborative approach enables a broader and more collective defense against outbreaks.
-
-    6. *Integration with Security Systems*: YARA rules can be integrated into various security systems, including antivirus solutions and intrusion detection systems. This integration allows for real-time detection and response to outbreaks, enhancing the overall security posture of an organization.
-
-    7. *Behavioral Analysis*: While based on static patterns, YARA rules can also incorporate behavioral aspects of malware. Hence, you can design YARA rules to detect known signatures and suspicious or malicious behavior, contributing to more dynamic threat detection.
-
+- [Upgrade Instructions](./docs/upgrade-instructions.md)
+- [Overview of Outbreak Response Framework](./docs/background-information.md)
+- [Using Pluggable Threat Hunting Framework](./docs/pluggable-threat-hunting.md)
+- [Triggering and Monitoring Playbooks Using Playbook Execution Wizard](./docs/trigger-and-monitor-pb-with-peb.md)
 
 # Next Steps
 | [Installation](./docs/setup.md#installation) | [Configuration](./docs/setup.md#configuration) | [Usage](./docs/usage.md) | [Contents](./docs/contents.md) |
