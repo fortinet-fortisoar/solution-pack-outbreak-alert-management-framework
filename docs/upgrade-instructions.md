@@ -3,7 +3,7 @@
 
 # Upgrade Instructions
 
-This section points out some actions to take after the upgrade to **Outbreak Response Framework** `v2.0.0`.
+This section points out some actions to take after the upgrade to **Outbreak Response Framework** `v2.1.0`.
 
 > **IMPORTANT**: Follow these instructions closely and do not skip.
 
@@ -11,39 +11,20 @@ This section points out some actions to take after the upgrade to **Outbreak Res
 
 - Upgrade Fortinet FortiAnalyzer connector to `v3.3.0` or later
 
-<!-- ## Before upgrade
-
- 1. 
- 
- 2. 
- 
- 3.  -->
-
 ## After Upgrade
 
-Perform these actions after a successful upgrade to **Outbreak Response Framework** `v2.0.0`.
+After upgrade users may see the following screen instead of Outbreak Alerts page:
 
-1. **Edit Picklist**
+![](./res/unconfigured-keystore-outbreak-alerts-page.png)
 
-    1. Edit the picklist **Outbreak Alert Status**. For information on editing picklists, refer [Editing Picklist](https://docs.fortinet.com/document/fortisoar/7.6.0/administration-guide/97786/application-editor#Picklist_Editor) on FortiSOAR product documentation.
+Run the **Outbreak Response Framework** configuration wizard again. For information on the wizard, refer [Configuration Wizard](./setup.md#setup-outbreak-response-framework-on-fortisoar).
 
-    2. Add a new picklist item **Deactivated**
+Once configured the users see the following Outbreak Alerts page:
 
-2. **Playbook Changes**
+![](./res/outbreak-alerts-moveit.png)
 
-    - Edit playbook **> Investigate Outbreak Alert** under the playbook collection *10 - SP - Outbreak Response Framework*.
-
-        1. Edit the playbook step **Update Last Pull Time**.
-
-        2. Scroll down to the **Status** field and set it to **`Tracking`**.
-
-    - Edit playbook **Outbreak Alert Time Frame Analysis** under the playbook collection *10 - SP - Outbreak Response Framework*.
-
-        1. Edit the playbook step **Update Outbreak Alert Status**.
-
-        2. Scroll down to the **Status** field and set it to **`Deactivated`**.
-
-3. Run the **Outbreak Response Framework** configuration wizard again. For information on the wizard, refer [Configuration Wizard](./setup.md#setup-outbreak-response-framework-on-fortisoar).
+> [!Note]
+> The count of outbreak alerts that appear on the Outbreak Alerts page depends on the Outbreak Response solution packs installed.
 
 # Next Steps
 
