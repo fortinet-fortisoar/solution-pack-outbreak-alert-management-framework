@@ -34,7 +34,7 @@ A new feature automatically updates critical information for Outbreak Alerts wit
 
 ### Fields Mapping in Threat Intel Feeds
 
-- Updated the mapping of the *Type* field in Threat Intel Feeds to accurately reflect the specific hash type (e.g., *`FileHash-MD5`*, *`FileHash-SHA256`*, etc.) instead of using the generic type *`FileHash`*.
+- Updated the mapping of the *Type* field in Threat Intel Feeds to accurately reflect the specific hash type (*`FileHash-MD5`*, *`FileHash-SHA1`*, and *`FileHash-SHA256`*) instead of using the generic type *`FileHash`*.
 
 ### Enhanced CVE Details with EPSS Scores
 
